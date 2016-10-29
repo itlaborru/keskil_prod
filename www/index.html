@@ -9,8 +9,8 @@
             * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+      
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">  -->
 
     <!-- Required meta tags-->
     <meta charset="utf-8">
@@ -35,6 +35,7 @@
 </head>
 
 <body>
+
     <!-- Status bar overlay for full screen mode (PhoneGap) -->
     <div class="statusbar-overlay"></div>
 
@@ -48,8 +49,12 @@
 			<input class="login" name="login" size="32"  type="text" placeholder="Login">
 			<input class="pass" name="pass" size="32"  type="text" placeholder="Password">
 			<input class="signin" name="signin" type="button" value="Log in">
-			<input class="register" name="register" type="button" value="Register">
 			<input class="logout" name="logout" type="button" value="logout">
+			
+			<input class="loginReg" name="login" size="32"  type="text" placeholder="Login">
+			<input class="passReg" name="pass" size="32"  type="text" placeholder="Password">
+			<input class="mail" name="mail" size="70"  type="text" placeholder="mail">
+			<input class="register" name="register" type="button" value="Register">
 			
         </div>
     </div>
@@ -79,23 +84,33 @@
                     <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="content-block">
-                            <p class="photoUploadButton">фотки</p>
-                            <!-- Link to another page -->
+                            <a href="#contests">Contest list</a>
                            
                         </div>
                     </div>
                 </div>
+				
+				<div data-page="contests" class="page cached contests">
+					<div class="page-content">
+						<div class="content-block">
+							asdasdasd
+						</div>
+					</div>
+				</div>
             </div>
             <!-- Bottom Toolbar-->
             <div class="toolbar">
                 <div class="toolbar-inner">
                     <!-- Toolbar links -->
-                    <a href="#" class="link">Link 1</a>
+                    <a href="#" class="link back">Move back</a>
                     <a href="#" class="link">Link 2</a>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
+	
+	<div class="loadingScreen">
+	</div>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
