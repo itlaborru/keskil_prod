@@ -37,6 +37,7 @@ $$(document).on('deviceready', function() {
 			},
 			success: function(data){
 				$$('.cartoons .page-content .cartoonBlock').html(data);
+				//console.log(data);
 			}
 		});
 	}
