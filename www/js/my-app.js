@@ -28,6 +28,19 @@ $$(document).on('deviceready', function() {
 			};
 		}, 1);
 	};
+	function renderCartoons() {
+		$$.ajax({
+			method : 'POST',
+			url: 'http://it-labor.ru/playground/valera/admin/admin-cartoonsListServer.php',
+			data: {
+				'type': 'download',
+			},
+			success: function(data){
+				$$('.cartoons .page-content .cartoonBlock').html(data);
+			}
+		});
+	}
+	renderCartoons();
 	
 	opacityRedact();
 	
