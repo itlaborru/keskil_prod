@@ -1,5 +1,4 @@
 п»ї$$('.feedbackSend').on('click', function(){
-	console.log("Отправка рекомендации");
 	if($$('.feedback').val() != "") {
 		//console.log($$('.feedback').val());
 		shortAjax('http://it-labor.ru/playground/valera/feedback.php', 
