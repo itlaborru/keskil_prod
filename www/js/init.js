@@ -30,6 +30,8 @@ $$(document).on('deviceready', function() {
 	};
 	renderCartoons(); // Прогрузка видеозаписей на страницу с мультфильмами, функция описана в cartoons.js
 	
+	renderNews();
+	
 	opacityRedact();
 	
 	console.log("Ready");
