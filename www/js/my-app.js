@@ -20,13 +20,18 @@ function uploadPhoto(imageURI) {
 	var params = new Object();
 	params.contest = globalVar.imgData;
 	
-	console.log(globalVar.imgData);
-
 	options.params = params;
-	options.chunkedMode = false;
+	
+	globalVar.imageURI = imageURI;
 
-	var ft = new FileTransfer();
-	ft.upload(imageURI, "http://it-labor.ru/playground/valera/fileChecker.php", win, fail, options);
+	$$('.uploadButton').on('click',function(){
+		options.params.text = $$('.textareaFor'+globalVar.imgData).val();
+		options.chunkedMode = false;
+		
+		var ft = new FileTransfer();
+		ft.upload(globalVar.imageURI, "http://it-labor.ru/playground/valera/fileChecker.php", win, fail, options);
+		$$('.uploadButton').off('click');
+	});
 }
 
 function win(r) {

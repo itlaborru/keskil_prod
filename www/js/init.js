@@ -76,7 +76,11 @@ $$(document).on('deviceready', function() {
 					+
 					'</br>'
 					+
-					'<p class="photoUploadButton" data-contest = "'+contestList.contest[i].id+'">фотки</p>'
+					'<p class="photoUploadButton" data-contest = "'+contestList.contest[i].id+'">Выбрать фото</p>'
+					+
+					'<textarea placeholder = "Краткое описание(Не обязательно)" class = "textareaFor'+contestList.contest[i].id+'"></textarea>'
+					+
+					'<p class="uploadButton" data-contest = "'+contestList.contest[i].id+'">Отправить!</p>'
 				);
 				
 				myPage_content.append(myContent_block);
