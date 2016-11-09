@@ -19,7 +19,7 @@ function renderCartoons() {
 }
 //Клик по категории
 $$('.cartoons').on('click', '.cartoonCategory', function (e) {
-	//console.log("KAEF");
+	console.log("KAEF");
 	var categ = $$(this).attr('data-cartooncat');
 	renderCartoonFolder(categ);
 });
