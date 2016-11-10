@@ -5,50 +5,46 @@ function renderNews() {
 			'type':'download',
 		},
 		function(data) {
-			//$$('.cartoons .page-content .cartoonBlock').html(data); 
 			data = JSON.parse(data);
 			for(var i = 0; i < data[0].length; i++) {
-				var folder = $$("<a href='#renderNews' data-newscat='"+data[0][i][0]+"' class='newsCategory'>"+data[0][i][0]+" </a></br>");
-				$$('.news .page-content .news').append(folder);
+				var newsFolder = $$("<a href='#renderNews' data-newscat='"+data[0][i][0]+"' class='newsCategory'>"+data[0][i][0]+" </a></br>");
+				newsFolder.on('click', function(){
+					var categ = $$(this).attr('data-newscat');
+					console.log(categ);
+					renderNewsFolder(categ);
+				});
+				$$('.news .page-content .news').append(newsFolder);
 			}
-			//cartoonData = data[1];
+			newsData = data[1];
 			console.log(data);
-			//console.log(cartoonData);
 		}
 	);
-}/*
-//Клик по категории
-$$('.cartoons').on('click', '.cartoonCategory', function (e) {
-	//console.log("KAEF");
-	var categ = $$(this).attr('data-cartooncat');
-	renderCartoonFolder(categ);
-});
+}
 //Прорисовка категории
-function renderCartoonFolder(cat) {
-	$$(".inFolder").html("");
+function renderNewsFolder(cat) {
+	$$(".inCateg").html("");
 	var ifClear = true;
-	function createVideo() {
-		var block = $$("<div class='video'><div> "+cartoonData[i][0] +"</div><iframe width='350' height='200' src='"+cartoonData[i][1]+"?rel=0&amp;controls=0&amp;showinfo=0&feature=player_embedded' frameborder='0' allowfullscreen> </iframe></div>");
-		$$(".inFolder").append(block);
+	function createPost() {
+		var block = $$("<div class='post'><div><h3> "+newsData[i][0]+"</h3> Категории: "+newsData[i][2]+" <div>"+newsData[i][1] +"</div></div></div>");
+		$$(".inCateg").append(block);
 	}
-	for(var i = 0; i < cartoonData.length; i++) {
+	for(var i = 0; i < newsData.length; i++) {
 		if(firstCartRender) {
-			cartoonData[i][2] = cartoonData[i][2].split(",");
+			newsData[i][2] = newsData[i][2].split(",");
 		}
 		else {
 		}
-		if(cartoonData[i][2].length >=2) {
-			//console.log(cartoonData[i][2]);
-			for(var y=0; y<cartoonData[i][2].length;y++ ) {
-				if(cat ==cartoonData[i][2][y]) {
-					createVideo();
+		if(newsData[i][2].length >=2) {
+			for(var y=0; y<newsData[i][2].length;y++ ) {
+				if(cat ==newsData[i][2][y]) {
+					createPost();
 					ifClear = false;
 				}					
 			}
 		}
 		else {
-			if(cat == cartoonData[i][2]) {
-				createVideo();
+			if(cat == newsData[i][2]) {
+				createPost();
 				ifClear = false;
 			}
 		}
@@ -59,4 +55,4 @@ function renderCartoonFolder(cat) {
 	if(ifClear) {
 		myApp.alert('В данной категории пока отсутствует контент', 'Приносим извинения');
 	}
-}*/
+}
