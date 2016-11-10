@@ -16,26 +16,6 @@ var mainView = myApp.addView('.view-main', {
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
 	
-	var opacityRedact = function(){
-		var i = 100;
-	
-		var loadScreensOpChanger = setInterval(function() {
-			i-=1;
-			$$(".loadingScreen").css('opacity', i/100);
-			if(i<=0){
-				clearInterval(loadScreensOpChanger);
-				$$(".loadingScreen").css('display', 'none');
-			};
-		}, 1);
-	};
-	renderCartoons(); // Прогрузка видеозаписей на страницу с мультфильмами, функция описана в cartoons.js
-	
-	renderNews();
-	
-	opacityRedact();
-	
-	console.log("Ready");
-	
 	shortAjax(
 		'http://it-labor.ru/playground/valera/data-ajax.php',
 		{},
@@ -80,7 +60,7 @@ $$(document).on('deviceready', function() {
 					+
 					'<textarea placeholder = "Краткое описание(Не обязательно)" class = "textareaFor'+contestList.contest[i].id+'"></textarea>'
 					+
-					'<p class="uploadButton" data-contest = "'+contestList.contest[i].id+'">Отправить!</p>'
+					'<p class="uploadButton" data-contest = "'+contestList.contest[i].id+'" data-type = "contest">Отправить!</p>'
 				);
 				
 				myPage_content.append(myContent_block);
@@ -91,9 +71,31 @@ $$(document).on('deviceready', function() {
 			};
 			
 			$$('.photoUploadButton').on('click', function(){
-				globalVar.imgData = $$(this).attr('data-contest')
+				globalVar.imgData = $$(this).attr('data-contest');
+				globalVar.typeData = $$(this).attr('data-type');
 				getImage();
 			});
 		}
 	);
+	
+	var opacityRedact = function(){
+		var i = 100;
+	
+		var loadScreensOpChanger = setInterval(function() {
+			i-=1;
+			$$(".loadingScreen").css('opacity', i/100);
+			if(i<=0){
+				clearInterval(loadScreensOpChanger);
+				$$(".loadingScreen").css('display', 'none');
+			};
+		}, 1);
+	};
+	renderCartoons(); // Прогрузка видеозаписей на страницу с мультфильмами, функция описана в cartoons.js
+	
+	renderNews();
+	
+	opacityRedact();
+	
+	console.log("Ready");
+	
 });

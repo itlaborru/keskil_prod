@@ -19,6 +19,7 @@ function uploadPhoto(imageURI) {
 
 	var params = new Object();
 	params.contest = globalVar.imgData;
+	params.type = globalVar.typeData;
 	
 	options.params = params;
 	
