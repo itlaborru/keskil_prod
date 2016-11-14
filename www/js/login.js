@@ -18,7 +18,11 @@ $$('.signin').on('click', function(){
 			},
 			
 			function(data){
-				alert(data);
+				var dataLogin = JSON.parse(data);
+				alert(dataLogin['text']);
+				localStorage.setItem("phpSessionId", dataLogin.sessionId);
+				$$('.loginPanel').css('display', 'none');
+				$$('.userPanel').css('display', 'block');
 			}
 		);
 	}
@@ -55,6 +59,10 @@ $$('.logout').on('click', function(){
 		{},
 		function(data){
 			alert(data);
+			getCookie('PHPSESSID', null);
+			localStorage.clear();
+			$$('.loginPanel').css('display', 'block');
+			$$('.userPanel').css('display', 'none');
 		}
 	);
 	

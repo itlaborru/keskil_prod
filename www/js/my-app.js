@@ -1,3 +1,32 @@
+function getOtherImage() {
+	// Retrieve image file location from specified source
+	
+	navigator.camera.getPicture(uploadOtherPhoto, function(message) {
+		alert('get picture failed');
+	},{
+		quality: 50, 
+		destinationType: navigator.camera.DestinationType.FILE_URI,
+		sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+	});
+}
+
+function uploadOtherPhoto(imageURI) {
+	
+	var options = new FileUploadOptions();
+	options.fileKey="userfile";
+	options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+	options.mimeType="image/*";
+
+	var params = new Object();
+	
+	options.params = params;
+	
+	options.chunkedMode = false;
+		
+	var ft = new FileTransfer();
+	ft.upload(imageURI, "http://it-labor.ru/playground/valera/fileChecker.php", win, fail, options);
+}
+
 function getImage() {
 	// Retrieve image file location from specified source
 	

@@ -13,6 +13,12 @@ var mainView = myApp.addView('.view-main', {
 	domCache : true,
 });
 
+if(localStorage.getItem("phpSessionId") != 'undefined'){//Проверка на сохраненность куки
+	setCookie('PHPSESSID', localStorage.getItem("phpSessionId"));
+	$$('.loginPanel').css('display', 'none');
+	$$('.userPanel__name').html('Oshibka v soedinenii s serverom!');
+}
+
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
 	
@@ -20,18 +26,25 @@ $$(document).on('deviceready', function() {
 		'http://it-labor.ru/playground/valera/data-ajax.php',
 		{},
 		function(data){
-			var contestList = JSON.parse(data);
+			var data_ajax = JSON.parse(data);
+			
+			if(localStorage.getItem("phpSessionId") != 'undefined'){
+				$$('.userPanel__name').html(data_ajax.userData[0].login);
+				$$('.userPanel__icon').attr('src', data_ajax.userData[0].icon);
+				console.log(data_ajax);
+			}
+			
 			$$('.contests .page-content .content-block').html('');
-			for(var i = 0; i < contestList.contest.length; i++){
+			for(var i = 0; i < data_ajax.contest.length; i++){
 			
 				$$('.contests .page-content .content-block').append(
-					//' '+contestList.contest[i].start
+					//' '+data_ajax.contest[i].start
 					//+
-					//' '+contestList.contest[i].end
+					//' '+data_ajax.contest[i].end
 					//+
-					'<a href = "#contest'+contestList.contest[i].id+'">'+contestList.contest[i].title
+					'<a href = "#contest'+data_ajax.contest[i].id+'">'+data_ajax.contest[i].title
 					//+
-					//' '+contestList.contest[i].content
+					//' '+data_ajax.contest[i].content
 					+
 					'</a> </br>'
 				);
@@ -40,27 +53,27 @@ $$(document).on('deviceready', function() {
 				var myContent_block = $$('<div></div>');
 				var myPage_content = $$('<div></div>');
 				
-				myPage.addClass('page cached contest'+contestList.contest[i].id);
-				myPage.attr('data-page', 'contest'+contestList.contest[i].id);
+				myPage.addClass('page cached contest'+data_ajax.contest[i].id);
+				myPage.attr('data-page', 'contest'+data_ajax.contest[i].id);
 				myPage_content.addClass('page-content');
 				myContent_block.addClass('content-block');
 				
 				myContent_block.append(
-					' '+contestList.contest[i].start
+					' '+data_ajax.contest[i].start
 					+
-					' '+contestList.contest[i].end
+					' '+data_ajax.contest[i].end
 					+
-					' '+contestList.contest[i].title
+					' '+data_ajax.contest[i].title
 					+
-					' '+contestList.contest[i].content
+					' '+data_ajax.contest[i].content
 					+
 					'</br>'
 					+
-					'<p class="photoUploadButton" data-contest = "'+contestList.contest[i].id+'">Выбрать фото</p>'
+					'<p class="photoUploadButton" data-contest = "'+data_ajax.contest[i].id+'">Выбрать фото</p>'
 					+
-					'<textarea placeholder = "Краткое описание(Не обязательно)" class = "textareaFor'+contestList.contest[i].id+'"></textarea>'
+					'<textarea placeholder = "Краткое описание(Не обязательно)" class = "textareaFor'+data_ajax.contest[i].id+'"></textarea>'
 					+
-					'<p class="uploadButton" data-contest = "'+contestList.contest[i].id+'" data-type = "contest">Отправить!</p>'
+					'<p class="uploadButton" data-contest = "'+data_ajax.contest[i].id+'" data-type = "contest">Отправить!</p>'
 				);
 				
 				myPage_content.append(myContent_block);
