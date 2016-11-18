@@ -19,24 +19,28 @@ $$('.signin').on('click', function(){
 			
 			function(data){
 				var dataLogin = JSON.parse(data);
-				alert(dataLogin['text']);
-				localStorage.setItem("phpSessionId", dataLogin.sessionId);
-				localStorage.setItem("loggedIn", true);
-				$$('.loginPanel').css('display', 'none');
-				$$('.userPanel').css('display', 'block');
-				$$('.userPanel__icon').attr('src', '');
-				$$('.userPanel__name').html('Soedinenie s serverom ne ustanovilos!');
-				shortAjax(
-					'http://it-labor.ru/playground/valera/user-data-ajax.php', 
-					
-					{},
-					
-					function(data){
-						var dataLogin = JSON.parse(data);
-						$$('.userPanel__icon').attr('src', dataLogin.icon);
-						$$('.userPanel__name').html(dataLogin.login);
-					}
-				);
+				alert(dataLogin.text);
+				if(dataLogin.sessionId != undefined){
+					localStorage.setItem("phpSessionId", dataLogin.sessionId);
+					localStorage.setItem("loggedIn", true);
+					$$('.loginPanel').css('display', 'none');
+					$$('.userPanel').css('display', 'block');
+					$$('.userPanel__icon').attr('src', '');
+					$$('.userPanel__name').html('Soedinenie s serverom ne ustanovilos!');
+					shortAjax(
+						'http://it-labor.ru/playground/valera/user-data-ajax.php', 
+						
+						{
+							'type': 'get',
+						},
+						
+						function(data){
+							var dataLogin = JSON.parse(data);
+							$$('.userPanel__icon').attr('src', dataLogin.icon);
+							$$('.userPanel__name').html(dataLogin.login);
+						}
+					);
+				}
 			}
 		);
 	}
