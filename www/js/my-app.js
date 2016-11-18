@@ -18,6 +18,8 @@ function uploadOtherPhoto(imageURI) {
 	options.mimeType="image/*";
 
 	var params = new Object();
+	params.contest = '';
+	params.type = 'avatar';
 	
 	options.params = params;
 	
