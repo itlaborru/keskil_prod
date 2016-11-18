@@ -21,8 +21,22 @@ $$('.signin').on('click', function(){
 				var dataLogin = JSON.parse(data);
 				alert(dataLogin['text']);
 				localStorage.setItem("phpSessionId", dataLogin.sessionId);
+				localStorage.setItem("loggedIn", true);
 				$$('.loginPanel').css('display', 'none');
 				$$('.userPanel').css('display', 'block');
+				$$('.userPanel__icon').attr('src', '');
+				$$('.userPanel__name').html('Soedinenie s serverom ne ustanovilos!');
+				shortAjax(
+					'http://it-labor.ru/playground/valera/user-data-ajax.php', 
+					
+					{},
+					
+					function(data){
+						var dataLogin = JSON.parse(data);
+						$$('.userPanel__icon').attr('src', dataLogin.icon);
+						$$('.userPanel__name').html(dataLogin.login);
+					}
+				);
 			}
 		);
 	}
@@ -61,6 +75,7 @@ $$('.logout').on('click', function(){
 			alert(data);
 			getCookie('PHPSESSID', null);
 			localStorage.clear();
+			console.log(localStorage.getItem('phpSessionId'));
 			$$('.loginPanel').css('display', 'block');
 			$$('.userPanel').css('display', 'none');
 		}

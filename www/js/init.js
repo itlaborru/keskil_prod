@@ -13,11 +13,13 @@ var mainView = myApp.addView('.view-main', {
 	domCache : true,
 });
 
-if(localStorage.getItem("phpSessionId") != 'undefined'){//Проверка на сохраненность куки
+if(localStorage.getItem("loggedIn")){//Проверка на сохраненность куки
 	setCookie('PHPSESSID', localStorage.getItem("phpSessionId"));
 	$$('.loginPanel').css('display', 'none');
 	$$('.userPanel__name').html('Oshibka v soedinenii s serverom!');
-}
+} else {
+	$$('.userPanel').css('display', 'none');
+};
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
@@ -28,7 +30,7 @@ $$(document).on('deviceready', function() {
 		function(data){
 			var data_ajax = JSON.parse(data);
 			
-			if(localStorage.getItem("phpSessionId") != 'undefined'){
+			if(localStorage.getItem("loggedIn")){
 				$$('.userPanel__name').html(data_ajax.userData[0].login);
 				$$('.userPanel__icon').attr('src', data_ajax.userData[0].icon);
 				console.log(data_ajax);

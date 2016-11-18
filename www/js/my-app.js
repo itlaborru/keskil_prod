@@ -58,6 +58,7 @@ function uploadPhoto(imageURI) {
 
 	$$('.uploadButton').on('click',function(){
 		options.params.text = $$('.textareaFor'+globalVar.imgData).val();
+		$$('.textareaFor'+globalVar.imgData).val('');
 		options.chunkedMode = false;
 		
 		var ft = new FileTransfer();
