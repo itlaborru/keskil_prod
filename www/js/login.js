@@ -38,6 +38,8 @@ $$('.signin').on('click', function(){
 							var dataLogin = JSON.parse(data);
 							$$('.userPanel__icon').attr('src', dataLogin.icon);
 							$$('.userPanel__name').html(dataLogin.login);
+							$$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
+							$$('.userPanel__mail').html(dataLogin.mail);
 						}
 					);
 				}

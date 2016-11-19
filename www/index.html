@@ -60,13 +60,15 @@
 				
 				<div class="userPanel__shortInfo">
 					
-					<div style="height: 100px; width: 100px;">
-						<img class="userPanel__icon" style="max-height: 100px; max-width: 100px; background-size: contain; margin: auto;"/>
+					<div style="margin: 0 auto;">
+						<img class="userPanel__icon" style="max-height: 100px; max-width: 100px; background-size: contain;"/>
 					</div>
 					
 					<h3 class="userPanel__name"></h3>
 					
 					<input class="logout" name="logout" type="button" value="logout">
+					
+					<p><a href="#userPage" class="close-panel">Личный кабинет</a></p>
 					
 				</div>
 				
@@ -98,6 +100,25 @@
             <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
             <div class="pages navbar-through toolbar-through">
                 <!-- Page, "data-page" contains page name -->
+				
+				<div data-page="userPage" class="page cached userPage">
+                    <!-- Scrollable page content -->
+                    <div class="page-content">
+                        <div class="content-block">
+                            <div style="margin: 0 auto 50px; max-height: 200px; max-width: 200px;">
+								<img class="userPanel__icon" style="max-height: 200px; max-width: 200px; background-size: contain; margin: auto; border-radius: 500px;"/>
+							</div>
+							<div class="userPage__fullname">
+							</div>
+							<div class="userPanel__name">
+							</div>
+							<div class="userPanel__mail">
+							</div>
+							
+                        </div>
+                    </div>
+                </div>
+				
                 <div data-page="index" class="page">
                     <!-- Scrollable page content -->
                     <div class="page-content">
