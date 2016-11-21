@@ -3,6 +3,8 @@
 		
 $$('.signin').on('click', function(){
 	
+	myApp.closePanel();
+	
 	//Проверка на длину при отправке данных на сервер.
 	if( 
 		( $$('.login').val().length < 4 ) || ( $$('.pass').val().length <8 ) 
@@ -40,6 +42,8 @@ $$('.signin').on('click', function(){
 							$$('.userPanel__name').html(dataLogin.login);
 							currentLogin = dataLogin.login;
 							localStorage.setItem("userName", currentLogin);
+							$$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
+							$$('.userPanel__mail').html(dataLogin.mail);
 						}
 					);
 				}
@@ -50,7 +54,9 @@ $$('.signin').on('click', function(){
 });
 
 $$('.register').on('click', function(){
-
+	
+	myApp.closePanel();
+	
 	//Проверка на длину при отправке данных на сервер.
 	if( 
 		( $$('.loginReg').val().length < 4 ) || ( $$('.passReg').val().length <8 ) 
@@ -73,11 +79,11 @@ $$('.register').on('click', function(){
 });
 
 $$('.logout').on('click', function(){
-	if(currentLogin!="") {
-		currentLogin = "";
-		localStorage.setItem("userName", currentLogin);
-		
-	}
+	currentLogin = "";
+	
+	myApp.closePanel();
+	
+	mainView.router.back({'pageName':'index', 'force':true});
 	shortAjax(
 		'http://it-labor.ru/playground/valera/logout.php',
 		{},

@@ -31,10 +31,12 @@ $$(document).on('deviceready', function() {
 			var data_ajax = JSON.parse(data);
 			
 			if(localStorage.getItem("loggedIn")){
-				$$('.userPanel__name').html(data_ajax.userData[0].login);
-				$$('.userPanel__icon').attr('src', data_ajax.userData[0].icon);
+				$$('.userPanel__name').html(data_ajax.userData.login);
+				$$('.userPanel__icon').attr('src', data_ajax.userData.icon);
 				console.log(data_ajax);
-			}
+				$$('.userPage__fullname').html(data_ajax.userData.lname + ' ' + data_ajax.userData.fname + ' ' +  data_ajax.userData.mname);
+				$$('.userPanel__mail').html(data_ajax.userData.mail);
+			};
 			
 			$$('.contests .page-content .content-block').html('');
 			for(var i = 0; i < data_ajax.contest.length; i++){
@@ -90,8 +92,7 @@ $$(document).on('deviceready', function() {
 				globalVar.typeData = $$(this).attr('data-type');
 				getImage();
 			});
-		}
-	);
+		});
 	
 	var opacityRedact = function(){
 		var i = 100;
