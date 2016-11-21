@@ -100,6 +100,9 @@
             <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
             <div class="pages navbar-through toolbar-through">
                 <!-- Page, "data-page" contains page name -->
+				<!-- <div class="login-screen modal-in">
+					... login screen content ...				Кажется, это будет неплохо смотреться.
+				</div> -->
 				
 				<div data-page="userPage" class="page cached userPage">
                     <!-- Scrollable page content -->
@@ -114,6 +117,8 @@
 							</div>
 							<div class="userPanel__mail">
 							</div>
+							
+							<p><a href="#" class="open-login-screen">Изменить данные</a></p>
 							
                         </div>
                     </div>
@@ -183,6 +188,28 @@
 					</div>
 				</div>
             </div>
+			
+			<div class="login-screen" style = "padding-top: 30px">
+			
+				
+				<div style="margin: 0 auto 50px; max-height: 200px; max-width: 200px;">
+					<img class="userPanel__icon" style="max-height: 200px; max-width: 200px; background-size: contain; margin: auto; border-radius: 500px;"/>
+				</div>
+				
+				<p>(Нажмите на картинку, чтобы поменять ее; Будут изменены только введенные данные)</p>
+				
+				<input class="userPage__fullname__fname__change" placeholder="fname">
+				<input class="userPage__fullname__mname__change" placeholder="mname">
+				<input class="userPage__fullname__lname__change" placeholder="lname">
+				<!--<input class="userPanel__pass__change" placeholder="pass">
+				<input class="userPanel__mail__change" placeholder="mail">-->
+				
+				<p><a href="#" class="changeUserInfo">Изменить информацию</a></p>
+				
+			
+				<p><a href="#" class="close-login-screen">Закрыть меню</a></p>
+			</div>
+			
             <!-- Bottom Toolbar-->
             <div class="toolbar">
                 <div class="toolbar-inner">

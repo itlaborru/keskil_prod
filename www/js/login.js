@@ -3,6 +3,8 @@
 		
 $$('.signin').on('click', function(){
 	
+	myApp.closePanel();
+	
 	//Проверка на длину при отправке данных на сервер.
 	if( 
 		( $$('.login').val().length < 4 ) || ( $$('.pass').val().length <8 ) 
@@ -50,7 +52,9 @@ $$('.signin').on('click', function(){
 });
 
 $$('.register').on('click', function(){
-
+	
+	myApp.closePanel();
+	
 	//Проверка на длину при отправке данных на сервер.
 	if( 
 		( $$('.loginReg').val().length < 4 ) || ( $$('.passReg').val().length <8 ) 
@@ -73,6 +77,10 @@ $$('.register').on('click', function(){
 });
 
 $$('.logout').on('click', function(){
+	
+	myApp.closePanel();
+	
+	mainView.router.back({'pageName':'index', 'force':true})
 	
 	shortAjax(
 		'http://it-labor.ru/playground/valera/logout.php',

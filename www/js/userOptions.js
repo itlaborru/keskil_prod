@@ -5,3 +5,21 @@ $$('.userPanel__icon').on('click', function(){
 	globalVar.typeData = 'avatar';
 	
 });
+
+$$('.changeUserInfo').on('click', function(){
+	
+	shortAjax(
+		'http://it-labor.ru/playground/valera/user-data-edit.php',
+		{
+			'fname': $$('.userPage__fullname__fname__change').val(),
+			'mname': $$('.userPage__fullname__mname__change').val(),
+			'lname': $$('.userPage__fullname__lname__change').val(),
+			//'pass': $$('.userPage__pass__change').val(),
+			//'mail': $$('.userPage__mail__change').val(),
+		},
+		function(data){
+			alert(data);
+		}
+	);
+	
+});

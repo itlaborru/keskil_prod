@@ -36,7 +36,7 @@ $$(document).on('deviceready', function() {
 				console.log(data_ajax);
 				$$('.userPage__fullname').html(data_ajax.userData.lname + ' ' + data_ajax.userData.fname + ' ' +  data_ajax.userData.mname);
 				$$('.userPanel__mail').html(data_ajax.userData.mail);
-			}
+			};
 			
 			$$('.contests .page-content .content-block').html('');
 			for(var i = 0; i < data_ajax.contest.length; i++){
@@ -92,8 +92,7 @@ $$(document).on('deviceready', function() {
 				globalVar.typeData = $$(this).attr('data-type');
 				getImage();
 			});
-		}
-	);
+		});
 	
 	var opacityRedact = function(){
 		var i = 100;
