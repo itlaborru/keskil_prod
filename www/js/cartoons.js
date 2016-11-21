@@ -12,14 +12,11 @@ function renderCartoons() {
 				$$('.cartoons .page-content .cartoonBlock').append(folder);
 			}
 			cartoonData = data[1];
-			console.log(data);
-			console.log(cartoonData);
 		}
 	);
 }
 //Клик по категории
 $$('.cartoons').on('click', '.cartoonCategory', function (e) {
-	console.log("KAEF");
 	var categ = $$(this).attr('data-cartooncat');
 	renderCartoonFolder(categ);
 });

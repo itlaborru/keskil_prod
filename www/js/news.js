@@ -10,13 +10,11 @@ function renderNews() {
 				var newsFolder = $$("<a href='#renderNews' data-newscat='"+data[0][i][0]+"' class='newsCategory'>"+data[0][i][0]+" </a></br>");
 				newsFolder.on('click', function(){
 					var categ = $$(this).attr('data-newscat');
-					console.log(categ);
 					renderNewsFolder(categ);
 				});
 				$$('.news .page-content .news').append(newsFolder);
 			}
 			newsData = data[1];
-			console.log(data);
 		}
 	);
 }
@@ -31,7 +29,6 @@ function renderNewsFolder(cat) {
 			file = JSON.parse(file)[0];
 			file = file.split('/')[0];
 			var url  = JSON.parse(newsData[i][4])[0];
-			console.log(file);
 			if(file == "image"){
 				block = $$("<div class='post'><div><h3> "+newsData[i][0]+"</h3> Категории: "+newsData[i][2]+" <div>"+newsData[i][1] +"</div></div> <img style='max-width:500px;max-height:300px;' src='http://it-labor.ru/playground/valera/images/newsUploads/"+url+"'/> </div>");
 			}

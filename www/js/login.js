@@ -38,6 +38,8 @@ $$('.signin').on('click', function(){
 							var dataLogin = JSON.parse(data);
 							$$('.userPanel__icon').attr('src', dataLogin.icon);
 							$$('.userPanel__name').html(dataLogin.login);
+							currentLogin = dataLogin.login;
+							localStorage.setItem("userName", currentLogin);
 						}
 					);
 				}
@@ -71,7 +73,11 @@ $$('.register').on('click', function(){
 });
 
 $$('.logout').on('click', function(){
-	
+	if(currentLogin!="") {
+		currentLogin = "";
+		localStorage.setItem("userName", currentLogin);
+		
+	}
 	shortAjax(
 		'http://it-labor.ru/playground/valera/logout.php',
 		{},
