@@ -21,6 +21,26 @@ if(localStorage.getItem("loggedIn")){//Проверка на сохраненность куки
 	$$('.userPanel').css('display', 'none');
 };
 
+var updateUserinfo = function(){
+	shortAjax(
+		'http://it-labor.ru/playground/valera/user-data-ajax.php', 
+		
+		{
+			'type': 'get',
+		},
+		
+		function(data){
+			var dataLogin = JSON.parse(data);
+			$$('.userPanel__icon').attr('src', dataLogin.icon);
+			$$('.userPanel__name').html(dataLogin.login);
+			currentLogin = dataLogin.login;
+			localStorage.setItem("userName", currentLogin);
+			$$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
+			$$('.userPanel__mail').html(dataLogin.mail);
+		}
+	);
+};
+
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
 	

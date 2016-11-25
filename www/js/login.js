@@ -29,6 +29,11 @@ $$('.signin').on('click', function(){
 					$$('.userPanel').css('display', 'block');
 					$$('.userPanel__icon').attr('src', '');
 					$$('.userPanel__name').html('Soedinenie s serverom ne ustanovilos!');
+					$$('.login').val('');
+					$$('.pass').val('');
+					$$('.loginReg').val('');
+					$$('.passReg').val('');
+					$$('.mail').val('');
 					shortAjax(
 						'http://it-labor.ru/playground/valera/user-data-ajax.php', 
 						
@@ -73,6 +78,11 @@ $$('.register').on('click', function(){
 		},
 		function(data){
 			alert(data);
+			$$('.login').val('');
+			$$('.pass').val('');
+			$$('.loginReg').val('');
+			$$('.passReg').val('');
+			$$('.mail').val('');
 		}
 	);
 	
@@ -82,6 +92,12 @@ $$('.logout').on('click', function(){
 	currentLogin = "";
 	
 	myApp.closePanel();
+	
+	$$('.login').val('');
+	$$('.pass').val('');
+	$$('.loginReg').val('');
+	$$('.passReg').val('');
+	$$('.mail').val('');
 	
 	mainView.router.back({'pageName':'index', 'force':true});
 	shortAjax(
@@ -96,5 +112,11 @@ $$('.logout').on('click', function(){
 			$$('.userPanel').css('display', 'none');
 		}
 	);
+	
+});
+
+$$('.updateUserinfo').on('click', function(){
+	
+	updateUserinfo();
 	
 });
