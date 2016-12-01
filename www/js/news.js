@@ -73,6 +73,6 @@ function renderNewsFolder(cat) {
 		firstCartRender = false;
 	}
 	if(ifClear) {
-		myApp.alert('В данной категории пока отсутствует контент', 'Приносим извинения');
+		myApp.alert(dictionary.noContent, dictionary.sorry);
 	}
 }

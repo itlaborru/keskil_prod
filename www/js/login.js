@@ -9,7 +9,7 @@ $$('.signin').on('click', function(){
 	if( 
 		( $$('.login').val().length < 4 ) || ( $$('.pass').val().length <8 ) 
 	){
-		alert('Ошибка! Минимальная длина пароля - 8, минимальная длина логина - 4');
+		alert(dictionary.error +dictionary.register);
 	} else {
 		shortAjax(
 			'http://it-labor.ru/playground/valera/loginChecker.php', 
@@ -28,7 +28,7 @@ $$('.signin').on('click', function(){
 					$$('.loginPanel').css('display', 'none');
 					$$('.userPanel').css('display', 'block');
 					$$('.userPanel__icon').attr('src', '');
-					$$('.userPanel__name').html('Soedinenie s serverom ne ustanovilos!');
+					$$('.userPanel__name').html(dictionary.unableToConnect);
 					$$('.login').val('');
 					$$('.pass').val('');
 					$$('.loginReg').val('');
@@ -66,7 +66,7 @@ $$('.register').on('click', function(){
 	if( 
 		( $$('.loginReg').val().length < 4 ) || ( $$('.passReg').val().length <8 ) 
 	){
-		alert('Ошибка! Минимальная длина пароля - 8, минимальная длина логина - 4');
+		alert(dictionary.error +dictionary.register);
 	}
 	
 	shortAjax(

@@ -16,7 +16,7 @@ var mainView = myApp.addView('.view-main', {
 if(localStorage.getItem("loggedIn")){//Проверка на сохраненность куки
 	setCookie('PHPSESSID', localStorage.getItem("phpSessionId"));
 	$$('.loginPanel').css('display', 'none');
-	$$('.userPanel__name').html('Oshibka v soedinenii s serverom!');
+	$$('.userPanel__name').html(dictionary.unableToConnect);
 } else {
 	$$('.userPanel').css('display', 'none');
 };
@@ -132,6 +132,6 @@ $$(document).on('deviceready', function() {
 	
 	opacityRedact();
 	
-	console.log("Ready");
+	console.log(dictionary.ready);
 	
 });
