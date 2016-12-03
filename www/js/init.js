@@ -1,17 +1,4 @@
-// Initialize app
-var myApp = new Framework7();
 
-var globalVar = {};
-
-// If we need to use custom DOM library, let's save it to $$ variable:
-var $$ = Dom7;
-
-// Add view
-var mainView = myApp.addView('.view-main', {
-	// Because we want to use dynamic navbar, we need to enable it for this view:
-	dynamicNavbar: true,
-	domCache : true,
-});
 
 if(localStorage.getItem("loggedIn")){//Проверка на сохраненность куки
 	setCookie('PHPSESSID', localStorage.getItem("phpSessionId"));
@@ -22,23 +9,7 @@ if(localStorage.getItem("loggedIn")){//Проверка на сохраненность куки
 };
 
 var updateUserinfo = function(){
-	shortAjax(
-		'http://it-labor.ru/playground/valera/user-data-ajax.php', 
-		
-		{
-			'type': 'get',
-		},
-		
-		function(data){
-			var dataLogin = JSON.parse(data);
-			$$('.userPanel__icon').attr('src', dataLogin.icon);
-			$$('.userPanel__name').html(dataLogin.login);
-			currentLogin = dataLogin.login;
-			localStorage.setItem("userName", currentLogin);
-			$$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
-			$$('.userPanel__mail').html(dataLogin.mail);
-		}
-	);
+	shortAjax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
 };
 
 // Handle Cordova Device Ready Event

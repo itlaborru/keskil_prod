@@ -4,18 +4,7 @@
 			myApp.alert(dictionary.plsLogin, dictionary.error);
 		}
 		else {
-			shortAjax('http://it-labor.ru/playground/valera/feedback.php', 
-				{
-					'type':'upload',
-					'content':	$$('.feedback').val(),
-					'user':	localStorage.getItem("userName"),
-				},
-				function(data) {
-					console.log(data);
-					$$('.feedback').val("");
-					myApp.alert(dictionary.feedbackSent, dictionary.success);
-				}
-			);
+			shortAjax(entrypoints.feedback.url,entrypoints.feedback.data,entrypoints.feedback.success);
 		}
 	}
 	else {

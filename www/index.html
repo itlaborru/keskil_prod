@@ -228,7 +228,9 @@
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
+    <script type="text/javascript" src="js/entrypoints.js"></script>
     <script type="text/javascript" src="js/cookie.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/feedback.js"></script>
@@ -236,12 +238,11 @@
     <script type="text/javascript" src="js/cartoons.js"></script>
     <script type="text/javascript" src="js/news.js"></script>
     <script type="text/javascript" src="js/userOptions.js"></script>
-    <script type="text/javascript" src="js/my-app.js"></script>
     <script type="text/javascript" src="js/dictionary.js"></script>
 </body>
 <!--
 BUGS:
--2. Системные сообщения, подсказки ошибки и тд вынести в отдельный файл dictionary.js
+-2. Системные сообщения, подсказки ошибки и тд вынести в отдельный файл dictionary.js ++++++
 -1. Все точки входа должны быть собраны в entrypoints.js
 0. Рефакторинг на объекты всего, даже функций - нет глобальных переменных и функций, все внутри какого-либо объекта
 Файл init.js ничего не создает, подключается самым последним и именно он стукает все

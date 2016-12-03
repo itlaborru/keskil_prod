@@ -1,19 +1,6 @@
 //Прорисовка списка категорий, получение и запись данных
 function renderCartoons() {
-	shortAjax('http://it-labor.ru/playground/valera/cartoonsServer.php', 
-		{
-			'type':'download',
-		},
-		function(data) {
-			//$$('.cartoons .page-content .cartoonBlock').html(data); 
-			data = JSON.parse(data);
-			for(var i = 0; i < data[0].length; i++) {
-				var folder = $$("<a href='#renderCartoons' data-cartooncat='"+data[0][i][0]+"' class='cartoonCategory'>"+data[0][i][0]+" </a></br>");
-				$$('.cartoons .page-content .cartoonBlock').append(folder);
-			}
-			cartoonData = data[1];
-		}
-	);
+	shortAjax(entrypoints.cartoonsServer.url,entrypoints.cartoonsServer.data,entrypoints.cartoonsServer.success);
 }
 //Клик по категории
 $$('.cartoons').on('click', '.cartoonCategory', function (e) {
