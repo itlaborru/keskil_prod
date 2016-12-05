@@ -1,4 +1,4 @@
-$$('.userPanel__icon').on('click', function(){
+$('.userPanel__icon').on('click', function(){
 	
 	getOtherImage();
 	globalVar.imgData = '';
@@ -7,16 +7,16 @@ $$('.userPanel__icon').on('click', function(){
 	
 });
 
-$$('.changeUserInfo').on('click', function(){
+$('.changeUserInfo').on('click', function(){
 	
-	shortAjax(
+	ajax(
 		'http://it-labor.ru/playground/valera/user-data-edit.php',
 		{
-			'fname': $$('.userPage__fullname__fname__change').val(),
-			'mname': $$('.userPage__fullname__mname__change').val(),
-			'lname': $$('.userPage__fullname__lname__change').val(),
-			//'pass': $$('.userPage__pass__change').val(),
-			//'mail': $$('.userPage__mail__change').val(),
+			'fname': $('.userPage__fullname__fname__change').val(),
+			'mname': $('.userPage__fullname__mname__change').val(),
+			'lname': $('.userPage__fullname__lname__change').val(),
+			//'pass': $('.userPage__pass__change').val(),
+			//'mail': $('.userPage__mail__change').val(),
 		},
 		function(data){
 			alert(data);

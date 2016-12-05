@@ -5,11 +5,11 @@ var entrypoints = {
 			'type':'download',
 		},
 		success:	function(data) {
-			//$$('.cartoons .page-content .cartoonBlock').html(data); 
+			//$('.cartoons .page-content .cartoonBlock').html(data); 
 			data = JSON.parse(data);
 			for(var i = 0; i < data[0].length; i++) {
-				var folder = $$("<a href='#renderCartoons' data-cartooncat='"+data[0][i][0]+"' class='cartoonCategory'>"+data[0][i][0]+" </a></br>");
-				$$('.cartoons .page-content .cartoonBlock').append(folder);
+				var folder = $("<a href='#renderCartoons' data-cartooncat='"+data[0][i][0]+"' class='cartoonCategory'>"+data[0][i][0]+" </a></br>");
+				$('.cartoons .page-content .cartoonBlock').append(folder);
 			}
 			cartoonData = data[1];
 		},
@@ -18,13 +18,13 @@ var entrypoints = {
 		url:	'http://it-labor.ru/playground/valera/feedback.php', 
 		data:	{
 			'type':'upload',
-			'content':	$$('.feedback').val(),
+			'content':	$('.feedback').val(),
 			'user':	localStorage.getItem("userName"),
 		},
 		success:	function(data) {
 			console.log(data);
-			$$('.feedback').val("");
-			myApp.alert(dictionary.feedbackSent, dictionary.success);
+			$('.feedback').val("");
+			app.alert(dictionary.feedbackSent, dictionary.success);
 		},
 	},
 	newUserInfo: {
@@ -34,12 +34,12 @@ var entrypoints = {
 		},
 		success:	function(data){
 			var dataLogin = JSON.parse(data);
-			$$('.userPanel__icon').attr('src', dataLogin.icon);
-			$$('.userPanel__name').html(dataLogin.login);
+			$('.userPanel__icon').attr('src', dataLogin.icon);
+			$('.userPanel__name').html(dataLogin.login);
 			currentLogin = dataLogin.login;
 			localStorage.setItem("userName", currentLogin);
-			$$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
-			$$('.userPanel__mail').html(dataLogin.mail);
+			$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
+			$('.userPanel__mail').html(dataLogin.mail);
 		},
 	},
 	onReady: {
@@ -49,17 +49,17 @@ var entrypoints = {
 			var data_ajax = JSON.parse(data);
 			
 			if(localStorage.getItem("loggedIn")){
-				$$('.userPanel__name').html(data_ajax.userData.login);
-				$$('.userPanel__icon').attr('src', data_ajax.userData.icon);
+				$('.userPanel__name').html(data_ajax.userData.login);
+				$('.userPanel__icon').attr('src', data_ajax.userData.icon);
 				console.log(data_ajax);
-				$$('.userPage__fullname').html(data_ajax.userData.lname + ' ' + data_ajax.userData.fname + ' ' +  data_ajax.userData.mname);
-				$$('.userPanel__mail').html(data_ajax.userData.mail);
+				$('.userPage__fullname').html(data_ajax.userData.lname + ' ' + data_ajax.userData.fname + ' ' +  data_ajax.userData.mname);
+				$('.userPanel__mail').html(data_ajax.userData.mail);
 			};
 			
-			$$('.contests .page-content .content-block').html('');
+			$('.contests .page-content .content-block').html('');
 			for(var i = 0; i < data_ajax.contest.length; i++){
 			
-				$$('.contests .page-content .content-block').append(
+				$('.contests .page-content .content-block').append(
 					//' '+data_ajax.contest[i].start
 					//+
 					//' '+data_ajax.contest[i].end
@@ -71,9 +71,9 @@ var entrypoints = {
 					'</a> </br>'
 				);
 				
-				var myPage = $$('<div></div>');
-				var myContent_block = $$('<div></div>');
-				var myPage_content = $$('<div></div>');
+				var myPage = $('<div></div>');
+				var myContent_block = $('<div></div>');
+				var myPage_content = $('<div></div>');
 				
 				myPage.addClass('page cached contest'+data_ajax.contest[i].id);
 				myPage.attr('data-page', 'contest'+data_ajax.contest[i].id);
@@ -101,13 +101,13 @@ var entrypoints = {
 				myPage_content.append(myContent_block);
 				myPage.append(myPage_content);
 				
-				$$('.pages').append(myPage);
+				$('.pages').append(myPage);
 			
 			};
 			
-			$$('.photoUploadButton').on('click', function(){
-				globalVar.imgData = $$(this).attr('data-contest');
-				globalVar.typeData = $$(this).attr('data-type');
+			$('.photoUploadButton').on('click', function(){
+				globalVar.imgData = $(this).attr('data-contest');
+				globalVar.typeData = $(this).attr('data-type');
 				getImage();
 			});
 		},
@@ -116,8 +116,8 @@ var entrypoints = {
 		url:	'http://it-labor.ru/playground/valera/loginChecker.php', 
 		
 		data:	{
-			'login': $$('.login').val(),
-			'pass': $$('.pass').val(),
+			'login': $('.login').val(),
+			'pass': $('.pass').val(),
 		},
 		
 		success:	function(data){
@@ -126,16 +126,16 @@ var entrypoints = {
 			if(dataLogin.sessionId != undefined){
 				localStorage.setItem("phpSessionId", dataLogin.sessionId);
 				localStorage.setItem("loggedIn", true);
-				$$('.loginPanel').css('display', 'none');
-				$$('.userPanel').css('display', 'block');
-				$$('.userPanel__icon').attr('src', '');
-				$$('.userPanel__name').html(dictionary.unableToConnect);
-				$$('.login').val('');
-				$$('.pass').val('');
-				$$('.loginReg').val('');
-				$$('.passReg').val('');
-				$$('.mail').val('');
-				shortAjax(
+				$('.loginPanel').css('display', 'none');
+				$('.userPanel').css('display', 'block');
+				$('.userPanel__icon').attr('src', '');
+				$('.userPanel__name').html(dictionary.unableToConnect);
+				$('.login').val('');
+				$('.pass').val('');
+				$('.loginReg').val('');
+				$('.passReg').val('');
+				$('.mail').val('');
+				ajax(
 					'http://it-labor.ru/playground/valera/user-data-ajax.php', 
 					
 					{
@@ -144,12 +144,12 @@ var entrypoints = {
 					
 					function(data){
 						var dataLogin = JSON.parse(data);
-						$$('.userPanel__icon').attr('src', dataLogin.icon);
-						$$('.userPanel__name').html(dataLogin.login);
+						$('.userPanel__icon').attr('src', dataLogin.icon);
+						$('.userPanel__name').html(dataLogin.login);
 						currentLogin = dataLogin.login;
 						localStorage.setItem("userName", currentLogin);
-						$$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
-						$$('.userPanel__mail').html(dataLogin.mail);
+						$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
+						$('.userPanel__mail').html(dataLogin.mail);
 					});
 			}
 		},
