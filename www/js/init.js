@@ -1,15 +1,9 @@
-
-
 if(localStorage.getItem("loggedIn")){//Проверка на сохраненность куки
-	setCookie('PHPSESSID', localStorage.getItem("phpSessionId"));
+	cookies.setCookie('PHPSESSID', localStorage.getItem("phpSessionId"));
 	$('.loginPanel').css('display', 'none');
 	$('.userPanel__name').html(dictionary.unableToConnect);
 } else {
 	$('.userPanel').css('display', 'none');
-};
-
-var updateUserinfo = function(){
-	ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
 };
 
 // Handle Cordova Device Ready Event
@@ -17,6 +11,7 @@ $(document).on('deviceready', function() {
 	initPages.handler();
 	ajax(entrypoints.onReady.url,entrypoints.onReady.data,entrypoints.onReady.success);
 	
+	//Вообще, эта  функция не нужна, поэтому переписывать я ее не буду
 	var opacityRedact = function(){
 		var i = 100;
 	
@@ -29,9 +24,12 @@ $(document).on('deviceready', function() {
 			};
 		}, 1);
 	};
+	
+	login.bindEvents();
+	
 	cartoons.renderCartoons(); // Прогрузка видеозаписей на страницу с мультфильмами, функция описана в cartoons.js
 	
-	renderNews();
+	news.renderNews();
 	
 	opacityRedact();
 	

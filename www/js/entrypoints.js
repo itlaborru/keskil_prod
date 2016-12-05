@@ -108,7 +108,7 @@ var entrypoints = {
 			$('.photoUploadButton').on('click', function(){
 				globalVar.imgData = $(this).attr('data-contest');
 				globalVar.typeData = $(this).attr('data-type');
-				getImage();
+				transferImages.getImage();
 			});
 		},
 	},

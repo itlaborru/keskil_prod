@@ -229,7 +229,6 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/init.js"></script>
     <script type="text/javascript" src="js/entrypoints.js"></script>
     <script type="text/javascript" src="js/cookie.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
@@ -239,14 +238,15 @@
     <script type="text/javascript" src="js/news.js"></script>
     <script type="text/javascript" src="js/userOptions.js"></script>
     <script type="text/javascript" src="js/dictionary.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
 </body>
 <!--
 BUGS:
 -2. Системные сообщения, подсказки ошибки и тд вынести в отдельный файл dictionary.js ++
 -1. Все точки входа должны быть собраны в entrypoints.js потом вместе с руслсаном и валерой
-0. Рефакторинг на объекты всего, даже функций - нет глобальных переменных и функций, все внутри какого-либо объекта
-Стандартизовать названия функций и их местоположение в коде (типа render и тд) 
-Файл init.js ничего не создает, подключается самым последним и именно он стукает все
+0. Рефакторинг на объекты всего, даже функций - нет глобальных переменных и функций, все внутри какого-либо объекта ++
+Стандартизовать названия функций и их местоположение в коде (типа render и тд) ++
+Файл init.js ничего не создает, подключается самым последним и именно он стукает все ++
 --- $ на $ ++
 --- ajax на ajax() ++
 
@@ -259,7 +259,7 @@ BUGS:
 4.Запрет на использование спец символов на стороне клиента
 
 
-1. uploadPhoto (my-app.js:44)
+1. uploadPhoto (app.js:44)
 2. при логине если неправильно то выдается несколько алертов, потом еще нажимаешь на кнопку панельки и опять
 3. функции должны именоваться максимально подробно
 4. группировка функций - глобальные для работы с файловой системой телефона например - то есть именование файлов
