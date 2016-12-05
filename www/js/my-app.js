@@ -1,8 +1,54 @@
+// Initialize app
+var myApp = new Framework7();
+
+var globalVar = {};
+
+// If we need to use custom DOM library, let's save it to $$ variable:
+var $$ = Dom7;
+
+// Add view
+var mainView = myApp.addView('.view-main', {
+	// Because we want to use dynamic navbar, we need to enable it for this view:
+	dynamicNavbar: true,
+	domCache : true,
+});
+
+function getOtherImage() {
+	// Retrieve image file location from specified source
+	
+	navigator.camera.getPicture(uploadOtherPhoto, function(message) {
+		alert(dictionary.imageFail);
+	},{
+		quality: 50, 
+		destinationType: navigator.camera.DestinationType.FILE_URI,
+		sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+	});
+}
+
+function uploadOtherPhoto(imageURI) {
+	
+	var options = new FileUploadOptions();
+	options.fileKey="userfile";
+	options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+	options.mimeType="image/*";
+
+	var params = new Object();
+	params.contest = '';
+	params.type = 'avatar';
+	
+	options.params = params;
+	
+	options.chunkedMode = false;
+		
+	var ft = new FileTransfer();
+	ft.upload(imageURI, "http://it-labor.ru/playground/valera/fileChecker.php", win, fail, options);
+}
+
 function getImage() {
 	// Retrieve image file location from specified source
 	
 	navigator.camera.getPicture(uploadPhoto, function(message) {
-		alert('get picture failed');
+		alert(dictionary.imageFail);
 	},{
 		quality: 50, 
 		destinationType: navigator.camera.DestinationType.FILE_URI,
@@ -19,14 +65,21 @@ function uploadPhoto(imageURI) {
 
 	var params = new Object();
 	params.contest = globalVar.imgData;
+	params.type = globalVar.typeData;
 	
-	console.log(globalVar.imgData);
-
 	options.params = params;
-	options.chunkedMode = false;
+	
+	globalVar.imageURI = imageURI;
 
-	var ft = new FileTransfer();
-	ft.upload(imageURI, "http://it-labor.ru/playground/valera/fileChecker.php", win, fail, options);
+	$$('.uploadButton').on('click',function(){
+		options.params.text = $$('.textareaFor'+globalVar.imgData).val();
+		$$('.textareaFor'+globalVar.imgData).val('');
+		options.chunkedMode = false;
+		
+		var ft = new FileTransfer();
+		ft.upload(globalVar.imageURI, "http://it-labor.ru/playground/valera/fileChecker.php", win, fail, options);
+		$$('.uploadButton').off('click');
+	});
 }
 
 function win(r) {
@@ -37,7 +90,7 @@ function win(r) {
 }
 
 function fail(error) {
-	alert("An error has occurred: Code = " + error.code);
+	alert(dictionary.error +  error.code);
 }
 
 //alert('1');

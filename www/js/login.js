@@ -3,35 +3,28 @@
 		
 $$('.signin').on('click', function(){
 	
+	myApp.closePanel();
+	
 	//Проверка на длину при отправке данных на сервер.
 	if( 
 		( $$('.login').val().length < 4 ) || ( $$('.pass').val().length <8 ) 
 	){
-		alert('Ошибка! Минимальная длина пароля - 8, минимальная длина логина - 4');
+		alert(dictionary.error +dictionary.register);
 	} else {
-		shortAjax(
-			'http://it-labor.ru/playground/valera/loginChecker.php', 
-			
-			{
-			'login': $$('.login').val(),
-			'pass': $$('.pass').val(),
-			},
-			
-			function(data){
-				alert(data);
-			}
-		);
+		shortAjax(entrypoints.signIn.url,entrypoints.signIn.data,entrypoints.signIn.success);
 	}
 	
 });
 
 $$('.register').on('click', function(){
-
+	
+	myApp.closePanel();
+	
 	//Проверка на длину при отправке данных на сервер.
 	if( 
 		( $$('.loginReg').val().length < 4 ) || ( $$('.passReg').val().length <8 ) 
 	){
-		alert('Ошибка! Минимальная длина пароля - 8, минимальная длина логина - 4');
+		alert(dictionary.error +dictionary.register);
 	}
 	
 	shortAjax(
@@ -43,19 +36,45 @@ $$('.register').on('click', function(){
 		},
 		function(data){
 			alert(data);
+			$$('.login').val('');
+			$$('.pass').val('');
+			$$('.loginReg').val('');
+			$$('.passReg').val('');
+			$$('.mail').val('');
 		}
 	);
 	
 });
 
 $$('.logout').on('click', function(){
+	currentLogin = "";
 	
+	myApp.closePanel();
+	
+	$$('.login').val('');
+	$$('.pass').val('');
+	$$('.loginReg').val('');
+	$$('.passReg').val('');
+	$$('.mail').val('');
+	
+	mainView.router.back({'pageName':'index', 'force':true});
 	shortAjax(
 		'http://it-labor.ru/playground/valera/logout.php',
 		{},
 		function(data){
 			alert(data);
+			getCookie('PHPSESSID', null);
+			localStorage.clear();
+			console.log(localStorage.getItem('phpSessionId'));
+			$$('.loginPanel').css('display', 'block');
+			$$('.userPanel').css('display', 'none');
 		}
 	);
+	
+});
+
+$$('.updateUserinfo').on('click', function(){
+	
+	updateUserinfo();
 	
 });

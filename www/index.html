@@ -45,17 +45,39 @@
     <div class="panel panel-left panel-reveal">
         <div class="content-block">
            	<!-- Поле для ввода данных для входа/регистрации -->
-
-			<input class="login" name="login" size="32"  type="text" placeholder="Login">
-			<input class="pass" name="pass" size="32"  type="text" placeholder="Password">
-			<input class="signin" name="signin" type="button" value="Log in">
-			<input class="logout" name="logout" type="button" value="logout">
-			
-			<input class="loginReg" name="login" size="32"  type="text" placeholder="Login">
-			<input class="passReg" name="pass" size="32"  type="text" placeholder="Password">
-			<input class="mail" name="mail" size="70"  type="text" placeholder="mail">
-			<input class="register" name="register" type="button" value="Register">
-			
+			<div class="loginPanel">
+				<input class="login" name="login" size="32"  type="text" placeholder="Login">
+				<input class="pass" name="pass" size="32"  type="text" placeholder="Password">
+				<input class="signin" name="signin" type="button" value="Log in">
+				<input class="logout" name="logout" type="button" value="logout">
+				
+				<input class="loginReg" name="login" size="32"  type="text" placeholder="Login">
+				<input class="passReg" name="pass" size="32"  type="text" placeholder="Password">
+				<input class="mail" name="mail" size="70"  type="text" placeholder="mail">
+				<input class="register" name="register" type="button" value="Register">
+			</div>
+			<div class="userPanel">
+				
+				<div class="userPanel__shortInfo">
+					
+					<div style="margin: 0 auto;">
+						<img class="userPanel__icon" style="max-height: 100px; max-width: 100px; background-size: contain;"/>
+					</div>
+					
+					<h3 class="userPanel__name"></h3>
+					
+					<input class="logout" name="logout" type="button" value="logout">
+					
+					<p><a href="#userPage" class="close-panel">Личный кабинет</a></p>
+					
+					<p><a href="#" class="updateUserinfo">Обновить данные</a></p>
+					
+				</div>
+				
+				<div class="">
+				</div>
+				
+			</div>
         </div>
     </div>
 
@@ -80,12 +102,37 @@
             <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
             <div class="pages navbar-through toolbar-through">
                 <!-- Page, "data-page" contains page name -->
+				<!-- <div class="login-screen modal-in">
+					... login screen content ...				Кажется, это будет неплохо смотреться.
+				</div> -->
+				
+				<div data-page="userPage" class="page cached userPage">
+                    <!-- Scrollable page content -->
+                    <div class="page-content">
+                        <div class="content-block">
+                            <div style="margin: 0 auto 50px; max-height: 200px; max-width: 200px;">
+								<img class="userPanel__icon" style="max-height: 200px; max-width: 200px; background-size: contain; margin: auto; border-radius: 500px;"/>
+							</div>
+							<div class="userPage__fullname">
+							</div>
+							<div class="userPanel__name">
+							</div>
+							<div class="userPanel__mail">
+							</div>
+							
+							<p><a href="#" class="open-login-screen">Изменить данные</a></p>
+							
+                        </div>
+                    </div>
+                </div>
+				
                 <div data-page="index" class="page">
                     <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="content-block">
                             <a href="#contests">Contest list</a> </br>
 							<a href="#cartoons"> Мультфильмы </a> </br>
+							<a href="#news"> Новости </a> </br>
 							<a href="#feedback"> Рекомендация </a>
 							
                         </div>
@@ -108,6 +155,28 @@
 						</div>
 					</div>
 				</div>
+				<div data-page="renderCartoons" class="page cached renderCartoons">
+					<!-- Scrollable page content -->
+					<div class="page-content">
+						<div class="content-block inFolder">
+							
+						</div>
+					</div>
+				</div>
+				<div data-page="news" class="page cached news">
+					<!-- Scrollable page content -->
+					<div class="page-content">
+						<div class="content-block news">
+						</div>
+					</div>
+				</div>
+				<div data-page="renderNews" class="page cached renderNews">
+					<!-- Scrollable page content -->
+					<div class="page-content">
+						<div class="content-block inCateg">
+						</div>
+					</div>
+				</div>
 				<div data-page="feedback" class="page cached">
 					<!-- Scrollable page content -->
 					<div class="page-content">
@@ -121,6 +190,28 @@
 					</div>
 				</div>
             </div>
+			
+			<div class="login-screen" style = "padding-top: 30px">
+			
+				
+				<div style="margin: 0 auto 50px; max-height: 200px; max-width: 200px;">
+					<img class="userPanel__icon" style="max-height: 200px; max-width: 200px; background-size: contain; margin: auto; border-radius: 500px;"/>
+				</div>
+				
+				<p>(Нажмите на картинку, чтобы поменять ее; Будут изменены только введенные данные)</p>
+				
+				<input class="userPage__fullname__fname__change" placeholder="fname">
+				<input class="userPage__fullname__mname__change" placeholder="mname">
+				<input class="userPage__fullname__lname__change" placeholder="lname">
+				<!--<input class="userPanel__pass__change" placeholder="pass">
+				<input class="userPanel__mail__change" placeholder="mail">-->
+				
+				<p><a href="#" class="changeUserInfo">Изменить информацию</a></p>
+				
+			
+				<p><a href="#" class="close-login-screen">Закрыть меню</a></p>
+			</div>
+			
             <!-- Bottom Toolbar-->
             <div class="toolbar">
                 <div class="toolbar-inner">
@@ -137,11 +228,55 @@
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
+    <script type="text/javascript" src="js/entrypoints.js"></script>
+    <script type="text/javascript" src="js/cookie.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/feedback.js"></script>
+    <script type="text/javascript" src="js/globalvars.js"></script>
     <script type="text/javascript" src="js/cartoons.js"></script>
-    <script type="text/javascript" src="js/my-app.js"></script>
+    <script type="text/javascript" src="js/news.js"></script>
+    <script type="text/javascript" src="js/userOptions.js"></script>
+    <script type="text/javascript" src="js/dictionary.js"></script>
 </body>
+<!--
+BUGS:
+-2. Системные сообщения, подсказки ошибки и тд вынести в отдельный файл dictionary.js ++++++
+-1. Все точки входа должны быть собраны в entrypoints.js
+0. Рефакторинг на объекты всего, даже функций - нет глобальных переменных и функций, все внутри какого-либо объекта
+Стандартизовать названия функций и их местоположение в коде (типа render и тд)
+Файл init.js ничего не создает, подключается самым последним и именно он стукает все
+--- $$ на $
+--- shortAjax на ajax()
 
+
+1. Реализовать кэш-дату, которая хранит данные с момента последнего успешного соединения
+В общем при соединении нужно поулчать один большой объект, который хранит в себе всю необходимую инфу по приложении и наверное при выходе из приложения этот объект пишется в локалсторадж и он и есть эта кэш-дата.
+В общем надо чтобы был один запрос который выкачивает большой файл данных
+2. Привязка событий тоже в отдельный элемент
+3. Никаких анимаций на JS - все либо transition либо keyframes
+
+
+
+1. uploadPhoto (my-app.js:44)
+2. при логине если неправильно то выдается несколько алертов, потом еще нажимаешь на кнопку панельки и опять
+3. функции должны именоваться максимально подробно
+4. группировка функций - глобальные для работы с файловой системой телефона например - то есть именование файлов
+
+7. работа с цсс напрямую в жс нет, все только через классы, то как элемент выглядит решается полностью на стороне цсс
+
+От Руслана ****
+Конструктор аякс:
+на клиенте есть обьект, изначально он пустой и при первом запуске его наполняем большим файлом,
+при последующих запусках мы шлем короткий аякс который чекает актуальность данных, 
+те которые не прошли проверку собираются в один аякс и стукают северный файл, 
+который стукает демон, который каждые 5 мин состовляет акктуальный обьект, и заполняет обьект недостающими частями, 
+но при этом не убираем в этих файлах возможность "жесткого" тыка
+
+1.Составить список всего того что можно получить через ajax
+файлы на которые стукается аякс могут и по простому отдавать обьекты и через конструктор
+
+
+-->
 </html>
