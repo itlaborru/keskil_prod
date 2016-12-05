@@ -11,49 +11,7 @@ $$('.signin').on('click', function(){
 	){
 		alert(dictionary.error +dictionary.register);
 	} else {
-		shortAjax(
-			'http://it-labor.ru/playground/valera/loginChecker.php', 
-			
-			{
-			'login': $$('.login').val(),
-			'pass': $$('.pass').val(),
-			},
-			
-			function(data){
-				var dataLogin = JSON.parse(data);
-				alert(dataLogin.text);
-				if(dataLogin.sessionId != undefined){
-					localStorage.setItem("phpSessionId", dataLogin.sessionId);
-					localStorage.setItem("loggedIn", true);
-					$$('.loginPanel').css('display', 'none');
-					$$('.userPanel').css('display', 'block');
-					$$('.userPanel__icon').attr('src', '');
-					$$('.userPanel__name').html(dictionary.unableToConnect);
-					$$('.login').val('');
-					$$('.pass').val('');
-					$$('.loginReg').val('');
-					$$('.passReg').val('');
-					$$('.mail').val('');
-					shortAjax(
-						'http://it-labor.ru/playground/valera/user-data-ajax.php', 
-						
-						{
-							'type': 'get',
-						},
-						
-						function(data){
-							var dataLogin = JSON.parse(data);
-							$$('.userPanel__icon').attr('src', dataLogin.icon);
-							$$('.userPanel__name').html(dataLogin.login);
-							currentLogin = dataLogin.login;
-							localStorage.setItem("userName", currentLogin);
-							$$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
-							$$('.userPanel__mail').html(dataLogin.mail);
-						}
-					);
-				}
-			}
-		);
+		shortAjax(entrypoints.signIn.url,entrypoints.signIn.data,entrypoints.signIn.success);
 	}
 	
 });
