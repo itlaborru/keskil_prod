@@ -5,7 +5,7 @@ var entrypoints = {
 			'type':'download',
 		},
 		success:	function(data) {
-			//$('.cartoons .page-content .cartoonBlock').html(data); 
+			$('.cartoons .page-content .cartoonBlock').html(""); 
 			data = JSON.parse(data);
 			for(var i = 0; i < data[0].length; i++) {
 				var folder = $("<a href='#renderCartoons' data-cartooncat='"+data[0][i][0]+"' class='cartoonCategory'>"+data[0][i][0]+" </a></br>");
@@ -60,13 +60,7 @@ var entrypoints = {
 			for(var i = 0; i < data_ajax.contest.length; i++){
 			
 				$('.contests .page-content .content-block').append(
-					//' '+data_ajax.contest[i].start
-					//+
-					//' '+data_ajax.contest[i].end
-					//+
 					'<a href = "#contest'+data_ajax.contest[i].id+'">'+data_ajax.contest[i].title
-					//+
-					//' '+data_ajax.contest[i].content
 					+
 					'</a> </br>'
 				);
@@ -89,14 +83,7 @@ var entrypoints = {
 					+
 					' '+data_ajax.contest[i].content
 					+
-					'</br>'
-					+
-					'<p class="photoUploadButton" data-contest = "'+data_ajax.contest[i].id+'">Выбрать фото</p>'
-					+
-					'<textarea placeholder = "Краткое описание(Не обязательно)" class = "textareaFor'+data_ajax.contest[i].id+'"></textarea>'
-					+
-					'<p class="uploadButton" data-contest = "'+data_ajax.contest[i].id+'" data-type = "contest">Отправить!</p>'
-				);
+					'</br><p class="photoUploadButton" data-contest = "'+data_ajax.contest[i].id+'">Выбрать фото</p><textarea placeholder = "Краткое описание(Не обязательно)" class = "textareaFor'+data_ajax.contest[i].id+'"></textarea><p class="uploadButton" data-contest = "'+data_ajax.contest[i].id+'" data-type = "contest">Отправить!</p>');
 				
 				myPage_content.append(myContent_block);
 				myPage.append(myPage_content);
@@ -126,8 +113,8 @@ var entrypoints = {
 			if(dataLogin.sessionId != undefined){
 				localStorage.setItem("phpSessionId", dataLogin.sessionId);
 				localStorage.setItem("loggedIn", true);
-				$('.loginPanel').css('display', 'none');
-				$('.userPanel').css('display', 'block');
+				$('.loginPanel').addClass('display-none');
+				$('.userPanel').addClass('display-block');
 				$('.userPanel__icon').attr('src', '');
 				$('.userPanel__name').html(dictionary.unableToConnect);
 				$('.login').val('');

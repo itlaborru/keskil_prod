@@ -26,8 +26,8 @@ var login = {
 						if(dataLogin.sessionId != undefined){
 							localStorage.setItem("phpSessionId", dataLogin.sessionId);
 							localStorage.setItem("loggedIn", true);
-							$('.loginPanel').css('display', 'none');
-							$('.userPanel').css('display', 'block');
+							$('.loginPanel').addClass('display-none');
+							$('.userPanel').addClass('display-block');
 							$('.userPanel__icon').attr('src', '');
 							$('.userPanel__name').html(dictionary.unableToConnect);
 							$('.login').val('');
@@ -106,8 +106,8 @@ var login = {
 					cookies.getCookie('PHPSESSID', null);
 					localStorage.clear();
 					console.log(localStorage.getItem('phpSessionId'));
-					$('.loginPanel').css('display', 'block');
-					$('.userPanel').css('display', 'none');
+					$('.loginPanel').addClass('display-block');
+					$('.userPanel').addClass('display-none');
 				}
 			);
 			

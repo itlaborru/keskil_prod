@@ -1,12 +1,13 @@
 //Прорисовка списка категорий, получение и запись данных
 var news = {
-	renderNews:	function() {
+	render:	function() {
 		ajax('http://it-labor.ru/playground/valera/news.php', 
 			{
 				'type':'download',
 			},
 			function(data) {
 				data = JSON.parse(data);
+				$('.news .page-content .news').html("");
 				for(var i = 0; i < data[0].length; i++) {
 					var newsFolder = $("<a href='#renderNews' data-newscat='"+data[0][i][0]+"' class='newsCategory'>"+data[0][i][0]+" </a></br>");
 					newsFolder.on('click', function(){

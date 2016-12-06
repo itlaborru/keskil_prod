@@ -1,6 +1,6 @@
 //Прорисовка списка категорий, получение и запись данных
 var cartoons = {
-	renderCartoons: function() {
+	render: function() {
 		ajax(entrypoints.cartoonsServer.url,entrypoints.cartoonsServer.data,entrypoints.cartoonsServer.success);
 	},
 	renderCartoonFolder: function(cat) {
@@ -17,7 +17,6 @@ var cartoons = {
 			else {
 			}
 			if(cartoonData[i][2].length >=2) {
-				//console.log(cartoonData[i][2]);
 				for(var y=0; y<cartoonData[i][2].length;y++ ) {
 					if(cat ==cartoonData[i][2][y]) {
 						createVideo();

@@ -5,7 +5,7 @@ var userPage = {
 	bindEvents: function(){
 		$('.userPanel__icon').on('click', function(){
 			
-			transferImages.getOtherImage();
+			transferImages.getImage();
 			globalVar.imgData = '';
 			globalVar.typeData = 'avatar';
 			userOptions.updateUserinfo();

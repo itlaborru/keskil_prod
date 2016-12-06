@@ -22,4 +22,16 @@
 	bottom: 0;
 	background: black;
 	z-index: 10000;
+	opacity:	1;
+	transition:	opacity 2s linear;
+}
+.hideLoadingScreen{
+	opacity:	0;
+}
+
+.display-block {
+	display:	block;
+}
+.display-none {
+	display:	none;
 }
