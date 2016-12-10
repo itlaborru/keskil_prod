@@ -15,6 +15,10 @@ var mainView = app.addView('.view-main', {
 var initPages = {
 	splashscreen: function(){
 		$(".loadingScreen").addClass("hideLoadingScreen");
+		setTimeout(function() {
+			$(".loadingScreen").addClass("display-none");
+		}, 2000);
+
 	},
 	handler: 	function(){
 		$(document).on('pageBeforeAnimation', function (e) {

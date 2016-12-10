@@ -115,6 +115,8 @@ var entrypoints = {
 				localStorage.setItem("loggedIn", true);
 				$('.loginPanel').addClass('display-none');
 				$('.userPanel').addClass('display-block');
+				$('.userPanel').removeClass('display-none');
+				$('.loginPanel').removeClass('display-block');
 				$('.userPanel__icon').attr('src', '');
 				$('.userPanel__name').html(dictionary.unableToConnect);
 				$('.login').val('');

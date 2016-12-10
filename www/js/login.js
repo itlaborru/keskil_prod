@@ -27,6 +27,8 @@ var login = {
 							localStorage.setItem("phpSessionId", dataLogin.sessionId);
 							localStorage.setItem("loggedIn", true);
 							$('.loginPanel').addClass('display-none');
+							$('.loginPanel').removeClass('display-block');
+							$('.userPanel').removeClass('display-none');
 							$('.userPanel').addClass('display-block');
 							$('.userPanel__icon').attr('src', '');
 							$('.userPanel__name').html(dictionary.unableToConnect);
@@ -108,6 +110,8 @@ var login = {
 					console.log(localStorage.getItem('phpSessionId'));
 					$('.loginPanel').addClass('display-block');
 					$('.userPanel').addClass('display-none');
+					$('.userPanel').removeClass('display-block');
+					$('.loginPanel').removeClass('display-none');
 				}
 			);
 			
