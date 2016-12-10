@@ -8,7 +8,7 @@ var login = {
 			if( 
 				( $('.login').val().length < 4 ) || ( $('.pass').val().length <8 ) 
 			){
-				alert(dictionary.error +dictionary.register);
+				app.alert(dictionary.error +dictionary.register,dictionary.error);
 			} else {
 				//ajax(entrypoints.signIn.url,entrypoints.signIn.data,entrypoints.signIn.success);
 				ajax(
@@ -22,7 +22,7 @@ var login = {
 					
 					function(data){
 						var dataLogin = JSON.parse(data);
-						console.log(dataLogin.text);
+						app.alert(dataLogin.text,dictionary.success);
 						if(dataLogin.sessionId != undefined){
 							localStorage.setItem("phpSessionId", dataLogin.sessionId);
 							localStorage.setItem("loggedIn", true);
@@ -67,7 +67,7 @@ var login = {
 			if( 
 				( $('.loginReg').val().length < 4 ) || ( $('.passReg').val().length <8 ) 
 			){
-				alert(dictionary.error +dictionary.register);
+				app.alert(dictionary.error +dictionary.register,dictionary.error);
 			}
 			
 			ajax(
@@ -78,7 +78,7 @@ var login = {
 					'mail': $('.mail').val()
 				},
 				function(data){
-					alert(data);
+					app.alert(data,dictionary.keskil);
 					$('.login').val('');
 					$('.pass').val('');
 					$('.loginReg').val('');
@@ -104,7 +104,7 @@ var login = {
 				'http://it-labor.ru/playground/valera/logout.php',
 				{},
 				function(data){
-					alert(data);
+					app.alert(data,dictionary.success);
 					cookies.getCookie('PHPSESSID', null);
 					localStorage.clear();
 					console.log(localStorage.getItem('phpSessionId'));

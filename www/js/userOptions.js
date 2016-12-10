@@ -22,7 +22,7 @@ var userPage = {
 					//'mail': $('.userPage__mail__change').val(),
 				},
 				function(data){
-					alert(data);
+					app.alert(data,dictionart.success);
 				}
 			);
 		});

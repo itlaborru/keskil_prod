@@ -58,7 +58,7 @@ var transferImages = {
 		// Retrieve image file location from specified source
 		
 		navigator.camera.getPicture(transferImages.uploadPhoto, function(message) {
-			alert(dictionary.imageFail);
+			app.alert(dictionary.imageFail,dictionary.error);
 		},{
 			quality: 50, 
 			destinationType: navigator.camera.DestinationType.FILE_URI,
@@ -71,7 +71,7 @@ var transferImages = {
 		console.log("Code = " + r.responseCode);
 		console.log("Response = " + r.response);
 		console.log("Sent = " + r.bytesSent);
-		alert(r.response);
+		alert(r.response,dictionary.keskil);
 	},
 	fail: function(error) {
 		alert(dictionary.error +  error.code);

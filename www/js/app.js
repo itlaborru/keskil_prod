@@ -41,7 +41,7 @@ var ajax = function(url, data, onSuccess){
 		data: data,
 		success: onSuccess,
 		error: function(xhr, stat){
-			alert(stat);
+			console.log(stat);
 		}
 	});
 };
