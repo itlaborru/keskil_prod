@@ -1,19 +1,17 @@
-﻿$$('.feedbackSend').on('click', function(){
-	if($$('.feedback').val() != "") {
-		//console.log($$('.feedback').val());
-		shortAjax('http://it-labor.ru/playground/valera/feedback.php', 
-			{
-				'type':'upload',
-				'content':	$$('.feedback').val(),
-			},
-			function(data) {
-				console.log(data);
-				$$('.feedback').val("");
-				myApp.alert('Предложение отправленр', 'Успешно');
+﻿var feedback = {
+	bindEvents:	function() {
+		$('.feedbackSend').on('click', function(){
+			if($('.feedback').val() != "") {
+				if(localStorage.getItem("userName") == null) {
+					app.alert(dictionary.plsLogin, dictionary.error);
+				}
+				else {
+					ajax(entrypoints.feedback.url,entrypoints.feedback.data,entrypoints.feedback.success);
+				}
 			}
-		);
-	}
-	else {
-		myApp.alert('Поле пусто', 'Сообщение об ошибке');
-	}
-});
+			else {
+				app.alert(dictionary.emptyField, dictionary.error);
+			}
+		});
+	},
+}
