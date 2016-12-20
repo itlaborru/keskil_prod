@@ -105,8 +105,8 @@
                             <a href="#contests">Contest list</a> </br>
 							<a href="#cartoons"> Мультфильмы </a> </br>
 							<a href="#news"> Новости </a> </br>
-							<a href="#feedback"> Рекомендация </a>
-							<a href="#pulseGoroda"> Пульс Города </a>
+							<a href="#feedback"> Рекомендация </a></br>
+							<a href="#pulsegoroda"> Пульс Города </a>
                         </div>
                     </div>
                 </div>
@@ -149,13 +149,6 @@
 						</div>
 					</div>
 				</div>
-				<div data-page="pulseGoroda" class="page cached pulseGoroda">
-					<!-- Scrollable page content -->
-					<div class="page-content">
-						<div class="content-block pulseGoroda">
-						</div>
-					</div>
-				</div>
 				<div data-page="feedback" class="page cached">
 					<!-- Scrollable page content -->
 					<div class="page-content">
@@ -166,6 +159,13 @@
 							<textarea class="feedback" ></textarea>
 							<a href="#" class="button active feedbackSend">Отправить</a>
 						</div>
+					</div>
+				</div>
+				<div data-page="pulsegoroda" class="page cached pulsegoroda">
+					<!-- Scrollable page content -->
+					<div class="page-content">
+							<div id="map">
+							</div>
 					</div>
 				</div>
             </div>
@@ -182,9 +182,12 @@
 	
 	<div class="loadingScreen">
 	</div>
-
+	
+	
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+	<script type="text/javascript" src="js/pulsegoroda.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNx6_QhDELTpDbMHl3C43gShtuazM4Xew"></script>
     <script type="text/javascript" src="js/cookie.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
