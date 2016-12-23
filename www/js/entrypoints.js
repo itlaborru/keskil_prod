@@ -1,5 +1,4 @@
-var testRuslan;
-
+var DataAjax;
 
 var entrypoints = {
 	cartoonsServer: {
@@ -146,19 +145,14 @@ var entrypoints = {
 			}
 		},
 	},
-	otherServer: {
+	allData: {
 		url:	'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/ruslan/testRes.php', 
 		data:	{
 			"object": "yes",
 		},
 		success:	function(data) {
-			app.alert(dictionary.success, dictionary.keskil);
-			testRuslan = JSON.parse(JSON.parse(data)[0])[0];
-			console.log(testRuslan);
+			DataAjax = JSON.parse(JSON.parse(data)[0])[0];
+			console.log(DataAjax);
 		},
 	},
 };
-
-//   Тест точек Руслана  
-
-ajax(entrypoints.otherServer.url,entrypoints.otherServer.data,entrypoints.otherServer.success);

@@ -10,12 +10,9 @@ if(localStorage.getItem("loggedIn")){//Проверка на сохраненность куки
 $(document).on('deviceready', function() {
 	initPages.handler();
 	ajax(entrypoints.onReady.url,entrypoints.onReady.data,entrypoints.onReady.success);
-	
+	ajax(entrypoints.allData.url,entrypoints.allData.data,entrypoints.allData.success);
 	initPages.splashscreen();
 	login.bindEvents();
-	
-	
-	//opacityRedact();
 	
 	console.log(dictionary.ready);
 	
