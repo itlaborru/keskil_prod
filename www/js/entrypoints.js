@@ -1,3 +1,6 @@
+var testRuslan;
+
+
 var entrypoints = {
 	cartoonsServer: {
 		url:	'http://it-labor.ru/playground/valera/cartoonsServer.php', 
@@ -143,4 +146,19 @@ var entrypoints = {
 			}
 		},
 	},
+	otherServer: {
+		url:	'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/ruslan/testRes.php', 
+		data:	{
+			"object": "yes",
+		},
+		success:	function(data) {
+			app.alert(dictionary.success, dictionary.keskil);
+			testRuslan = JSON.parse(JSON.parse(data)[0])[0];
+			console.log(testRuslan);
+		},
+	},
 };
+
+//   Тест точек Руслана  
+
+ajax(entrypoints.otherServer.url,entrypoints.otherServer.data,entrypoints.otherServer.success);
