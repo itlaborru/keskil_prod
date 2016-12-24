@@ -1,31 +1,35 @@
 //Прорисовка списка категорий, получение и запись данных
 var cartoons = {
 	render: function() {
-		ajax(entrypoints.cartoonsServer.url,entrypoints.cartoonsServer.data,entrypoints.cartoonsServer.success);
+		$('.cartoons .page-content .cartoonBlock').html("");
+		for(var i = 0; i < DataAjax.cartoonscategory.length; i++) {
+			var folder = $("<a href='#renderCartoons' data-cartooncat='"+DataAjax.cartoonscategory[i].category+"' class='cartoonCategory'>"+DataAjax.cartoonscategory[i].category+" </a></br>");
+			$('.cartoons .page-content .cartoonBlock').append(folder);
+		}
 	},
 	renderCartoonFolder: function(cat) {
 		$(".inFolder").html("");
 		var ifClear = true;
 		function createVideo() {
-			var block = $("<div class='video'><div> "+cartoonData[i][0] +"</div><iframe width='350' height='200' src='"+cartoonData[i][1]+"?rel=0&amp;controls=0&amp;showinfo=0&feature=player_embedded' frameborder='0' allowfullscreen> </iframe></div>");
+			var block = $("<div class='video'><div> "+DataAjax.cartoonslist[i].name +"</div><iframe width='350' height='200' src='"+DataAjax.cartoonslist[i].url+"?rel=0&amp;controls=0&amp;showinfo=0&feature=player_embedded' frameborder='0' allowfullscreen> </iframe></div>");
 			$(".inFolder").append(block);
 		}
-		for(var i = 0; i < cartoonData.length; i++) {
+		for(var i = 0; i < DataAjax.cartoonslist.length; i++) {
 			if(firstCartRender) {
-				cartoonData[i][2] = cartoonData[i][2].split(",");
+				DataAjax.cartoonslist[i].category = DataAjax.cartoonslist[i].category.split(",");
 			}
 			else {
 			}
-			if(cartoonData[i][2].length >=2) {
-				for(var y=0; y<cartoonData[i][2].length;y++ ) {
-					if(cat ==cartoonData[i][2][y]) {
+			if(DataAjax.cartoonslist[i].category.length >=2) {
+				for(var y=0; y<DataAjax.cartoonslist[i].category.length;y++ ) {
+					if(cat ==DataAjax.cartoonslist[i].category[y]) {
 						createVideo();
 						ifClear = false;
 					}					
 				}
 			}
 			else {
-				if(cat == cartoonData[i][2]) {
+				if(cat == DataAjax.cartoonslist[i].category) {
 					createVideo();
 					ifClear = false;
 				}
@@ -39,9 +43,14 @@ var cartoons = {
 		}
 	},
 	bindEvents: function(){
-		$('.cartoons').on('click', '.cartoonCategory', function (e) {
-			var categ = $(this).attr('data-cartooncat');
-			cartoons.renderCartoonFolder(categ);
-		});
+		if(!cartoons.notFirstUse) {
+			$('.cartoons').on('click', '.cartoonCategory', function (e) {
+				var categ = $(this).attr('data-cartooncat');
+				console.log("Idk");
+				cartoons.renderCartoonFolder(categ);
+			});
+		}
+		cartoons.notFirstUse = true;
 	},
+	notFirstUse: false,
 };

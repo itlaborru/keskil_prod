@@ -1,4 +1,4 @@
-if(localStorage.getItem("loggedIn")){//Проверка на сохраненность куки
+п»їif(localStorage.getItem("loggedIn")){//РџСЂРѕРІРµСЂРєР° РЅР° СЃРѕС…СЂР°РЅРµРЅРЅРѕСЃС‚СЊ РєСѓРєРё
 	cookies.setCookie('PHPSESSID', localStorage.getItem("phpSessionId"));
 	$('.loginPanel').addClass('display-none');
 	$('.userPanel__name').html(dictionary.unableToConnect);
@@ -9,8 +9,11 @@ if(localStorage.getItem("loggedIn")){//Проверка на сохраненность куки
 // Handle Cordova Device Ready Event
 $(document).on('deviceready', function() {
 	initPages.handler();
+	
 	ajax(entrypoints.onReady.url,entrypoints.onReady.data,entrypoints.onReady.success);
-	ajax(entrypoints.allData.url,entrypoints.allData.data,entrypoints.allData.success);
+	
+	entrypoints.allDataUpdate();
+	
 	initPages.splashscreen();
 	login.bindEvents();
 	

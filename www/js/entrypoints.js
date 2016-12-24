@@ -1,7 +1,7 @@
 var DataAjax;
 
 var entrypoints = {
-	cartoonsServer: {
+	/*cartoonsServer: {
 		url:	'http://it-labor.ru/playground/valera/cartoonsServer.php', 
 		data:	{
 			'type':'download',
@@ -15,6 +15,9 @@ var entrypoints = {
 			}
 			cartoonData = data[1];
 		},
+	},*/
+	allDataUpdate : function() {
+		ajax(entrypoints.allData.url,entrypoints.allData.data,entrypoints.allData.success);
 	},
 	feedback: {
 		url:	'http://it-labor.ru/playground/valera/feedback.php', 
