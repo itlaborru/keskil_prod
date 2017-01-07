@@ -142,8 +142,8 @@
                     <div class="page-content">
                         <div class="content-block">
                             <a href="#contests">Contest list</a> </br>
-							<a href="#cartoons"> Мультфильмы </a> </br>
-							<a href="#news"> Новости </a> </br>
+							<a href="#cartoons__category"> Мультфильмы </a> </br>
+							<a href="#news__category"> Новости </a> </br>
 							<a href="#feedback"> Рекомендация </a></br>
 							<a href="#pulsegoroda"> Пульс Города </a>
                         </div>
@@ -158,7 +158,7 @@
 					</div>
 				</div>
 				
-				<div data-page="cartoons" class="page cached cartoons">
+				<div data-page="cartoons__category" class="page cached cartoons__category">
 					<!-- Scrollable page content -->
 					<div class="page-content">
 						<div class="content-block cartoonBlock">
@@ -166,22 +166,22 @@
 						</div>
 					</div>
 				</div>
-				<div data-page="renderCartoons" class="page cached renderCartoons">
+				<div data-page="cartoons" class="page cached cartoons">
 					<!-- Scrollable page content -->
 					<div class="page-content">
-						<div class="content-block inFolder">
+						<div class="content-block inFolder" data-category="">
 							
 						</div>
 					</div>
 				</div>
-				<div data-page="news" class="page cached news">
+				<div data-page="news__category" class="page cached news__category">
 					<!-- Scrollable page content -->
 					<div class="page-content">
 						<div class="content-block news">
 						</div>
 					</div>
 				</div>
-				<div data-page="renderNews" class="page cached renderNews">
+				<div data-page="news" class="page cached news">
 					<!-- Scrollable page content -->
 					<div class="page-content">
 						<div class="content-block inCateg">
@@ -257,12 +257,21 @@
     <script type="text/javascript" src="js/feedback.js"></script>
     <script type="text/javascript" src="js/globalvars.js"></script>
     <script type="text/javascript" src="js/cartoons.js"></script>
+    <script type="text/javascript" src="js/cartoons_category.js"></script>
     <script type="text/javascript" src="js/news.js"></script>
+    <script type="text/javascript" src="js/news__category.js"></script>
     <script type="text/javascript" src="js/userOptions.js"></script>
     <script type="text/javascript" src="js/dictionary.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
 </body>
 <!--
+	*Одноранговые страницы
+	
+	*Различные файлы для каждой страницы
+	
+	*Единый стандарт кода
+	
+	*Накопи деньги на подарок
 
 !-В entrypoints.js зашито получение данных одним объектом-! (тестовая версия)
 

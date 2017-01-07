@@ -149,12 +149,12 @@ var entrypoints = {
 		},
 	},
 	allData: {
-		url:	'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/ruslan/testRes.php', 
+		url:	'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/daemon/testRes.php', 
 		data:	{
 			"object": "yes",
 		},
 		success:	function(data) {
-			DataAjax = JSON.parse(JSON.parse(data)[0])[0];
+			DataAjax = JSON.parse(data)[0];
 			console.log(DataAjax);
 		},
 	},
