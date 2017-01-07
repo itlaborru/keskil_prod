@@ -154,7 +154,7 @@ var entrypoints = {
 			"object": "yes",
 		},
 		success:	function(data) {
-			DataAjax = JSON.parse(data)[0];
+			DataAjax = JSON.parse(data);
 			console.log(DataAjax);
 		},
 	},

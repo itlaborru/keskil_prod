@@ -1,12 +1,14 @@
 //Прорисовка списка категорий, получение и запись данных
 var news = {
 	//Прорисовка категории
-	render:	function(cat) {
-		$(".inCateg").html("");
+	render:	function() {
+		$(".newsFolder").html("");
 		var ifClear = true;
+		var cat = $(".newsFolder").attr("data-category");
 		function createPost() {
 			var block;
-			if(newsData[i][4]) {
+			//Это если есть прикрепленные файлы
+			/*if(DataAjax[i][4]) {
 				var file = newsData[i][5];
 				file = JSON.parse(file)[0];
 				file = file.split('/')[0];
@@ -23,29 +25,29 @@ var news = {
 				else {
 					block = $("<div class='post'><div><h3> "+newsData[i][0]+"</h3> Категории: "+newsData[i][2]+" <div>"+newsData[i][1] +"</div></div> Не получилось обработать файл, приносим извинения!</div>");
 				}
-			}
-			else {
+			}*/
+			//else {
 				//var block = $("<div class='post'><div><h3> "+newsData[i][0]+"</h3> Категории: "+newsData[i][2]+" <div>"+newsData[i][1] +"</div></div></div>");
-				block = $("<div class='post'><div><h3> "+newsData[i][0]+"</h3> Категории: "+newsData[i][2]+" <div>"+newsData[i][1] +"</div></div></div>");
-			}
-			$(".inCateg").append(block);
+				block = $("<div class='post'><div><h3> "+DataAjax.newslist[i].title+"</h3> Категории: "+DataAjax.newslist[i].categories+" <div>"+DataAjax.newslist[i].content +"</div></div></div>");
+			//}
+			$(".newsFolder").append(block);
 		}
-		for(var i = 0; i < newsData.length; i++) {
+		for(var i = 0; i < DataAjax.newslist.length; i++) {
 			if(firstCartRender) {
-				newsData[i][2] = newsData[i][2].split(",");
+				DataAjax.newslist[i].categories = DataAjax.newslist[i].categories.split(",");
 			}
 			else {
 			}
-			if(newsData[i][2].length >=2) {
-				for(var y=0; y<newsData[i][2].length;y++ ) {
-					if(cat ==newsData[i][2][y]) {
+			if(DataAjax.newslist[i].categories.length >=2) {
+				for(var y=0; y<DataAjax.newslist[i].categories.length;y++ ) {
+					if(cat ==DataAjax.newslist[i].categories[y]) {
 						createPost();
 						ifClear = false;
 					}					
 				}
 			}
 			else {
-				if(cat == newsData[i][2]) {
+				if(cat == DataAjax.newslist[i].categories) {
 					createPost();
 					ifClear = false;
 				}
