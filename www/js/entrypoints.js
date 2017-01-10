@@ -24,7 +24,7 @@ var entrypoints = {
 		data:	{
 			'type':'upload',
 			'content':	$('.feedback').val(),
-			'user':	localStorage.getItem("userName"),
+			'user':	userInfo.userName,
 		},
 		success:	function(data) {
 			console.log(data);
@@ -41,8 +41,8 @@ var entrypoints = {
 			var dataLogin = JSON.parse(data);
 			$('.userPanel__icon').attr('src', dataLogin.icon);
 			$('.userPanel__name').html(dataLogin.login);
-			currentLogin = dataLogin.login;
-			localStorage.setItem("userName", currentLogin);
+			userInfo.userName = dataLogin.login;
+			localStorage.setItem("userInfo", JSON.stringify(userInfo));
 			$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
 			$('.userPanel__mail').html(dataLogin.mail);
 		},
@@ -52,14 +52,16 @@ var entrypoints = {
 		data:	{},
 		success:	function(data){
 			var data_ajax = JSON.parse(data);
-			
-			if(localStorage.getItem("loggedIn")){
-				$('.userPanel__name').html(data_ajax.userData.login);
-				$('.userPanel__icon').attr('src', data_ajax.userData.icon);
-				console.log(data_ajax);
-				$('.userPage__fullname').html(data_ajax.userData.lname + ' ' + data_ajax.userData.fname + ' ' +  data_ajax.userData.mname);
-				$('.userPanel__mail').html(data_ajax.userData.mail);
-			};
+			if(localStorage.getItem("userInfo")) {
+				userInfo = JSON.parse(localStorage.getItem("userInfo"));
+				if(userInfo.loggedIn){
+					$('.userPanel__name').html(data_ajax.userData.login);
+					$('.userPanel__icon').attr('src', data_ajax.userData.icon);
+					console.log(data_ajax);
+					$('.userPage__fullname').html(data_ajax.userData.lname + ' ' + data_ajax.userData.fname + ' ' +  data_ajax.userData.mname);
+					$('.userPanel__mail').html(data_ajax.userData.mail);
+				}
+			}
 			
 			$('.contests .page-content .content-block').html('');
 			for(var i = 0; i < data_ajax.contest.length; i++){
@@ -116,8 +118,9 @@ var entrypoints = {
 			var dataLogin = JSON.parse(data);
 			console.log(dataLogin.text);
 			if(dataLogin.sessionId != undefined){
-				localStorage.setItem("phpSessionId", dataLogin.sessionId);
-				localStorage.setItem("loggedIn", true);
+				userInfo.phpSessionId = dataLogin.sessionId;
+				userInfo.loggedIn =	true;
+				localStorage.setItem("userInfo", JSON.stringify(userInfo));
 				$('.loginPanel').addClass('display-none');
 				$('.userPanel').addClass('display-block');
 				$('.userPanel').removeClass('display-none');
@@ -140,8 +143,9 @@ var entrypoints = {
 						var dataLogin = JSON.parse(data);
 						$('.userPanel__icon').attr('src', dataLogin.icon);
 						$('.userPanel__name').html(dataLogin.login);
-						currentLogin = dataLogin.login;
-						localStorage.setItem("userName", currentLogin);
+						userInfo = JSON.parse(localStorage.getItem("userInfo"));
+						userInfo.userName =  dataLogin.login;
+						localStorage.setItem("userInfo", JSON.stringify(userInfo));
 						$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
 						$('.userPanel__mail').html(dataLogin.mail);
 					});
@@ -149,7 +153,7 @@ var entrypoints = {
 		},
 	},
 	allData: {
-		url:	'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/daemon/testRes.php', 
+		url:	'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/daemon/get.php', 
 		data:	{
 			"object": "yes",
 		},

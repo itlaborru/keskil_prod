@@ -24,8 +24,9 @@ var login = {
 						var dataLogin = JSON.parse(data);
 						app.alert(dataLogin.text,dictionary.success);
 						if(dataLogin.sessionId != undefined){
-							localStorage.setItem("phpSessionId", dataLogin.sessionId);
-							localStorage.setItem("loggedIn", true);
+							userInfo.phpSessionId = dataLogin.sessionId;
+							userInfo.loggedIn = true;
+							localStorage.setItem("userInfo",JSON.stringify(userInfo));
 							$('.loginPanel').addClass('display-none');
 							$('.loginPanel').removeClass('display-block');
 							$('.userPanel').removeClass('display-none');
@@ -48,8 +49,7 @@ var login = {
 									var dataLogin = JSON.parse(data);
 									$('.userPanel__icon').attr('src', dataLogin.icon);
 									$('.userPanel__name').html(dataLogin.login);
-									currentLogin = dataLogin.login;
-									localStorage.setItem("userName", currentLogin);
+									localStorage.setItem("userInfo", JSON.stringify(userInfo));
 									$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
 									$('.userPanel__mail').html(dataLogin.mail);
 								});
@@ -89,7 +89,6 @@ var login = {
 			
 		});
 		$('.logout').on('click', function(){
-			currentLogin = "";
 			
 			app.closePanel();
 			
@@ -106,8 +105,8 @@ var login = {
 				function(data){
 					app.alert(data,dictionary.success);
 					cookies.getCookie('PHPSESSID', null);
+					userInfo = {};
 					localStorage.clear();
-					console.log(localStorage.getItem('phpSessionId'));
 					$('.loginPanel').addClass('display-block');
 					$('.userPanel').addClass('display-none');
 					$('.userPanel').removeClass('display-block');

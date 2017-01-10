@@ -1,8 +1,13 @@
-﻿if(localStorage.getItem("loggedIn")){//Проверка на сохраненность куки
-	cookies.setCookie('PHPSESSID', localStorage.getItem("phpSessionId"));
-	$('.loginPanel').addClass('display-none');
-	$('.userPanel__name').html(dictionary.unableToConnect);
-} else {
+﻿if(localStorage.getItem("userInfo")) {
+	userInfo = JSON.parse(localStorage.getItem("userInfo"));
+	console.log(userInfo);
+	if(userInfo.loggedIn){//Проверка на сохраненность куки
+		cookies.setCookie('PHPSESSID', userInfo.phpSessionId);
+		$('.loginPanel').addClass('display-none');
+		$('.userPanel__name').html(dictionary.unableToConnect);
+	} 
+}
+else {
 	$('.userPanel').addClass('display-none');
 };
 
