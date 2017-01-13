@@ -10,15 +10,13 @@
 </head>
 <body>
 	<!-- Поле для ввода данных для входа/регистрации -->
+	
+	<p>Voidite v sistemu!</p>
 
 	<input class="login" name="login" size="32"  type="text" placeholder="Login">
 	<input class="pass" name="pass" size="32"  type="text" placeholder="Password">
 	<input class="signin" name="signin" type="button" value="Log in">
-	<input class="register" name="register" type="button" value="Register">
 	<input class="logout" name="logout" type="button" value="logout">
-	<input class="test1" name="test1" type="text" value="test1">
-	<input class="test2" name="test2" type="text" value="test2">
-	<input class="test" name="test" type="button" value="test">
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -36,7 +34,7 @@
 		}
 		
 		shortAjax(
-			"loginChecker.php", 
+			"../entrypoints/loginChecker.php", 
 			
 			{
 			"login": $(".login").val(),
@@ -50,34 +48,10 @@
 		
 	});
 	
-	//Регистрация (Действия при нажатии).
-	
-	$(".register").on("click", function(){
-		
-		//Проверка на длину при отправке данных на сервер.
-		if( 
-			( $(".login").val().length < 4 ) || ( $(".pass").val().length <8 ) 
-		){
-			alert("Ошибка! Минимальная длина пароля - 8, минимальная длина логина - 4");
-		}
-		
-		shortAjax(
-			"registration.php",
-			{ 
-				"login": $(".login").val(), 
-				"pass": $(".pass").val(),
-			},
-			function(data){
-				alert(data);
-			}
-		);
-		
-	});
-	
 	$(".logout").on("click", function(){
 			
 		shortAjax(
-			"http://it-labor.ru/playground/valera/logout.php",
+			"../entrypoints/logout.php",
 			{},
 			function(data){
 				alert(data);
@@ -86,21 +60,6 @@
 		
 	});
 	
-	
-	$(".test").on("click", function(){
-		
-		shortAjax(
-			"user-data-passChange.php",
-			{
-				oldPass : $(".test1").val(),
-				pass : $(".test2").val()
-			},
-			function(data){
-				console.log(data);
-			}
-		);
-		
-	})
 	
 	//Укороченный ajax.
 	

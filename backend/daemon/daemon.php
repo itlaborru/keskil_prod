@@ -1,7 +1,7 @@
 <?php
 set_time_limit (0);
 $b = true;
-$loginFordb = 'root';
+$loginFordb = 'Keskil';
 $passFordb = '123456';
 
 $db = mysql_connect('localhost',$loginFordb, $passFordb) or die(mysql_error());
@@ -12,15 +12,13 @@ mysql_set_charset("utf8");
 
 
 
-$tabels = array ("newslist","newscategs","lastChanges","cartoonslist","cartoonscategory","contestlist");
+$tabels = array ("newslist","newscategs","lastChanges","cartoonslist","cartoonscategory","contestlist"); //список таблиц которые грузит демон в cache.json
 while($b){
 	echo "working ";
 	foreach($tabels as $value){
-		$limit = 20;
 		if($value == "lastChanges" ){
-			$limit = 1;
 		}
-		$sqlQuery = "SELECT * FROM ".$value." ORDER BY  `id` DESC LIMIT 0 , ".$limit;
+		$sqlQuery = "SELECT * FROM ".$value." ORDER BY  `id` DESC";
 		$result=mysql_query($sqlQuery);
 		$arr = array();
 		while($row=mysql_fetch_assoc($result)){

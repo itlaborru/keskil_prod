@@ -73,7 +73,7 @@
 	$('.logout').on('click', function(){
 			
 		shortAjax(
-			'http://it-labor.ru/playground/valera/logout.php',
+			'../entrypoints/logout.php',
 			{},
 			function(data){
 				alert(data);
