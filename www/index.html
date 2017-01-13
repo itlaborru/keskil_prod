@@ -126,13 +126,24 @@
                     </div>
                 </div>
 				
+				<!--
+				<div data-page="contest" class="page">
+					<div class="page-content">
+						<div class="content-block">
+							<p class="photoUploadButton">фотки</p>
+							<a></a>
+						   
+						</div>
+					</div>
+				</div>
+				-->
+				
                 <div data-page="index" class="page">
-                    <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="content-block">
                             <a href="#contests">Contest list</a> </br>
-							<a href="#cartoons"> Мультфильмы </a> </br>
-							<a href="#news"> Новости </a> </br>
+							<a href="#cartoons__category"> Мультфильмы </a> </br>
+							<a href="#news__category"> Новости </a> </br>
 							<a href="#feedback"> Рекомендация </a></br>
 							<a href="#pulsegoroda"> Пульс Города </a>
                         </div>
@@ -147,33 +158,33 @@
 					</div>
 				</div>
 				
-				<div data-page="cartoons" class="page cached cartoons">
+				<div data-page="cartoons__category" class="page cached cartoons__category">
 					<!-- Scrollable page content -->
 					<div class="page-content">
-						<div class="content-block cartoonBlock">
+						<div class="content-block cartoonCatBlock">
 						
 						</div>
 					</div>
 				</div>
-				<div data-page="renderCartoons" class="page cached renderCartoons">
+				<div data-page="cartoons" class="page cached cartoons">
 					<!-- Scrollable page content -->
 					<div class="page-content">
-						<div class="content-block inFolder">
+						<div class="content-block cartoonFolder" data-category="">
 							
 						</div>
 					</div>
 				</div>
-				<div data-page="news" class="page cached news">
+				<div data-page="news__category" class="page cached news__category">
 					<!-- Scrollable page content -->
 					<div class="page-content">
 						<div class="content-block news">
 						</div>
 					</div>
 				</div>
-				<div data-page="renderNews" class="page cached renderNews">
+				<div data-page="news" class="page cached news">
 					<!-- Scrollable page content -->
 					<div class="page-content">
-						<div class="content-block inCateg">
+						<div class="content-block newsFolder" data-category="">
 						</div>
 					</div>
 				</div>
@@ -241,22 +252,29 @@
 	
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
-	<script type="text/javascript" src="js/pulsegoroda.js"></script>
+	<script type="text/javascript" src="js/page_pulsegoroda.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNx6_QhDELTpDbMHl3C43gShtuazM4Xew"></script>
+    <script type="text/javascript" src="js/globalvars.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/images.js"></script>
     <script type="text/javascript" src="js/entrypoints.js"></script>
     <script type="text/javascript" src="js/cookie.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
-    <script type="text/javascript" src="js/feedback.js"></script>
-    <script type="text/javascript" src="js/globalvars.js"></script>
-    <script type="text/javascript" src="js/cartoons.js"></script>
-    <script type="text/javascript" src="js/news.js"></script>
-    <script type="text/javascript" src="js/userOptions.js"></script>
+    <script type="text/javascript" src="js/page_feedback.js"></script>
+    <script type="text/javascript" src="js/page_cartoons.js"></script>
+    <script type="text/javascript" src="js/page_cartoons__category.js"></script>
+    <script type="text/javascript" src="js/page_news.js"></script>
+    <script type="text/javascript" src="js/page_news__category.js"></script>
+    <script type="text/javascript" src="js/page_userOptions.js"></script>
     <script type="text/javascript" src="js/dictionary.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
 </body>
 <!--
+
+!-В entrypoints.js зашито получение данных одним объектом-! (тестовая версия)
+
+!!!! В bindEvents предусмотреть впервые вызов или нет
+
 BUGS:
 -2. Системные сообщения, подсказки ошибки и тд вынести в отдельный файл dictionary.js ++
 -1. Все точки входа должны быть собраны в entrypoints.js потом вместе с руслсаном и валерой
@@ -276,7 +294,7 @@ BUGS:
 
 
 1. uploadPhoto (images.js) Я просто стал использовать одну функцию, если чо, в images.js есть getOtherImage ++
-2. при логине если неправильно то выдается несколько алертов, потом еще нажимаешь на кнопку панельки и опять
+2. при логине если неправильно то выдается несколько алертов, потом еще нажимаешь на кнопку панельки и опять ++
 3. функции должны именоваться максимально подробно ++
 4. группировка функций - глобальные для работы с файловой системой телефона например - то есть именование файлов ++
 

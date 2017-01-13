@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Мануал</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+	
+	<p>//На примеры можно нажимать. Если нажать, то в консоль пушится этот пример (Уже отпарсенный).</p>
+	
+	<h2>cartoonsServer.php</h2>
+	<p>Получает: "type" через post запрос</p>
+	<p>
+		При "type" == <br>
+		"download" {
+			Возвращает json массив в котором сначала идет массив категорий (0), потом идет массив с массивами с названиями видео, ссылками к ним, списком категорий (Через запятую) и id (1).<br>
+			<p class="cartoonsServer__download__template">Пример: [["random category","new","test","\u0440\u043f\u0440\u043f"],[["Cosmonaut","https:\/\/www.youtube.com\/embed\/csnXqZHMJa0","new,test","1"],["Best PC","https:\/\/www.youtube.com\/embed\/sPCDQVKAkRg","new","2"],["NEBOSKREB","https:\/\/www.youtube.com\/embed\/fsuzJby2plY","random category,new","6"]]];</p>
+		}<br>
+		"upload" {
+			Требует рута. Получает через post запрос 'url', 'name' и 'category', где 'url' - адрес видео (Только ютуб), 'name' - название видео (Отоброжается в посте видео) и 'category' (Категория видео для сортировки)
+		}<br>
+		"uploadCat" {
+			Требует рута. Получает через post запрос 'category' и пушит его в таблицу с категориями для видео.
+		}<br>
+		"delete" {
+			Требует рута. Получает через post запрос 'id', по которому находит и удаляет видео.
+		}<br>
+		"update" {
+			Требует рута. Получает через post запрос 'url'(На который сменится старый), 'categories'(На который сменится старый) и 'id'(ай ди того видео, которое измениться).
+		}<br>
+	</p>
+	
+	
+	<h2>data-ajax.php</h2>
+	<p>Получает: 'sessionId' через куки (Не обязательно)</p>
+	<p>Отдает: json объект, в котором внутри 'contest' массив контестов, 'userData' (Если передали 'sessionId') объект с данными юзера ('id', 'login', 'mail', 'fname', 'lname', 'icon' ('icon' - ссылка, остальные - файлы)), 'sessionId' переменная с sessionId , который необходим для нормальной работы сессий (Должен храниться в куках в такой же переменной (sessionId)).</p>
+	
+	<h2>feedback.php</h2>
+	<p>Требует логина в систему. Получает: 'type' через post запрос</p>
+	<p>
+		При "type" == <br>
+		"download" {
+			Требует рута. Возвращает json массив в котором будет список сообщений отправленных в фидбэк.<br>
+			<p class="feedback__download__template">Пример: [{"id":"11","content":"\u043f\u043a\u0435\u043f\u0430\u043f\u043a\u0430\u043f","user":"TypicalEarthman"},{"id":"12","content":"\u0414\u0430\u0439\u0442\u0435 \u043c\u043d\u0435 \u0440\u0430\u0431\u043e\u0442\u0443","user":"ravenard"},{"id":"13","content":"Dajte mine rabotu!!!","user":"ravenard"}];</p>
+		}<br>
+		"upload" {
+			Требует рута. Получает через post запрос 'content', который пушится на сервер и 'login' через сессию (Требует 'sessionId' в куках).
+		}<br>
+		"delete" {
+			Требует рута. Получает через post запрос 'id', по которому находит и удаляет сообщение в фидбэке.
+		}<br>
+	</p>
+	
+	<h2>fileChecker.php</h2>
+	<p>Требует логина в систему. Получает: Файл 'userfile' и переменную 'type', 'contest', 'text' через post запрос (Преобразуется в $_FILES запрос)</p>
+	<p>
+		При "type" == <br>
+		"avatar" {
+			Заменяет аватарку юзера на отправленную фотку<br>
+		}<br>
+		
+		"contest"{
+			Пушит новый пост в таблицу. Обязательно нужен 'contest' через post запрос.
+		}<br>
+		При других 'type' они будут просто пушиться, кроме 'type'=='contest'.
+		
+		'text' и 'contest' не обязательны (Если 'type' != 'contest'). Они будут пушиться с фоткой в таблицу, если будут присутствовать.
+	</p>
+	
+	<h2>loginChecker.php</h2>
+	<p>Требует логина в систему. Получает: 'login' и 'pass' через post запрос.</p>
+	<p>
+		Проверяет на наличие логина и верность логина и пароля. При верности всего, то регистрирует сесиию на юзера.
+	</p>
+	
+	<h2>logout.php</h2>
+	<p>Очищает полностью сессию. Если юзер не залогинен, то выводит предупреждающее сообщение.</p>
+	
+	<h2>user-data-ajax.php</h2>
+	<p>Требует логина в систему. Получает 'type' через post запрос.</p>
+	<p>
+		При "type" == <br>
+		"get" {
+			Возвращает json объект, в котором 'id', 'login', 'mail', 'fname', 'mname', 'lname', 'icon' юзера, где 'fname' - имя юзера, 'mname' - фамилия, 'lname' - отчество, 'icon' - ссылка на аву.<br>
+		}<br>
+		
+		"edit"{
+			Получает 'fname', 'mname', 'lname' через post запрос (Не обязательно все). Если что то из них отсутсвует, то просто не пушит это.
+		}<br>
+	</p>
+	
+	<h2>user-data-passChange.php</h2>
+	<p>Требует логина в систему. Получает 'pass' и 'oldPass' через post запрос.</p>
+	<p>
+		При верном oldPass сменяет пароль на новый. В планах подтверждение смены пароля через почту (Двуфакторная аутентификация).
+	</p>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script>
+	
+		$('.cartoonsServer__download__template').on('click', function(){
+			console.log(JSON.parse('[["random category","new","test","\u0440\u043f\u0440\u043f"],[["Cosmonaut","https:\/\/www.youtube.com\/embed\/csnXqZHMJa0","new,test","1"],["Best PC","https:\/\/www.youtube.com\/embed\/sPCDQVKAkRg","new","2"],["NEBOSKREB","https:\/\/www.youtube.com\/embed\/fsuzJby2plY","random category,new","6"]]]'));
+		});
+		
+		$('.feedback__download__template').on('click', function(){
+			console.log(JSON.parse('[{"id":"11","content":"\u043f\u043a\u0435\u043f\u0430\u043f\u043a\u0430\u043f","user":"TypicalEarthman"},{"id":"12","content":"\u0414\u0430\u0439\u0442\u0435 \u043c\u043d\u0435 \u0440\u0430\u0431\u043e\u0442\u0443","user":"ravenard"},{"id":"13","content":"Dajte mine rabotu!!!","user":"ravenard"}]'));
+		});
+	
+	</script>
+	
+</body>
+</html>

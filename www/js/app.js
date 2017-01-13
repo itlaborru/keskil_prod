@@ -17,16 +17,13 @@ var initPages = {
 		$(".loadingScreen").addClass("hideLoadingScreen");
 		setTimeout(function() {
 			$(".loadingScreen").addClass("display-none");
-		}, 2000);
+		}, 1); //change 1 to 2000
 
 	},
 	handler: 	function(){
 		$(document).on('pageBeforeAnimation', function (e) {
 			var page = e.detail.page.name;
-			if( page !="renderCartoons" && page!="news" && page!="renderNews" && page!="index") {
-				window[page].bindEvents();
-			}
-			if(page == "cartoons" || page == "news") {
+			if(page != "index") {
 				window[page].render();
 			}
 		});
