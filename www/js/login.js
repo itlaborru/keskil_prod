@@ -70,7 +70,7 @@ var login = {
 			}
 			
 			ajax(
-				'http://it-labor.ru/playground/valera/registration.php',
+				'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/registration.php',
 				{ 
 					'login': $('.loginReg').val(), 
 					'pass': $('.passReg').val(),
