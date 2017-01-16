@@ -8,10 +8,8 @@ var cartoons = {
 			$(".cartoonFolder").append(block);
 		}
 		for(var i = 0; i < DataAjax.cartoonslist.length; i++) {
-			if(firstCartRender) {
-				DataAjax.cartoonslist[i].category = DataAjax.cartoonslist[i].category.split(",");
-			}
-			else {
+			if(cartoons.firstUse) {
+				DataAjax.cartoonslist[i].category = JSON.parse(DataAjax.cartoonslist[i].category);
 			}
 			if(DataAjax.cartoonslist[i].category.length >=2) {
 				for(var y=0; y<DataAjax.cartoonslist[i].category.length;y++ ) {
@@ -22,17 +20,18 @@ var cartoons = {
 				}
 			}
 			else {
-				if(cat == DataAjax.cartoonslist[i].category) {
+				if(cat == DataAjax.cartoonslist[i].category[0]) {
 					createVideo();
 					ifClear = false;
 				}
 			}
 		}
-		if(firstCartRender) {
-			firstCartRender = false;
+		if(cartoons.firstUse) {
+			cartoons.firstUse = false;
 		}
 		if(ifClear) {
 			app.alert(dictionary.noContent, dictionary.sorry);
 		}
 	},
+	firstUse: true,
 };

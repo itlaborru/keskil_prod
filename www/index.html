@@ -124,24 +124,12 @@
 							
                         </div>
                     </div>
-                </div>
-				
-				<!--
-				<div data-page="contest" class="page">
-					<div class="page-content">
-						<div class="content-block">
-							<p class="photoUploadButton">фотки</p>
-							<a></a>
-						   
-						</div>
-					</div>
-				</div>
-				-->
+                </div>				
 				
                 <div data-page="index" class="page">
                     <div class="page-content">
                         <div class="content-block">
-                            <a href="#contests">Contest list</a> </br>
+                            <a href="#contests__list">Contest list</a> </br>
 							<a href="#cartoons__category"> Мультфильмы </a> </br>
 							<a href="#news__category"> Новости </a> </br>
 							<a href="#feedback"> Рекомендация </a></br>
@@ -150,10 +138,18 @@
                     </div>
                 </div>
 				
-				<div data-page="contests" class="page cached contests">
+				<div data-page="contests__list" class="page cached contests">
+					<div class="page-content">
+						<div class="content-block contestListBlock">
+							
+						</div>
+					</div>
+				</div>
+				
+				<div data-page="contest" class="page cached contest">
 					<div class="page-content">
 						<div class="content-block">
-							asdasdasd
+							It's contest
 						</div>
 					</div>
 				</div>
@@ -260,6 +256,7 @@
     <script type="text/javascript" src="js/entrypoints.js"></script>
     <script type="text/javascript" src="js/cookie.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/page_contests.js"></script>
     <script type="text/javascript" src="js/page_feedback.js"></script>
     <script type="text/javascript" src="js/page_cartoons.js"></script>
     <script type="text/javascript" src="js/page_cartoons__category.js"></script>
@@ -270,7 +267,6 @@
     <script type="text/javascript" src="js/init.js"></script>
 </body>
 <!--
-
 !-В entrypoints.js зашито получение данных одним объектом-! (тестовая версия)
 
 !!!! В bindEvents предусмотреть впервые вызов или нет
@@ -310,7 +306,5 @@ BUGS:
 
 1.Составить список всего того что можно получить через ajax
 файлы на которые стукается аякс могут и по простому отдавать обьекты и через конструктор
-
-
 -->
 </html>
