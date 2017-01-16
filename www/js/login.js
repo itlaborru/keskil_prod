@@ -12,8 +12,7 @@ var login = {
 			} else {
 				//ajax(entrypoints.signIn.url,entrypoints.signIn.data,entrypoints.signIn.success);
 				ajax(
-				
-					'http://it-labor.ru/playground/valera/loginChecker.php', 
+				'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/loginChecker.php', 
 					
 					{
 						'login': $('.login').val(),
@@ -39,7 +38,7 @@ var login = {
 							$('.passReg').val('');
 							$('.mail').val('');
 							ajax(
-								'http://it-labor.ru/playground/valera/user-data-ajax.php', 
+								'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/user-data-ajax.php', 
 								
 								{
 									'type': 'get',
@@ -100,7 +99,7 @@ var login = {
 			
 			mainView.router.back({'pageName':'index', 'force':true});
 			ajax(
-				'http://it-labor.ru/playground/valera/logout.php',
+				'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/logout.php',
 				{},
 				function(data){
 					app.alert(data,dictionary.success);

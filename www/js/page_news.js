@@ -7,7 +7,7 @@ var news = {
 		var cat = $(".newsFolder").attr("data-category");
 		function createPost() {
 			var block;
-			block = $("<div class='post'><h3> "+DataAjax.newslist[i].title+"</h3><div>"+DataAjax.newslist[i].content +"</div><</div>");
+			block = $("<div class='post'><h3> "+DataAjax.newslist[i].title+"</h3><div>"+DataAjax.newslist[i].content +"</div></div>");
 			$(".newsFolder").append(block);
 		}
 		for(var i = 0; i < DataAjax.newslist.length; i++) {

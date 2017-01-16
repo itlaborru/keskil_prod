@@ -153,7 +153,7 @@ var entrypoints = {
 		},
 	},
 	allData: {
-		url:	'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/daemon/get.php', 
+		url:	"http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/get.php",
 		data:	{
 			"object": "yes",
 		},
@@ -162,4 +162,15 @@ var entrypoints = {
 			console.log(DataAjax);
 		},
 	},
+	
+	/*http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/set.php
+	{
+		'file':  'fileChecker',
+		'type':		'contest',
+		'contest' : id,
+		'text':	'Коммент от юзера'
+	}
+	
+	
+	*/
 };
