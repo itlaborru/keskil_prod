@@ -12,7 +12,7 @@ var login = {
 			} else {
 				//ajax(entrypoints.signIn.url,entrypoints.signIn.data,entrypoints.signIn.success);
 				ajax(
-				'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/loginChecker.php', 
+				serverAdress + 'entrypoints/loginChecker.php', 
 					
 					{
 						'login': $('.login').val(),
@@ -38,7 +38,7 @@ var login = {
 							$('.passReg').val('');
 							$('.mail').val('');
 							ajax(
-								'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/user-data-ajax.php', 
+								serverAdress + 'entrypoints/user-data-ajax.php', 
 								
 								{
 									'type': 'get',
@@ -70,7 +70,7 @@ var login = {
 			}
 			
 			ajax(
-				'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/registration.php',
+				serverAdress + 'entrypoints/registration.php',
 				{ 
 					'login': $('.loginReg').val(), 
 					'pass': $('.passReg').val(),
@@ -99,7 +99,7 @@ var login = {
 			
 			mainView.router.back({'pageName':'index', 'force':true});
 			ajax(
-				'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/logout.php',
+				serverAdress + 'entrypoints/logout.php',
 				{},
 				function(data){
 					app.alert(data,dictionary.success);

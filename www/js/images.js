@@ -22,7 +22,7 @@ var transferImages = {
 		options.chunkedMode = false;
 		// ** Тут меняешь адрес сервера для картинок
 		var ft = new FileTransfer();
-		ft.upload(imageURI, "http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/set.php", transferImages.win, transferImages.fail, options);
+		ft.upload(imageURI, serverAdress + "entrypoints/set.php", transferImages.win, transferImages.fail, options);
 	},
 	getImage:	function() {
 		// Retrieve image file location from specified source

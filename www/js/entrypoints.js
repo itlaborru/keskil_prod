@@ -2,21 +2,6 @@ var DataAjax;
  // Тут можешь переписывать на боевой сервак
  
 var entrypoints = {
-	/*cartoonsServer: {
-		url:	'http://it-labor.ru/playground/valera/cartoonsServer.php', 
-		data:	{
-			'type':'download',
-		},
-		success:	function(data) {
-			$('.cartoons .page-content .cartoonBlock').html(""); 
-			data = JSON.parse(data);
-			for(var i = 0; i < data[0].length; i++) {
-				var folder = $("<a href='#renderCartoons' data-cartooncat='"+data[0][i][0]+"' class='cartoonCategory'>"+data[0][i][0]+" </a></br>");
-				$('.cartoons .page-content .cartoonBlock').append(folder);
-			}
-			cartoonData = data[1];
-		},
-	},*/
 	allDataUpdate : function() {
 		ajax(entrypoints.allData.url,entrypoints.allData.data,entrypoints.allData.success);
 	},
@@ -154,7 +139,7 @@ var entrypoints = {
 		},
 	},
 	allData: {
-		url:	"http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/get.php",
+		url:	serverAdress + "entrypoints/get.php",
 		data:	{
 			"object": "yes",
 		},
@@ -162,16 +147,5 @@ var entrypoints = {
 			DataAjax = JSON.parse(data);
 			console.log(DataAjax);
 		},
-	},
-	
-	/*http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/set.php
-	{
-		'file':  'fileChecker',
-		'type':		'contest',
-		'contest' : id,
-		'text':	'Коммент от юзера'
 	}
-	
-	
-	*/
 };
