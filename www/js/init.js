@@ -10,9 +10,12 @@
 else {
 	$('.userPanel').addClass('display-none');
 };
-
 // Handle Cordova Device Ready Event
-$(document).on('deviceready', function() {
+document.addEventListener('deviceready', onDeviceReady, false);
+if(document.location.hostname == "it-labor.ru")  {
+	onDeviceReady();
+}
+function onDeviceReady() {
 	initPages.handler();
 	
 	entrypoints.allDataUpdate();
@@ -26,5 +29,4 @@ $(document).on('deviceready', function() {
 	login.bindEvents();
 	
 	console.log(dictionary.ready);
-	
-});
+}

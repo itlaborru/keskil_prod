@@ -17,7 +17,7 @@ var initPages = {
 		$(".loadingScreen").addClass("hideLoadingScreen");
 		setTimeout(function() {
 			$(".loadingScreen").addClass("display-none");
-		}, 1); //change 1 to 2000
+		}, 2000); //change 1 to 2000
 
 	},
 	handler: 	function(){
