@@ -11,8 +11,10 @@ else {
 	$('.userPanel').addClass('display-none');
 };
 // Handle Cordova Device Ready Event
-document.addEventListener('deviceready', onDeviceReady, false);
-if(document.location.hostname == "it-labor.ru")  {
+$(document).on('deviceready', function() {
+	onDeviceReady();
+});
+if(document.location.hostname == "it-labor.ru") {
 	onDeviceReady();
 }
 function onDeviceReady() {
