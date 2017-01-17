@@ -1,5 +1,6 @@
 var DataAjax;
-
+ // Тут можешь переписывать на боевой сервак
+ 
 var entrypoints = {
 	/*cartoonsServer: {
 		url:	'http://it-labor.ru/playground/valera/cartoonsServer.php', 

@@ -20,7 +20,7 @@ var transferImages = {
 		globalVar.imageURI = imageURI;
 
 		options.chunkedMode = false;
-		
+		// ** Тут меняешь адрес сервера для картинок
 		var ft = new FileTransfer();
 		ft.upload(imageURI, "http://it-labor.ru/playground/valera/fileChecker.php", transferImages.win, transferImages.fail, options);
 	},
