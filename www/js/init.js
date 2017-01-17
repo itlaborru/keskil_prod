@@ -18,7 +18,6 @@ $(document).on('deviceready', function() {
 	entrypoints.allDataUpdate();
 	ajax(entrypoints.onReady.url,entrypoints.onReady.data,entrypoints.onReady.success); 
 	setInterval(function() {
-		
 		entrypoints.allDataUpdate();
 	} , 5000);
 	
