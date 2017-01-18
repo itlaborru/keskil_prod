@@ -4,7 +4,14 @@
 	if(userInfo.loggedIn){//Проверка на сохраненность куки
 		cookies.setCookie('PHPSESSID', userInfo.phpSessionId);
 		$('.loginPanel').addClass('display-none');
-		$('.userPanel__name').html(dictionary.unableToConnect);
+		$('.loginPanel').removeClass('display-block');
+		$('.userPanel').removeClass('display-none');
+		$('.userPanel').addClass('display-block');
+		$('.userPanel__icon').attr('src', '');
+		$('.userPanel__icon').attr('src', userInfo.icon);
+		$('.userPanel__name').html(userInfo.login);
+		$('.userPage__fullname').html(userInfo.lname + ' ' + userInfo.fname + ' ' +  userInfo.mname);
+		$('.userPanel__mail').html(userInfo.mail);
 	} 
 }
 else {
@@ -25,10 +32,7 @@ function onDeviceReady() {
 	}
 	else {
 		entrypoints.allDataUpdate();
-	}
-		
-	
-	ajax(entrypoints.onReady.url,entrypoints.onReady.data,entrypoints.onReady.success); 
+	} 
 	setInterval(function() {
 		var lastChanges = JSON.parse(localStorage.getItem("lastChanges"));
 		ajax(entrypoints.checkForUpdates.url,{"lastChanges":lastChanges},entrypoints.checkForUpdates.success); 

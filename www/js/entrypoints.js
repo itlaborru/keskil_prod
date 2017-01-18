@@ -33,7 +33,7 @@ var entrypoints = {
 			$('.userPanel__mail').html(dataLogin.mail);
 		},
 	},
-	onReady: {
+	/*onReady: {
 		url:	'http://it-labor.ru/playground/valera/data-ajax.php',
 		data:	{},
 		success:	function(data){
@@ -92,7 +92,7 @@ var entrypoints = {
 			});
 		},
 	},
-	/*signIn: {
+	signIn: {
 		url:	'http://it-labor.ru/playground/valera/loginChecker.php', 
 		
 		data:	{

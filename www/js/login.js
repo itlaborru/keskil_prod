@@ -45,13 +45,20 @@ var login = {
 								},
 								
 								function(data){
-									console.log(data);
 									var dataLogin = JSON.parse(data);
+									console.log(dataLogin);
 									$('.userPanel__icon').attr('src', dataLogin.icon);
 									$('.userPanel__name').html(dataLogin.login);
-									localStorage.setItem("userInfo", JSON.stringify(userInfo));
 									$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
 									$('.userPanel__mail').html(dataLogin.mail);
+									
+									userInfo.login = dataLogin.login;
+									userInfo.fname = dataLogin.fname;
+									userInfo.lname = dataLogin.lname;
+									userInfo.mname = dataLogin.mname;
+									userInfo.mail = dataLogin.mail;
+									userInfo.icon = dataLogin.icon;
+									localStorage.setItem("userInfo", JSON.stringify(userInfo));
 								});
 						}
 					}
