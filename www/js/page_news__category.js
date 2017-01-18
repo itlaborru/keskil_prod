@@ -2,9 +2,11 @@
 var news__category = {
 	render:	function() {
 		$('.news__category .page-content .news').html("");
-		for(var i = 0; i < DataAjax.newscategs.length; i++) {
-			var newsFolder = $("<a href='#news' data-newscat='"+DataAjax.newscategs[i].category+"' class='newsCategory'>"+DataAjax.newscategs[i].category+" </a></br>");
-			$('.news__category .page-content .news').append(newsFolder);
+		for(var i = 0; i < DataAjax.categorylist.length; i++) {
+			if(DataAjax.categorylist[i].type == "news") {
+				var newsFolder = $("<a href='#news' data-newscat='"+DataAjax.categorylist[i].category+"' class='newsCategory'>"+DataAjax.categorylist[i].category+" </a></br>");
+				$('.news__category .page-content .news').append(newsFolder);
+			}
 		}
 		news__category.bindEvents();
 	},

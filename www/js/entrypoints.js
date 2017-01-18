@@ -164,9 +164,6 @@ var entrypoints = {
 				localStorage.setItem("cache", JSON.stringify(DataAjax));
 				localStorage.setItem("lastChanges", JSON.stringify(data.lastChangesNew));
 			}
-			else{
-				console.log("Old data");
-			}
 		},
 	}
 };
