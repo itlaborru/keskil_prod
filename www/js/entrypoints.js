@@ -146,23 +146,27 @@ var entrypoints = {
 		success:	function(data) {
 			DataAjax = JSON.parse(data);
 			console.log(DataAjax);
-			//DataAjax.lastChanges[0].newscategs = "3";
-			//DataAjax.lastChanges[0].contestlist = "1";
-			localStorage.setItem("lastChanges", JSON.stringify(DataAjax.lastChanges[0]));
 			localStorage.setItem("cache", JSON.stringify(DataAjax));
+			DataAjax.lastChanges.contestlist = "1";
+			localStorage.setItem("lastChanges", JSON.stringify(DataAjax.lastChanges));
 		},
 	},
 	checkForUpdates: {
 		url:	serverAdress + "entrypoints/get.php",
-		data:	{
-			"lastChanges": JSON.parse(localStorage.getItem("lastChanges")),
-		},
 		success:	function(data) {
-			console.log(JSON.parse(data));
-			/*DataAjax = JSON.parse(data);
-			console.log(DataAjax);
-			DataAjax.lastChanges[0].Newslist = "1";
-			localStorage.setItem("lastChanges", JSON.stringify(DataAjax.lastChanges));*/
+			data = JSON.parse(data);
+			console.log(data);
+			if(data) {
+				console.log("New data");
+				for(var key in data) {
+					DataAjax[key] = data.key;
+				}
+				localStorage.setItem("cache", JSON.stringify(DataAjax));
+				localStorage.setItem("lastChanges", JSON.stringify(data.lastChangesNew));
+			}
+			else{
+				console.log("Old data");
+			}
 		},
 	}
 };

@@ -21,6 +21,7 @@ function onDeviceReady() {
 	initPages.handler();
 	
 	if(localStorage.getItem("cache")) {
+		DataAjax = JSON.parse(localStorage.getItem("cache"));
 	}
 	else {
 		entrypoints.allDataUpdate();
@@ -28,9 +29,10 @@ function onDeviceReady() {
 		
 	
 	ajax(entrypoints.onReady.url,entrypoints.onReady.data,entrypoints.onReady.success); 
-	//setInterval(function() {
-		//entrypoints.allDataUpdate();
-	//} , 5000);
+	setInterval(function() {
+		var lastChanges = JSON.parse(localStorage.getItem("lastChanges"));
+		ajax(entrypoints.checkForUpdates.url,{"lastChanges":lastChanges},entrypoints.checkForUpdates.success); 
+	} , 5000);
 	
 	
 	initPages.splashscreen();

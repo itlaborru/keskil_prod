@@ -46,12 +46,12 @@ var login = {
 								
 								function(data){
 									console.log(data);
-									/*var dataLogin = JSON.parse(data);
+									var dataLogin = JSON.parse(data);
 									$('.userPanel__icon').attr('src', dataLogin.icon);
 									$('.userPanel__name').html(dataLogin.login);
 									localStorage.setItem("userInfo", JSON.stringify(userInfo));
 									$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
-									$('.userPanel__mail').html(dataLogin.mail);*/
+									$('.userPanel__mail').html(dataLogin.mail);
 								});
 						}
 					}
@@ -106,7 +106,7 @@ var login = {
 					app.alert(data,dictionary.success);
 					cookies.getCookie('PHPSESSID', null);
 					userInfo = {};
-					localStorage.clear();
+					localStorage.removeItem("userInfo");
 					$('.loginPanel').addClass('display-block');
 					$('.userPanel').addClass('display-none');
 					$('.userPanel').removeClass('display-block');

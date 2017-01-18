@@ -1,4 +1,7 @@
 var userPage = {
+	render: function() {
+		userPage.bindEvents();
+	},
 	updateUserinfo: function() {
 		ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
 	},
@@ -13,8 +16,10 @@ var userPage = {
 		});
 		$('.changeUserInfo').on('click', function(){
 			ajax(
-				'http://it-labor.ru/playground/valera/user-data-edit.php',
+				serverAdress + "entrypoints/set.php",
 				{
+					'file':	'user-data-edit',
+					'type':	'data',
 					'fname': $('.userPage__fullname__fname__change').val(),
 					'mname': $('.userPage__fullname__mname__change').val(),
 					'lname': $('.userPage__fullname__lname__change').val(),
