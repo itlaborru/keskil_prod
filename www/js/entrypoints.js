@@ -92,7 +92,7 @@ var entrypoints = {
 			});
 		},
 	},
-	signIn: {
+	/*signIn: {
 		url:	'http://it-labor.ru/playground/valera/loginChecker.php', 
 		
 		data:	{
@@ -137,7 +137,7 @@ var entrypoints = {
 					});
 			}
 		},
-	},
+	},*/
 	allData: {
 		url:	serverAdress + "entrypoints/get.php",
 		data:	{
@@ -146,6 +146,23 @@ var entrypoints = {
 		success:	function(data) {
 			DataAjax = JSON.parse(data);
 			console.log(DataAjax);
+			//DataAjax.lastChanges[0].newscategs = "3";
+			//DataAjax.lastChanges[0].contestlist = "1";
+			localStorage.setItem("lastChanges", JSON.stringify(DataAjax.lastChanges[0]));
+			localStorage.setItem("cache", JSON.stringify(DataAjax));
+		},
+	},
+	checkForUpdates: {
+		url:	serverAdress + "entrypoints/get.php",
+		data:	{
+			"lastChanges": JSON.parse(localStorage.getItem("lastChanges")),
+		},
+		success:	function(data) {
+			console.log(JSON.parse(data));
+			/*DataAjax = JSON.parse(data);
+			console.log(DataAjax);
+			DataAjax.lastChanges[0].Newslist = "1";
+			localStorage.setItem("lastChanges", JSON.stringify(DataAjax.lastChanges));*/
 		},
 	}
 };

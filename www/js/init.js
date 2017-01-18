@@ -20,11 +20,17 @@ if(document.location.hostname == "it-labor.ru") {
 function onDeviceReady() {
 	initPages.handler();
 	
-	entrypoints.allDataUpdate();
-	ajax(entrypoints.onReady.url,entrypoints.onReady.data,entrypoints.onReady.success); 
-	setInterval(function() {
+	if(localStorage.getItem("cache")) {
+	}
+	else {
 		entrypoints.allDataUpdate();
-	} , 5000);
+	}
+		
+	
+	ajax(entrypoints.onReady.url,entrypoints.onReady.data,entrypoints.onReady.success); 
+	//setInterval(function() {
+		//entrypoints.allDataUpdate();
+	//} , 5000);
 	
 	
 	initPages.splashscreen();

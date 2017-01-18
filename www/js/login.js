@@ -10,7 +10,7 @@ var login = {
 			){
 				app.alert(dictionary.error +dictionary.register,dictionary.error);
 			} else {
-				//ajax(entrypoints.signIn.url,entrypoints.signIn.data,entrypoints.signIn.success);
+				
 				ajax(
 				serverAdress + 'entrypoints/loginChecker.php', 
 					
@@ -45,12 +45,13 @@ var login = {
 								},
 								
 								function(data){
-									var dataLogin = JSON.parse(data);
+									console.log(data);
+									/*var dataLogin = JSON.parse(data);
 									$('.userPanel__icon').attr('src', dataLogin.icon);
 									$('.userPanel__name').html(dataLogin.login);
 									localStorage.setItem("userInfo", JSON.stringify(userInfo));
 									$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
-									$('.userPanel__mail').html(dataLogin.mail);
+									$('.userPanel__mail').html(dataLogin.mail);*/
 								});
 						}
 					}

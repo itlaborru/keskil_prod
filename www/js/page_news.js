@@ -11,9 +11,6 @@ var news = {
 			$(".newsFolder").append(block);
 		}
 		for(var i = 0; i < DataAjax.newslist.length; i++) {
-			if(news.firstUse) {
-				DataAjax.newslist[i].category = JSON.parse(DataAjax.newslist[i].category);
-			}
 			if(DataAjax.newslist[i].category.length >=2) {
 				for(var y=0; y<DataAjax.newslist[i].category.length;y++ ) {
 					if(cat ==DataAjax.newslist[i].category[y]) {
@@ -29,12 +26,8 @@ var news = {
 				}
 			}
 		}
-		if(news.firstUse) {
-			news.firstUse = false;
-		}
 		if(ifClear) {
 			app.alert(dictionary.noContent, dictionary.sorry);
 		}
 	},
-	firstUse: true,
 }

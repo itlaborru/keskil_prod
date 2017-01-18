@@ -8,9 +8,6 @@ var cartoons = {
 			$(".cartoonFolder").append(block);
 		}
 		for(var i = 0; i < DataAjax.cartoonslist.length; i++) {
-			if(cartoons.firstUse) {
-				DataAjax.cartoonslist[i].category = JSON.parse(DataAjax.cartoonslist[i].category);
-			}
 			if(DataAjax.cartoonslist[i].category.length >=2) {
 				for(var y=0; y<DataAjax.cartoonslist[i].category.length;y++ ) {
 					if(cat ==DataAjax.cartoonslist[i].category[y]) {
@@ -26,12 +23,8 @@ var cartoons = {
 				}
 			}
 		}
-		if(cartoons.firstUse) {
-			cartoons.firstUse = false;
-		}
 		if(ifClear) {
 			app.alert(dictionary.noContent, dictionary.sorry);
 		}
-	},
-	firstUse: true,
+	}
 };
