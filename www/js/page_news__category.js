@@ -4,7 +4,7 @@ var news__category = {
 		$('.news__category .page-content .news').html("");
 		for(var i = 0; i < DataAjax.categorylist.length; i++) {
 			if(DataAjax.categorylist[i].type == "news") {
-				var newsFolder = $("<a href='#news' data-newscat='"+DataAjax.categorylist[i].category+"' class='newsCategory'>"+DataAjax.categorylist[i].category+" </a></br>");
+				var newsFolder = $("<a href='#news' data-newscat='"+DataAjax.categorylist[i].id+"' class='newsCategory'>"+DataAjax.categorylist[i].category+" </a></br>");
 				$('.news__category .page-content .news').append(newsFolder);
 			}
 		}

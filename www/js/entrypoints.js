@@ -139,7 +139,7 @@ var entrypoints = {
 		},
 	},*/
 	allData: {
-		url:	serverAdress + "entrypoints/get.php",
+		url:	serverAdress + "daemon/get.php",
 		data:	{
 			"object": "yes",
 		},
@@ -152,7 +152,7 @@ var entrypoints = {
 		},
 	},
 	checkForUpdates: {
-		url:	serverAdress + "entrypoints/get.php",
+		url:	serverAdress + "daemon/get.php",
 		success:	function(data) {
 			data = JSON.parse(data);
 			console.log(data);
@@ -161,8 +161,8 @@ var entrypoints = {
 				for(var key in data) {
 					DataAjax[key] = data.key;
 				}
-				localStorage.setItem("cache", JSON.stringify(DataAjax));
-				localStorage.setItem("lastChanges", JSON.stringify(data.lastChangesNew));
+				//localStorage.setItem("cache", JSON.stringify(DataAjax));
+				localStorage.setItem("lastChanges", JSON.stringify(data.lastChanges));
 			}
 		},
 	}

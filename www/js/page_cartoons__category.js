@@ -2,8 +2,8 @@
 var cartoons__category = {
 	render: function() {
 		$(".cartoonCatBlock").html("");
-		for(var i = 0; i < DataAjax.cartoonscategory.length; i++) {
-			var folder = $("<a href='#cartoons' data-cartooncat='"+DataAjax.cartoonscategory[i].category+"' class='cartoonCategory'>"+DataAjax.cartoonscategory[i].category+" </a></br>");
+		for(var i = 0; i < DataAjax.categorylist.length; i++) {
+			var folder = $("<a href='#cartoons' data-cartooncat='"+DataAjax.categorylist[i].id+"' class='cartoonCategory'>"+DataAjax.categorylist[i].category+" </a></br>");
 			$('.cartoons__category .page-content .cartoonCatBlock').append(folder);
 		};
 		cartoons__category.bindEvents();
