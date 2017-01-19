@@ -2,20 +2,26 @@
  // Тут можешь переписывать на боевой сервак
  
 var entrypoints = {
-	allDataUpdate : function() {
+	allDataUpdate: function() {
 		ajax(entrypoints.allData.url,entrypoints.allData.data,entrypoints.allData.success);
 	},
+	feedbackSend:	function(){
+		var content = $('.feedback').val();
+		ajax(entrypoints.feedback.url,
+			{
+				'file':'feedback',
+				'type':'upload',
+				'content':	content,
+			},
+		entrypoints.feedback.success);
+	},
 	feedback: {
-		url:	'http://it-labor.ru/playground/valera/feedback.php', 
-		data:	{
-			'type':'upload',
-			'content':	$('.feedback').val(),
-			'user':	userInfo.userName,
-		},
+		url:	serverAdress + "entrypoints/set.php", 
 		success:	function(data) {
+			console.log($('.feedback').val());
 			console.log(data);
-			$('.feedback').val("");
-			app.alert(dictionary.feedbackSent, dictionary.success);
+			//$('.feedback').val("");
+			//app.alert(dictionary.feedbackSent, dictionary.success);
 		},
 	},
 	newUserInfo: {
