@@ -1,4 +1,4 @@
-var DataAjax;
+
  // Тут можешь переписывать на боевой сервак
  
 var entrypoints = {
@@ -154,15 +154,15 @@ var entrypoints = {
 	checkForUpdates: {
 		url:	serverAdress + "daemon/get.php",
 		success:	function(data) {
-			data = JSON.parse(data);
-			console.log(data);
-			if(data) {
+			var Data = JSON.parse(data);
+			console.log(Data);
+			if(Data) {
 				console.log("New data");
-				for(var key in data) {
-					DataAjax[key] = data.key;
+				for(var key in Data) {
+					DataAjax[key] = Data[key];
 				}
-				//localStorage.setItem("cache", JSON.stringify(DataAjax));
-				localStorage.setItem("lastChanges", JSON.stringify(data.lastChanges));
+				localStorage.setItem("cache", JSON.stringify(DataAjax));
+				localStorage.setItem("lastChanges", JSON.stringify(Data.lastChanges));
 			}
 		},
 	}

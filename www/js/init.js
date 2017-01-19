@@ -36,7 +36,7 @@ function onDeviceReady() {
 	setInterval(function() {
 		var lastChanges = JSON.parse(localStorage.getItem("lastChanges"));
 		ajax(entrypoints.checkForUpdates.url,{"lastChanges":lastChanges},entrypoints.checkForUpdates.success); 
-	} , 5000);
+	} , LAST_CHANGES_INTERVAL);
 	
 	
 	initPages.splashscreen();
