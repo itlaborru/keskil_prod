@@ -6,14 +6,12 @@ var transferImages = {
 		options.mimeType="image/*";
 
 		var params = new Object();
-		//params.contest = globalVar.imgData;
-		//params.type = globalVar.typeData;
-		//if(type == "contest") {
-			params.contest = 3;
+		params.file =  'fileChecker';
+		params.user = userInfo.phpSessionId;
+		if(transferImages.type.name == "contest") {
+			params.contest = transferImages.type.contest;
 			params.type = "contest";
-			params.file =  'fileChecker';
-			params.user = userInfo.phpSessionId;
-		//}
+		}
 		
 		options.params = params;
 		
@@ -35,7 +33,10 @@ var transferImages = {
 			sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
 		});
 	},
-	 
+	type: {
+		name:	"",
+		contest:	0,
+	},
 	
 	win:	function(r) {
 		console.log("Code = " + r.responseCode);

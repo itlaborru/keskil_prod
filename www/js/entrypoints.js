@@ -20,8 +20,8 @@ var entrypoints = {
 		success:	function(data) {
 			console.log($('.feedback').val());
 			console.log(data);
-			//$('.feedback').val("");
-			//app.alert(dictionary.feedbackSent, dictionary.success);
+			$('.feedback').val("");
+			app.alert(dictionary.feedbackSent, dictionary.success);
 		},
 	},
 	newUserInfo: {
@@ -153,7 +153,6 @@ var entrypoints = {
 			DataAjax = JSON.parse(data);
 			console.log(DataAjax);
 			localStorage.setItem("cache", JSON.stringify(DataAjax));
-			DataAjax.lastChanges.contestlist = "1";
 			localStorage.setItem("lastChanges", JSON.stringify(DataAjax.lastChanges));
 		},
 	},
