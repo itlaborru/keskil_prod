@@ -9,8 +9,8 @@ var userPage = {
 		$('.userPanel__icon').on('click', function(){
 			
 			transferImages.getImage();
-			globalVar.imgData = '';
-			globalVar.typeData = 'avatar';
+			//globalVar.imgData = '';
+			//globalVar.typeData = 'avatar';
 			userOptions.updateUserinfo();
 			
 		});
