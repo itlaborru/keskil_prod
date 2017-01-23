@@ -73,4 +73,13 @@
 		}
 	};
 	
+	$js = file_get_contents(dirname(__FILE__)."/../daemon/lastChanges.json");
+	$j =json_decode($js, true);
+	$val = 'cartoonslist';
+	$j[$val] = $j[$val]+1;
+	echo json_encode($j);
+	$fp = fopen(dirname(__FILE__)."/../daemon/lastChanges.json", "w");
+	fwrite($fp, json_encode($j));
+	fclose($fp);
+	
 ?>
