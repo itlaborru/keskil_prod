@@ -26,7 +26,7 @@
 			$category = htmlspecialchars(stripslashes($_POST['category']));
 		
 			$sql = mysql_query('INSERT INTO `cartoonsList`(`url`, `name`,`category`) VALUES ("'.$url.'","'.$name.'","'.$category.'")');
-		}//Удаление
+		}//Удаление ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭ
 		
 		
 		
@@ -42,7 +42,7 @@
 				$array->text = 'error!';
 				echo(json_encode($array));
 			}
-		}//Обновление данных
+		}//Обновление данных ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭ
 		
 		
 		
@@ -125,21 +125,17 @@
 		$contest = htmlspecialchars(stripslashes($_POST['contest']));
 		$filetype = '';
 		$photoUploadDir = '';
-		$login = $_SESSION['login'];
 		$text = htmlspecialchars(stripslashes($_POST['text']));
 		$result = '';
 		$sqlData = '';
 		$fileDelete = '';
 		
-		
-		session_start();
-		
 		loginCheck();
 		
-		if($type == 'contest' && (gettype($contest) != 'integer' || $contest * 10 <= 0 )){
+		/*if($type == 'contest' && (gettype($contest) != 'integer' || $contest * 10 <= 0 )){
 			$array->text = 'Ne pravilnii tip "contest\'a"';
 			exit(json_encode($array));
-		};
+		};*/
 		
 		if($_FILES['userfile']['size'] > 10485760 || $_FILES['userfile']['size'] == 0){//Проверка на вес файла.
 			
@@ -148,20 +144,28 @@
 			
 		}
 		
+		if(!file_exists('images/'.$type.'Photo')){
+			mkdir('images/'.$type.'Photo');
+		}
+		
 		$filetype = pathinfo($_FILES['userfile']['name']);//Тут должна быть проверка на тип файла, но она почему-то не работает. Возможно ошибка на стороне отправки названия файла со стороны клиента.
 		$filetype = $filetype['extension'];
 		if(($filetype != 'jpeg') && ($filetype != 'jpg') && ($filetype != 'png')){
 			//exit('Ne pravilnii tip faila ('.$filetype.')');
 		};
 		
-		$photoUploadDir = 'images/'.$type.'Photo/'.getRandomFileName('images/contestPhoto/', $filetype).'.'.$filetype;//Генерация рандомного названия файла
+		//$photoUploadDir = __DIR__ . '/images/'.$type.'Photo/'.getRandomFileName('images/'.$type.'Photo/', $filetype).'.'.$filetype;//Генерация рандомного названия файла
 		
-		if(move_uploaded_file($_FILES['userfile']['tmp_name'], $photoUploadDir)){//Если файл переместится
-			$photoUploadDir = 'http://it-labor.ru/playground/valera/'.$photoUploadDir;
-			$sqlData = 'INSERT INTO `filelist`(`user`, `type`, `contest`, `name`, `date`, `text`) VALUES ("'.$login.'", "'.$type.'","'.$contest.'", "'.$photoUploadDir.'","'.$time['year'].$time['month'].$time['day'].'","'.$text.'")';
+		$server = '/var/www/domains/ovz1.itlaborykt.zm9y1.vps.myjino.ru/';
+		
+		$photoUploadDir = 'assets/'.getRandomFileName('../assets/', $filetype).'.'.$filetype;//Генерация рандомного названия файла
+		
+		if(move_uploaded_file($_FILES['userfile']['tmp_name'], $server.$photoUploadDir)){//Если файл переместится
+			$photoUploadDir = 'ovz1.itlaborykt.zm9y1.vps.myjino.ru/'.$photoUploadDir;
+			$sqlData = 'INSERT INTO `filelist`(`user`, `type`, `contest`, `name`, `date`, `text`) VALUES ("'.$_SESSION['login'].'", "'.$type.'","'.$contest.'", "'.$photoUploadDir.'","'.$time['year'].$time['month'].$time['day'].'","'.$text.'")';
 			$result = mysql_query($sqlData);
 		} else {
-			$array->text = 'Neizvestnaya oshibka pri peremeshenii faila! (nomer oshibki : '.$_FILES['userfile']['error'].' )';
+			$array->text = 'Neizvestnaya oshibka pri peremeshenii faila! (nomer oshibki : '.$_FILES['userfile']['error'].' )'.$photoUploadDir;
 			exit(json_encode($array));
 		}
 		

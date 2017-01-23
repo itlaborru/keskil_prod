@@ -5,9 +5,9 @@
 	$passFordb = '123456';
 	
 	include('includes/connect.php');
-	
-	echo 
-		'<a href="contests.php"> contests </a> </br> 
+	include('includes/header.php');
+?>
+		<a href="contests.php"> contests </a> </br> 
 		<a href="cartoons.php"> Cartoons </a> </br> 
 		<a href="users.php"> users </a> </br> 
 		<a href="feedback.php"> feedback </a> </br> 
@@ -38,6 +38,7 @@
 				);
 				
 			});
-		</script>';
-
+		</script>
+<?
+include('includes/footer.php');
 ?>

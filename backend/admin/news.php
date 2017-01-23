@@ -91,8 +91,13 @@
 						type: "push",
 						title: $(".title[data-file='newssql.php']").val(),
 						content: $(".content[data-file='newssql.php']").val(),
+<<<<<<< HEAD
 						//category: JSON.stringify(category)
+=======
+						category: JSON.stringify(category)
+>>>>>>> cbb6aed668b139b9f139da7e7a042cdf48c6ffd8
 					};
+					console.log(data.category);
 				} else {
 					data = {
 						type: "push",
@@ -128,7 +133,12 @@
 						title: $(".title[data-file='newssql.php']").val(),
 						content: $(".content[data-file='newssql.php']").val(),
 						//category: JSON.stringify(category)
+<<<<<<< HEAD
+=======
+						
+>>>>>>> cbb6aed668b139b9f139da7e7a042cdf48c6ffd8
 					};
+					
 				} else {
 					data = {
 						type: "update",

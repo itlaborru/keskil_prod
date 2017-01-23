@@ -13,36 +13,33 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">  -->
 
     <!-- Required meta tags-->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
     <!-- Your app title -->
-    <title>My App</title>
+    <title>Кэскил-online</title>
 
     <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
         http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
      -->
 
-    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
-    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css" />
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css" />
 
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css" />
 	
 </head>
 
 <body>
 
-    <!-- Status bar overlay for full screen mode (PhoneGap) -->
     <div class="statusbar-overlay"></div>
 
-    <!-- Panels overlay-->
     <div class="panel-overlay"></div>
-    <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal">
+	
+    <div class="panel panel-right panel-reveal">
         <div class="content-block">
            	<!-- Поле для ввода данных для входа/регистрации -->
 			<div class="loginPanel">
@@ -81,33 +78,14 @@
         </div>
     </div>
 
-    <!-- Views -->
     <div class="views">
-        <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
-            <!-- Top Navbar-->
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-                    <div class="center sliding">Awesome App</div>
-                    <div class="right">
-                        <!--
-                          Right link contains only icon - additional "icon-only" class
-                          Additional "open-panel" class tells app to open panel when we click on this link
-                        -->
-                        <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
-            <div class="pages navbar-through toolbar-through">
-                <!-- Page, "data-page" contains page name -->
+            <div class="pages toolbar-through">
 				<!-- <div class="login-screen modal-in">
 					... login screen content ...				Кажется, это будет неплохо смотреться.
 				</div> -->
 				
 				<div data-page="userPage" class="page cached userPage">
-                    <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="content-block">
                             <div style="margin: 0 auto 50px; max-height: 200px; max-width: 200px;">
@@ -129,11 +107,33 @@
                 <div data-page="index" class="page">
                     <div class="page-content">
                         <div class="content-block">
-                            <a href="#contests__list">Contest list</a> </br>
-							<a href="#cartoons__category"> Мультфильмы </a> </br>
-							<a href="#news__category"> Новости </a> </br>
-							<a href="#feedback"> Рекомендация </a></br>
-							<a href="#pulsegoroda"> Пульс Города </a>
+							<ul class="index-links">
+								<li>
+									<a href="#news__category" class="index-links__link">
+										<span class="index-links__text">Новости</span>
+									</a>
+								</li>
+								<li>
+									<a href="#pulsegoroda" class="index-links__link">
+										<span class="index-links__text">Пульс города</span>
+									</a>
+								</li>
+								<li>
+									<a href="#contests__list" class="index-links__link">
+										<span class="index-links__text">Конкурсы</span>
+									</a>
+								</li>
+								<li>
+									<a href="#cartoons__category" class="index-links__link">
+										<span class="index-links__text">Мультфильмы</span>
+									</a>
+								</li>
+								<li>
+									<a href="#feedback" class="index-links__link">
+										<span class="index-links__text">Обратная связь</span>
+									</a>
+								</li>
+							</ul>
                         </div>
                     </div>
                 </div>
@@ -157,7 +157,6 @@
 				</div>
 				
 				<div data-page="cartoons__category" class="page cached cartoons__category">
-					<!-- Scrollable page content -->
 					<div class="page-content">
 						<div class="content-block cartoonCatBlock">
 						
@@ -165,7 +164,6 @@
 					</div>
 				</div>
 				<div data-page="cartoons" class="page cached cartoons">
-					<!-- Scrollable page content -->
 					<div class="page-content">
 						<div class="content-block cartoonFolder" data-category="">
 							
@@ -173,21 +171,18 @@
 					</div>
 				</div>
 				<div data-page="news__category" class="page cached news__category">
-					<!-- Scrollable page content -->
 					<div class="page-content">
 						<div class="content-block news">
 						</div>
 					</div>
 				</div>
 				<div data-page="news" class="page cached news">
-					<!-- Scrollable page content -->
 					<div class="page-content">
 						<div class="content-block newsFolder" data-category="">
 						</div>
 					</div>
 				</div>
 				<div data-page="feedback" class="page cached">
-					<!-- Scrollable page content -->
 					<div class="page-content">
 						<div class="content-block">
 							<p>
@@ -212,8 +207,7 @@
 				</div>
             </div>
 			
-			<div class="login-screen" style = "padding-top: 30px">
-			
+			<div class="login-screen" style="padding-top: 30px">
 				
 				<div style="margin: 0 auto 50px; max-height: 200px; max-width: 200px;">
 					<img class="userPanel__icon" style="max-height: 200px; max-width: 200px; background-size: contain; margin: auto; border-radius: 500px;"/>
@@ -233,12 +227,10 @@
 				<p><a href="#" class="close-login-screen">Закрыть меню</a></p>
 			</div>
 			
-            <!-- Bottom Toolbar-->
             <div class="toolbar">
                 <div class="toolbar-inner">
-                    <!-- Toolbar links -->
-                    <a href="#" class="link back">Move back</a>
-                    <a href="#" class="link">Link 2</a>
+                    <a href="#" class="link back">Назад</a>
+					<a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
                 </div>
             </div>
         </div>
@@ -246,7 +238,6 @@
 	
 	<div class="loadingScreen">
 	</div>
-	
 	
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>

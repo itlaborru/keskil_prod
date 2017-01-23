@@ -5,13 +5,15 @@
 	$passFordb = '123456';
 	
 	include('includes/connect.php');
-	
+	include('/var/www/domains/ovz1.itlaborykt.zm9y1.vps.myjino.ru/daemon/change.php');
+	changeDB('cartoonslist');
+	$search = ['https://www.youtube.com/watch?v=','http://youtu.be/'];
 	$type = htmlspecialchars(stripslashes($_POST['type']));
 	$id = htmlspecialchars(stripslashes($_POST['id']));
 	$url = htmlspecialchars(stripslashes($_POST['url']));
 	$name = htmlspecialchars(stripslashes($_POST['name']));
 	$category = htmlspecialchars(stripslashes($_POST['category']));
-
+	$url = str_replace($search, [], $url);
 	if($type == 'push'){
 		
 		$sql = mysql_query('INSERT INTO `cartoonslist`(`url`, `name`, `category`) VALUES ("'.$url.'","'.$name.'","'.$category.'")');

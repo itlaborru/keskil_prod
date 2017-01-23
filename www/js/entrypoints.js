@@ -20,12 +20,12 @@ var entrypoints = {
 		success:	function(data) {
 			console.log($('.feedback').val());
 			console.log(data);
-			//$('.feedback').val("");
-			//app.alert(dictionary.feedbackSent, dictionary.success);
+			$('.feedback').val("");
+			app.alert(dictionary.feedbackSent, dictionary.success);
 		},
 	},
 	newUserInfo: {
-		url:	'http://it-labor.ru/playground/valera/user-data-ajax.php', 
+		url:	serverAdress + 'entrypoints/user-data-ajax.php',
 		data:	{
 			'type': 'get',
 		},
@@ -37,6 +37,13 @@ var entrypoints = {
 			localStorage.setItem("userInfo", JSON.stringify(userInfo));
 			$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
 			$('.userPanel__mail').html(dataLogin.mail);
+			userInfo.login = dataLogin.login;
+			userInfo.fname = dataLogin.fname;
+			userInfo.lname = dataLogin.lname;
+			userInfo.mname = dataLogin.mname;
+			userInfo.mail = dataLogin.mail;
+			userInfo.icon = dataLogin.icon;
+			localStorage.setItem("userInfo", JSON.stringify(userInfo));
 		},
 	},
 	/*onReady: {
@@ -153,7 +160,6 @@ var entrypoints = {
 			DataAjax = JSON.parse(data);
 			console.log(DataAjax);
 			localStorage.setItem("cache", JSON.stringify(DataAjax));
-			DataAjax.lastChanges.contestlist = "1";
 			localStorage.setItem("lastChanges", JSON.stringify(DataAjax.lastChanges));
 		},
 	},

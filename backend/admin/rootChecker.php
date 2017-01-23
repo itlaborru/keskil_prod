@@ -1,81 +1,34 @@
 <?
-	session_start();
+session_start();
 	
-	if($_SESSION['admin'] != true){
-		exit('<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>Title</title>
-</head>
-<body>
-	<!-- Поле для ввода данных для входа/регистрации -->
-	
-	<p>Voidite v sistemu!</p>
+if($_SESSION['admin'] != true){
+	include('includes/header.php');
+?>
+	<h1 style="padding: 2em 0">Админпанель<br />Кэскил-онлайн</h1>
+	<div class="main-login">
+		<form action="../entrypoints/loginChecker.php" type="POST">
+			<input class="login" name="login" size="32"  type="text" placeholder="Логин">
+			<input class="pass" name="pass" size="32"  type="text" placeholder="Пароль">
+			<input class="signin" name="signin" type="submit" value="Войти">
+		</form>
+	</div>
 
-	<input class="login" name="login" size="32"  type="text" placeholder="Login">
-	<input class="pass" name="pass" size="32"  type="text" placeholder="Password">
-	<input class="signin" name="signin" type="button" value="Log in">
-	<input class="logout" name="logout" type="button" value="logout">
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script>
+	var signin = document.querySelector(".signin");
+	var login = document.querySelector(".login");
+	var pass = document.querySelector(".pass");
 	
-	//Логин (Действия при нажатии).
-	
-	$(".signin").on("click", function(){
-		
-		//Проверка на длину при отправке данных на сервер.
+	signin.onclick = function() {
 		if( 
-			( $(".login").val().length < 4 ) || ( $(".pass").val().length <8 ) 
+			( login.value.length < 4 ) || ( pass.value.length <8 ) 
 		){
 			alert("Ошибка! Минимальная длина пароля - 8, минимальная длина логина - 4");
-		}
-		
-		shortAjax(
-			"../entrypoints/loginChecker.php", 
-			
-			{
-			"login": $(".login").val(),
-			"pass": $(".pass").val(),
-			},
-			
-			function(data){
-				alert(data);
-			}
-		);
-		
-	});
-	
-	$(".logout").on("click", function(){
-			
-		shortAjax(
-			"../entrypoints/logout.php",
-			{},
-			function(data){
-				alert(data);
-			}
-		);
-		
-	});
-	
-	
-	//Укороченный ajax.
-	
-	var shortAjax = function(url, data, onSuccess){
-		$.ajax({
-			method : "POST",
-			url: url,
-			data: data,
-			success: onSuccess,
-		
-		});
+			return false;
+		};
 	};
-	
 </script>
-</body>
-</html>');
+<?
+	include('includes/footer.php');
 	}
-
+	exit();
 ?>

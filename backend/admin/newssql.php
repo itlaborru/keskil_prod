@@ -5,7 +5,8 @@
 	$passFordb = '123456';
 	
 	include('includes/connect.php');
-	
+	include('/var/www/domains/ovz1.itlaborykt.zm9y1.vps.myjino.ru/daemon/change.php');
+	changeDB('newslist');
 	$type = htmlspecialchars(stripslashes($_POST['type']));
 	$id = htmlspecialchars(stripslashes($_POST['id']));
 	$title = htmlspecialchars(stripslashes($_POST['title']));

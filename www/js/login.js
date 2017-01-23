@@ -21,7 +21,6 @@ var login = {
 					
 					function(data){
 						var dataLogin = JSON.parse(data);
-						app.alert(dataLogin.text,dictionary.success);
 						if(dataLogin.sessionId != undefined){
 							userInfo.phpSessionId = dataLogin.sessionId;
 							userInfo.loggedIn = true;
@@ -51,6 +50,7 @@ var login = {
 									$('.userPanel__name').html(dataLogin.login);
 									$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
 									$('.userPanel__mail').html(dataLogin.mail);
+									app.alert(dictionary.hello + dataLogin.login,dictionary.success);
 									
 									userInfo.login = dataLogin.login;
 									userInfo.fname = dataLogin.fname;
