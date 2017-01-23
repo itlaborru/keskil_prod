@@ -23,7 +23,7 @@ var cartoons__category = {
 			myApp.closeModal('.categoryPicker')	
 		});
 		if(!cartoons__category.notFirstUse) {
-			$$('.open-categoryPicker').on('click', function () {
+			$('.open-categoryPicker').on('click', function () {
 				myApp.pickerModal('.categoryPicker')
 			});
 		}
