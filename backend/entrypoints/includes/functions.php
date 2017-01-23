@@ -21,6 +21,7 @@
         return $name;
     }
 	
+	
 	function getRandomStringName($bd, $var){//Генератор названия файла, который проверяет папку на заданный файл
  
         do {

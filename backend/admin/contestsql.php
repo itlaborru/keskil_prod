@@ -6,13 +6,16 @@
 	$passFordb = '123456';
 	
 	include('includes/connect.php');
-	
+	include('includes/time.php');
+	include('/var/www/domains/ovz1.itlaborykt.zm9y1.vps.myjino.ru/daemon/change.php');
+	changeDB('contestlist');
 	$type = htmlspecialchars(stripslashes($_POST['type']));
 	$id = htmlspecialchars(stripslashes($_POST['id']));
 	$start = htmlspecialchars(stripslashes($_POST['start']));
 	$end = htmlspecialchars(stripslashes($_POST['end']));
 	$title = htmlspecialchars(stripslashes($_POST['title']));
 	$content = htmlspecialchars(stripslashes($_POST['content']));
+	$contest = htmlspecialchars(stripslashes($_POST['contest']));
 
 	if($type == 'push'){
 		
@@ -78,6 +81,30 @@
 		if($sql){
 			echo 'Gotovo!';
 		}
-	};
+	} else
+	if($type == 'stop'){
+		$sql = mysql_query('UPDATE `contestlist` SET `end`="'.$time['year'].'-'.$time['month'].'-'.$time['day'].'" WHERE id = "'.$id.'"');
+		
+		if($sql){
+			echo 'Gotovo!';
+		}
+	} else
+	if($type == 'win'){
+		$sql = mysql_query('UPDATE `contestlist` SET `winner`='.$id.' WHERE id ="'.$contest.'"');
+		
+		if($sql){
+			echo 'Gotovo!';
+		} else {
+			echo 'Oshibka!';
+		}
+	}
+	
+	$js = file_get_contents("../daemon/lastChanges.json");
+	$j =json_decode($js, true);
+	$val = 'contestlist';
+	$j[$val] = $j[$val]+1;
+	$fp = fopen("../daemon/lastChanges.json", "w");
+	fwrite($fp, json_encode($j));
+	fclose($fp);
 	
 ?>

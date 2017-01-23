@@ -7,8 +7,8 @@
 	
 	include('includes/connect.php');
 	
-	echo
-		'<!DOCTYPE html>
+	?>
+		<!DOCTYPE html>
 		<html>
 		<head>
 			<meta charset="utf-8" />
@@ -22,22 +22,25 @@
 			<input class="title" name="title" type="text" placeholder="title">
 			<input class="content" name="content" type="text" placeholder="content">
 			<input class="push" name="push" type="button" value="push"> 
-			<input class="update" name="update" type="button" value="update"> </br>';
-	
+			<input class="update" name="update" type="button" value="update"> </br>
+			
+	<?
 	$sql = mysql_query('SELECT * FROM `contestlist` WHERE 1');
 	
 	while ($result = mysql_fetch_assoc($sql)) //Пуш данных в массив для вывода.
 	{ 
+		echo '<a href = "aboutContest.php?id='.$result['id'].'" >';
 		echo $result['id'].' ';
 		echo $result['start'].' ';
 		echo $result['end'].' ';
 		echo $result['title'].' ';
 		echo $result['content'].' ';
-		echo '<input class="delete" name="delete" type="button" value="delete" data-id="'.$result['id'].'">'.'</br>';
+		echo '</a>';
+		echo '<input class="delete" name="delete" type="button" value="delete" data-id="'.$result['id'].'"> ';
+		echo '<input class="stop" name="stop" type="button" value="stop" data-id="'.$result['id'].'">'.'</br>';
 	}
+	?>
 	
-	echo '
-			</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script>
 			
@@ -87,6 +90,19 @@
 				);
 			});
 			
+			$(".stop").on("click", function(){
+				shortAjax(
+					"contestsql.php",
+					{
+						type: "stop",
+						id: $(this).attr("data-id")
+					},
+					function(data){
+						alert(data);
+					}
+				);
+			});
+			
 			var shortAjax = function(url, data, onSuccess){
 				$.ajax({
 					method : "POST",
@@ -99,6 +115,8 @@
 			
 		</script>
 		</body>
-		</html>';
+		</html>
+		
+<?
 
 ?>

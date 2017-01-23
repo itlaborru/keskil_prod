@@ -12,25 +12,31 @@ mysql_set_charset("utf8");
 
 
 
-$tabels = array ("newslist","newscategs","lastChanges","cartoonslist","cartoonscategory","contestlist"); //список таблиц которые грузит демон в cache.json
+$tabels = array ("newslist","categorylist","cartoonslist","contestlist"); //список таблиц которые грузит демон в cache.json
 while($b){
 	echo "working ";
 	foreach($tabels as $value){
-		if($value == "lastChanges" ){
-		}
+		
 		$sqlQuery = "SELECT * FROM ".$value." ORDER BY  `id` DESC";
 		$result=mysql_query($sqlQuery);
 		$arr = array();
 		while($row=mysql_fetch_assoc($result)){
+			if ($value == "newslist" || $value == "cartoonslist" ){
+				$decode = $row["category"];
+				$row["category"] = (json_decode($decode));
+			}
+			else if ($value == "categorylist") {
+				$decode = $row["post"];
+				$row["post"] = (json_decode($decode));
+			}
 			array_push($arr, $row);
 		};
 		$response[$value.""] = ($arr);
 	};
-	file_put_contents('cache.json', '');
 	$fp = fopen(dirname(__FILE__)."/cache.json", "w");
 	fwrite($fp, json_encode($response));
 	fclose($fp);
-	sleep(10);
+	sleep(5);
 };
 //запуск usr/local/zend/bin/php -f var/www/domains/ovz1.itlaborykt.zm9y1.vps.myjino.ru/daemon/daemon.php &
 ?>

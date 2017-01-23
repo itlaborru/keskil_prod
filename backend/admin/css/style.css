@@ -1,0 +1,39 @@
+@font-face {
+	src : url("/admin/assets/fonts/rubik.ttf");
+	font-family: "rubik";
+}
+@font-face {
+	src : url("/admin/assets/fonts/merriweather.ttf");
+	font-family: "merriweather";
+}
+
+input, button, form {
+	font-size: inherit;
+	font-family: inherit;
+}
+
+body {
+	font: 16px/1.2 "merriweather", serif;
+}
+input:focus {
+	outline: none;
+}
+
+h1 {
+	font-size: 42px;
+	font-family: "rubik";
+}
+
+#page {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.main-login input {
+	display: block;
+	padding: 10px;
+	border-radius: 10px;
+	margin: 0;
+	border: 5px solid #ccc;
+	margin: 0 0 1em;
+}

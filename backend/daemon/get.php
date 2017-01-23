@@ -1,11 +1,17 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-$j = file_get_contents('cache.json');
+$j = file_get_contents(dirname(__FILE__)."/cache.json");
+$LC = file_get_contents(dirname(__FILE__)."/lastChanges.json");
 $a =  json_decode($j);
-if ($_POST['object'] == "yes" ){
-	echo json_encode($a);
-}
-if ($_POST['cache']){
+$change =  json_decode($LC);
+if($_POST['object'] == "yes" ){
+	foreach($a as  $key => $value){
+		$cacheVal = $a->$key;
+		$response[$key.""] = ($cacheVal);
+	};
+	$response["lastChanges"] = ($change);
+	echo json_encode($response);
+}  if ($_POST['cache']){
 	$response = array();
 	$cacheList = $_POST['cache'];
 	foreach($cacheList as $value){
@@ -14,17 +20,17 @@ if ($_POST['cache']){
 		
 	};
 	echo json_encode($response);
-}
-if ($_POST['lastChanges'] ){
+}  if ($_POST['lastChanges']){
 	$resList = array();
 	$cacheList = $_POST['lastChanges'];
-	$change = $a->lastChanges;
-	$change = $change[0];	
+	
+	
+	$isChanged = 0;
 	foreach($cacheList as  $key => $value){
-		$changeVal = $change->$key;
+		$changeVal = ($change->$key);
 		if($changeVal > $value) {
 			array_push($resList, $key.'');
-			
+			$isChanged = $isChanged + 1;
 		}
 	};
 	foreach($resList as $value){
@@ -32,8 +38,12 @@ if ($_POST['lastChanges'] ){
 		$response[$value.""] = ($cacheVal);
 		
 	};
-	$response["lastChangesNew"] = ($change);
-	echo json_encode($response);
+	if ($isChanged >= 1) {
+		$response["lastChanges"] = ($change);
+		echo json_encode($response);
+	}
+	else {
+		echo  'false';
+	}
 }
-
 ?>

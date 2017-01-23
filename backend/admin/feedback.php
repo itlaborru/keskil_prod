@@ -7,24 +7,16 @@
 	
 	include('includes/connect.php');
 	
-	echo
-		'<!DOCTYPE html>
+	?>
+	<!DOCTYPE html>
 		<html>
 		<head>
 			<meta charset="utf-8" />
 			<title>Название</title>
-			<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-			<script>
-				tinymce.init({
-					selector: "#mytextarea"
-				});
-			</script>
 		</head>
 		<body>
-			<textarea id="mytextarea"></textarea>
-			<input class="push" name="push" type="button" value="push" >
-			<div class="asdf">
-			</div>';
+			
+	<?
 	
 	$sql = mysql_query('SELECT * FROM `feedback` WHERE 1');
 	
@@ -36,8 +28,7 @@
 		echo '<input class="delete" name="delete" type="button" value="delete" data-id="'.$result['id'].'">'.'</br>';
 	}
 	
-	echo '
-			</div>
+	?> 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script>
 			
@@ -72,6 +63,8 @@
 			
 		</script>
 		</body>
-		</html>';
+		</html>
 
-?>
+		<?
+		
+		?>
