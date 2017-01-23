@@ -158,8 +158,10 @@
 				
 				<div data-page="cartoons__category" class="page cached cartoons__category">
 					<div class="page-content">
-						<div class="content-block cartoonCatBlock">
-						
+						<div class="content-block">
+							<p><a href="#" class="open-categoryPicker">Выбрать категорию</a></p>
+							<div class="cartoonCatBlock">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -172,7 +174,10 @@
 				</div>
 				<div data-page="news__category" class="page cached news__category">
 					<div class="page-content">
-						<div class="content-block news">
+						<div class="content-block">
+							<p><a href="#" class="open-categoryPicker">Выбрать категорию</a></p>
+							<div class="newsMain">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -236,6 +241,22 @@
         </div>
     </div> 
 	
+	<div class="picker-modal categoryPicker">
+		<div class="toolbar">
+			<div class="toolbar-inner">
+				<div class="left"></div>
+				<div class="right"><a href="#" class="close-picker">Закрыть</a></div>
+			</div>
+		</div>
+		<div class="picker-modal-inner">
+			<div class="content-block">
+				<h4>Категории:</h4>
+				<div class="category__list__inPicker">
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<div class="loadingScreen">
 	</div>
 	
@@ -278,5 +299,5 @@ Buglist
 
 1.Составить список всего того что можно получить через ajax
 файлы на которые стукается аякс могут и по простому отдавать обьекты и через конструктор
--->
+-->   
 </html>
