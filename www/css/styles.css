@@ -18,6 +18,38 @@
     background: #000000;
 }
 
+.page,
+.toolbar {
+	background: #fff;
+}
+
+.navbar {
+	background: none;
+}
+
+.navbar:after { 
+	display: none;
+}
+
+
+
+@font-face {
+	src : url("/assets/fonts/rubik.ttf");
+	font-family: "rubik";
+}
+@font-face {
+	src : url("/assets/fonts/merriweather.ttf");
+	font-family: "merriweather";
+}
+@font-face {
+	src : url("/assets/fonts/firasans.ttf");
+	font-family: "firasans";
+}
+@font-face {
+	src : url("/assets/fonts/yanone.ttf");
+	font-family: "yanone";
+}
+
 .loadingScreen{
 	position:absolute;
 	left: 0;
@@ -38,4 +70,10 @@
 }
 .display-none {
 	display:	none;
+}
+
+.index__link {
+	display: block;
+	height: 200px;
+	font-family: "rubik", sans-serif;
 }
