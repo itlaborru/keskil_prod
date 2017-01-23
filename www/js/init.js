@@ -12,6 +12,7 @@
 		$('.userPanel__name').html(userInfo.login);
 		$('.userPage__fullname').html(userInfo.lname + ' ' + userInfo.fname + ' ' +  userInfo.mname);
 		$('.userPanel__mail').html(userInfo.mail);
+		ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
 	} 
 }
 else {
@@ -35,7 +36,11 @@ function onDeviceReady() {
 	} 
 	setInterval(function() {
 		var lastChanges = JSON.parse(localStorage.getItem("lastChanges"));
-		ajax(entrypoints.checkForUpdates.url,{"lastChanges":lastChanges},entrypoints.checkForUpdates.success); 
+		ajax(entrypoints.checkForUpdates.url,{
+			"object" : {
+				"lastChanges":lastChanges
+			},
+		},entrypoints.checkForUpdates.success); 
 	} , LAST_CHANGES_INTERVAL);
 	
 	

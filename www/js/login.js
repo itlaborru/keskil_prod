@@ -123,7 +123,7 @@ var login = {
 			
 		});
 		$('.updateUserinfo').on('click', function(){
-			userOptions.updateUserinfo();
+			userPage.updateUserinfo();
 		});
 	}
 }

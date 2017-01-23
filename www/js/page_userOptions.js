@@ -8,10 +8,9 @@ var userPage = {
 	bindEvents: function(){
 		$('.userPanel__icon').on('click', function(){
 			
+			transferImages.type.name = "avatar";
 			transferImages.getImage();
-			//globalVar.imgData = '';
-			//globalVar.typeData = 'avatar';
-			userOptions.updateUserinfo();
+			userPage.updateUserinfo();
 			
 		});
 		$('.changeUserInfo').on('click', function(){
@@ -28,6 +27,7 @@ var userPage = {
 				},
 				function(data){
 					app.alert(data,dictionary.success);
+					userPage.updateUserinfo();
 				}
 			);
 		});

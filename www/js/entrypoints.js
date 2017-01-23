@@ -154,7 +154,9 @@ var entrypoints = {
 	allData: {
 		url:	serverAdress + "daemon/get.php",
 		data:	{
-			"object": "yes",
+			"object": {
+				"coldstart": "yes",
+			},
 		},
 		success:	function(data) {
 			DataAjax = JSON.parse(data);

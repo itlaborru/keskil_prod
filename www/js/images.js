@@ -1,5 +1,6 @@
 var transferImages = {
 	uploadPhoto:	function(imageURI) {
+		console.log(imageURI);
 		var options = new FileUploadOptions();
 		options.fileKey="userfile";
 		options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
@@ -11,6 +12,10 @@ var transferImages = {
 		if(transferImages.type.name == "contest") {
 			params.contest = transferImages.type.contest;
 			params.type = "contest";
+		}
+		if(transferImages.type.name == "avatar"){
+			params.file = 'fileChecker';
+			params.type="avatar";
 		}
 		
 		options.params = params;
