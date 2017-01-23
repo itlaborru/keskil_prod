@@ -23,11 +23,11 @@ var news__category = {
 		$('.category__list__inPicker').on('click', '.newsCategory', function (e) {
 			var categ = $(this).attr('data-newscat');
 			$('.newsFolder').attr("data-category",categ);
-			myApp.closeModal('.categoryPicker')	
+			app.closeModal('.categoryPicker')	
 		});
 		if(!news__category.notFirstUse) {
-			$$('.open-categoryPicker').on('click', function () {
-				myApp.pickerModal('.categoryPicker')
+			$('.open-categoryPicker').on('click', function () {
+				app.pickerModal('.categoryPicker')
 			});
 		}
 		news__category.notFirstUse = true;

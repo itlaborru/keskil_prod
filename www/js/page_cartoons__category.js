@@ -20,11 +20,11 @@ var cartoons__category = {
 		$('.category__list__inPicker').on('click', '.cartoonCategory', function (e) {
 			var categ = $(this).attr('data-cartooncat');
 			$('.cartoonFolder').attr("data-category",categ);
-			myApp.closeModal('.categoryPicker')	
+			app.closeModal('.categoryPicker')	
 		});
 		if(!cartoons__category.notFirstUse) {
 			$('.open-categoryPicker').on('click', function () {
-				myApp.pickerModal('.categoryPicker')
+				app.pickerModal('.categoryPicker')
 			});
 		}
 		cartoons__category.notFirstUse = true;
