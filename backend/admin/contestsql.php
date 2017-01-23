@@ -7,8 +7,12 @@
 	
 	include('includes/connect.php');
 	include('includes/time.php');
+<<<<<<< HEAD
+	
+=======
 	include('/var/www/domains/ovz1.itlaborykt.zm9y1.vps.myjino.ru/daemon/change.php');
 	changeDB('contestlist');
+>>>>>>> cbb6aed668b139b9f139da7e7a042cdf48c6ffd8
 	$type = htmlspecialchars(stripslashes($_POST['type']));
 	$id = htmlspecialchars(stripslashes($_POST['id']));
 	$start = htmlspecialchars(stripslashes($_POST['start']));

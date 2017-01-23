@@ -1,3 +1,4 @@
+
 <?
 	include('rootChecker.php');
 	
@@ -59,4 +60,5 @@
 	fwrite($fp, json_encode($j));
 	fclose($fp);
 	
+
 ?>
