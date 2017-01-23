@@ -174,6 +174,15 @@ var entrypoints = {
 				console.log("New data");
 				for(var key in Data) {
 					DataAjax[key] = Data[key];
+					if(key == "newslist"){
+						news__category.render();
+					}
+					else if(key == "cartoonslist"){
+						cartoons__category.render();
+					}
+					else if(key == "contestlist"){
+						contests__list.render();
+					}
 				}
 				localStorage.setItem("cache", JSON.stringify(DataAjax));
 				localStorage.setItem("lastChanges", JSON.stringify(Data.lastChanges));
