@@ -25,6 +25,15 @@ var transferImages = {
 		options.chunkedMode = false;
 		// ** Тут меняешь адрес сервера для картинок
 		var ft = new FileTransfer();
+		ft.onprogress = function(result) {
+			var percent =  result.loaded / result.total * 100;
+			percent = Math.round(percent);
+			app.setProgressbar($('.userPage__progressbar'), percent);
+			if(percent == 100) {
+				app.setProgressbar($('.userPage__progressbar'), 0);	
+				userPage.updateUserinfo();
+			}
+		};
 		ft.upload(imageURI, serverAdress + "entrypoints/set.php", transferImages.win, transferImages.fail, options);
 	},
 	getImage:	function() {
@@ -47,7 +56,8 @@ var transferImages = {
 		console.log("Code = " + r.responseCode);
 		console.log("Response = " + r.response);
 		console.log("Sent = " + r.bytesSent);
-		alert(r.response,dictionary.keskil);
+		//alert(r.response,dictionary.keskil);
+		app.alert(dictionary.uploaded,dictionary.success);
 	},
 	fail: function(error) {
 		alert(dictionary.error +  error.code);

@@ -13,4 +13,5 @@
 	keskil:	"Кэскил",
 	withoutUserContent:	"Не прикреплен файл",
 	hello:	"Здравствуйте, ",
+	uploaded:	"Загружено ",
 }

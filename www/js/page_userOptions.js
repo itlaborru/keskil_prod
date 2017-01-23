@@ -1,17 +1,18 @@
 var userPage = {
 	render: function() {
-		userPage.bindEvents();
 	},
 	updateUserinfo: function() {
 		ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
 	},
 	bindEvents: function(){
-		$('.userPanel__icon').on('click', function(){
-			
+		$('.userPage').on('click', '.userPanel__icon', function (e) {
+			transferImages.type.name = "avatar";
+			transferImages.getImage();
+		});
+		$('.userPanel').on('click', '.userPanel__icon', function (e) {
 			transferImages.type.name = "avatar";
 			transferImages.getImage();
 			userPage.updateUserinfo();
-			
 		});
 		$('.changeUserInfo').on('click', function(){
 			ajax(
