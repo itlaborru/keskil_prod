@@ -68,6 +68,10 @@ a {
 	color: #000;
 }
 
+h3 {
+	margin:	0;
+}
+
 .loadingScreen{
 	position:absolute;
 	left: 0;
@@ -108,4 +112,12 @@ a {
 	font-family: "rubik", sans-serif;
 	font-size: 24px;
 	color: #fff;
+}
+
+.news__tag {
+	color:	#000;
+}
+
+.post {
+	margin-bottom:	30px;
 }

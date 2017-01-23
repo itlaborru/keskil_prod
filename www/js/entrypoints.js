@@ -155,7 +155,7 @@ var entrypoints = {
 		url:	serverAdress + "daemon/get.php",
 		data:	{
 			"object": {
-				"coldstart": "yes",
+				"coldStart": "yes",
 			},
 		},
 		success:	function(data) {

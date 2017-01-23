@@ -11,8 +11,10 @@ var cartoons__category = {
 			createVideo();
 		}
 		for(var i = 0; i < DataAjax.categorylist.length; i++) {
-			var folder = $("<a href='#cartoons' data-cartooncat='"+DataAjax.categorylist[i].id+"' class='cartoonCategory'>"+DataAjax.categorylist[i].category+" </a></br>");
-			$('.categoryPicker .category__list__inPicker').append(folder);
+			if(DataAjax.categorylist[i].type == "cartoon") {
+				var folder = $("<a href='#cartoons' data-cartooncat='"+DataAjax.categorylist[i].id+"' class='cartoonCategory'>"+DataAjax.categorylist[i].category+" </a></br>");
+				$('.categoryPicker .category__list__inPicker').append(folder);
+			}
 		};
 		cartoons__category.bindEvents();
 	},
