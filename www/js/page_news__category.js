@@ -4,7 +4,6 @@ var news__category = {
 		$('.category__list__inPicker').html("");
 		$('.news__category .page-content .newsMain').html("");
 		function createPost() {
-			console.log("call");
 			var block;
 			var tags = "Тэги: ";
 			for(var x = 0; x <DataAjax.newslist[i].category.length;x++) {
