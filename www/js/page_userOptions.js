@@ -28,6 +28,9 @@ var userPage = {
 				},
 				function(data){
 					app.alert(data,dictionary.success);
+					$('.userPage__fullname__fname__change').val("");
+					$('.userPage__fullname__mname__change').val("");
+					$('.userPage__fullname__lname__change').val("");
 					userPage.updateUserinfo();
 				}
 			);

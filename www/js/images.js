@@ -31,7 +31,10 @@ var transferImages = {
 			app.setProgressbar($('.userPage__progressbar'), percent);
 			if(percent == 100) {
 				app.setProgressbar($('.userPage__progressbar'), 0);	
-				userPage.updateUserinfo();
+				setTimeout(function() {
+					userPage.updateUserinfo();
+				}, CHANGE_USER_INFO_TIMEOUT);
+
 			}
 		};
 		ft.upload(imageURI, serverAdress + "entrypoints/set.php", transferImages.win, transferImages.fail, options);

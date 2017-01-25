@@ -38,6 +38,7 @@ function onDeviceReady() {
 		var lastChanges = JSON.parse(localStorage.getItem("lastChanges"));
 		ajax(entrypoints.checkForUpdates.url,{
 			"object" : {
+				"coldStart":"no",
 				"lastChanges":lastChanges
 			},
 		},entrypoints.checkForUpdates.success); 
