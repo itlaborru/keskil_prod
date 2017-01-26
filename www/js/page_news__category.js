@@ -13,7 +13,11 @@ var news__category = {
 					}
 				}
 			}
-			block = $("<div class='post'><h3> "+DataAjax.newslist[i].title+"</h3><div><div class='news__tag'>"+tags+"</div>"+DataAjax.newslist[i].content +"</div></div>");
+			var text = DataAjax.newslist[i].content;
+			if(text.length > newsPreviewMaxSymbols) {
+				text = text.slice(0,newsPreviewMaxSymbols) + "...";
+			}
+			block = $("<div class='post' data-id='"+i+"'><h3> "+DataAjax.newslist[i].title+"</h3><div class='news__tag'>"+tags+"</div><div class='post__content'>"+text +"</div></div>");
 			$(".newsMain").append(block);
 		}
 		for(var i = 0; i < DataAjax.newslist.length; i++) {
@@ -33,6 +37,17 @@ var news__category = {
 			$('.newsFolder').attr("data-category",categ);
 			app.closeModal('.categoryPicker')	
 		});
+		$('.newsMain').on('click', '.post', function (e) {
+			var postId = $(this).attr('data-id');
+			$('.fullPost').attr("data-id",postId);
+			mainView.router.load({pageName: 'news__full__post'});
+		});
+		$('.newsFolder').on('click', '.post', function (e) {
+			var postId = $(this).attr('data-id');
+			$('.fullPost').attr("data-id",postId);
+			mainView.router.load({pageName: 'news__full__post'});
+		});
+
 		if(!news__category.notFirstUse) {
 			$('.open-categoryPicker').on('click', function () {
 				app.pickerModal('.categoryPicker')

@@ -121,3 +121,8 @@ h3 {
 .post {
 	margin-bottom:	30px;
 }
+.post__content {
+	overflow:	hidden;
+	text-overflow:	ellipsis;
+	max-height:	100px;
+}

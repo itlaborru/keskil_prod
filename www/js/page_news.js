@@ -15,7 +15,11 @@ var news = {
 					}
 				}
 			}
-			block = $("<div class='post'><h3> "+DataAjax.newslist[i].title+"</h3><div><div class='news__tag'>"+tags+"</div>"+DataAjax.newslist[i].content +"</div></div>");
+			var text = DataAjax.newslist[i].content;
+			if(text.length > newsPreviewMaxSymbols) {
+				text = text.slice(0,newsPreviewMaxSymbols) + "...";
+			}
+			block = $("<div class='post' data-id='"+i+"'><h3> "+DataAjax.newslist[i].title+"</h3><div class='news__tag'>"+tags+"</div><div class='post__content'>"+text +"</div></div>");
 			$(".newsFolder").append(block);
 		}
 		for(var i = 0; i < DataAjax.newslist.length; i++) {
