@@ -10,7 +10,7 @@ var login = {
 			){
 				app.alert(dictionary.error +dictionary.register,dictionary.error);
 			} else {
-				//ajax(entrypoints.signIn.url,entrypoints.signIn.data,entrypoints.signIn.success);
+				
 				ajax(
 				serverAdress + 'entrypoints/loginChecker.php', 
 					
@@ -21,13 +21,11 @@ var login = {
 					
 					function(data){
 						var dataLogin = JSON.parse(data);
-						app.alert(dataLogin.text,dictionary.success);
 						if(dataLogin.sessionId != undefined){
 							userInfo.phpSessionId = dataLogin.sessionId;
 							userInfo.loggedIn = true;
 							localStorage.setItem("userInfo",JSON.stringify(userInfo));
-							$('.loginPanel').addClass('display-none');
-							$('.loginPanel').removeClass('display-block');
+							$('.loginPanel').toggleClass("state_active");
 							$('.userPanel').removeClass('display-none');
 							$('.userPanel').addClass('display-block');
 							$('.userPanel__icon').attr('src', '');
@@ -46,11 +44,20 @@ var login = {
 								
 								function(data){
 									var dataLogin = JSON.parse(data);
+									console.log(dataLogin);
 									$('.userPanel__icon').attr('src', dataLogin.icon);
 									$('.userPanel__name').html(dataLogin.login);
-									localStorage.setItem("userInfo", JSON.stringify(userInfo));
 									$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
 									$('.userPanel__mail').html(dataLogin.mail);
+									app.alert(dictionary.hello + dataLogin.login,dictionary.success);
+									
+									userInfo.login = dataLogin.login;
+									userInfo.fname = dataLogin.fname;
+									userInfo.lname = dataLogin.lname;
+									userInfo.mname = dataLogin.mname;
+									userInfo.mail = dataLogin.mail;
+									userInfo.icon = dataLogin.icon;
+									localStorage.setItem("userInfo", JSON.stringify(userInfo));
 								});
 						}
 					}
@@ -105,17 +112,16 @@ var login = {
 					app.alert(data,dictionary.success);
 					cookies.getCookie('PHPSESSID', null);
 					userInfo = {};
-					localStorage.clear();
-					$('.loginPanel').addClass('display-block');
+					localStorage.removeItem("userInfo");
+					$('.loginPanel').toggleClass("state_active");
 					$('.userPanel').addClass('display-none');
 					$('.userPanel').removeClass('display-block');
-					$('.loginPanel').removeClass('display-none');
 				}
 			);
 			
 		});
 		$('.updateUserinfo').on('click', function(){
-			userOptions.updateUserinfo();
+			userPage.updateUserinfo();
 		});
 	}
 }

@@ -3,8 +3,15 @@
 	console.log(userInfo);
 	if(userInfo.loggedIn){//Проверка на сохраненность куки
 		cookies.setCookie('PHPSESSID', userInfo.phpSessionId);
-		$('.loginPanel').addClass('display-none');
-		$('.userPanel__name').html(dictionary.unableToConnect);
+		$('.loginPanel').toggleClass("state_active");
+		$('.userPanel').removeClass('display-none');
+		$('.userPanel').addClass('display-block');
+		$('.userPanel__icon').attr('src', '');
+		$('.userPanel__icon').attr('src', userInfo.icon);
+		$('.userPanel__name').html(userInfo.login);
+		$('.userPage__fullname').html(userInfo.lname + ' ' + userInfo.fname + ' ' +  userInfo.mname);
+		$('.userPanel__mail').html(userInfo.mail);
+		ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
 	} 
 }
 else {
@@ -20,15 +27,26 @@ if(document.location.hostname == "it-labor.ru") {
 function onDeviceReady() {
 	initPages.handler();
 	
-	entrypoints.allDataUpdate();
-	ajax(entrypoints.onReady.url,entrypoints.onReady.data,entrypoints.onReady.success); 
-	setInterval(function() {
+	if(localStorage.getItem("cache")) {
+		DataAjax = JSON.parse(localStorage.getItem("cache"));
+	}
+	else {
 		entrypoints.allDataUpdate();
-	} , 5000);
+	} 
+	setInterval(function() {
+		var lastChanges = JSON.parse(localStorage.getItem("lastChanges"));
+		ajax(entrypoints.checkForUpdates.url,{
+			"object" : {
+				"coldStart":"no",
+				"lastChanges":lastChanges
+			},
+		},entrypoints.checkForUpdates.success); 
+	} , LAST_CHANGES_INTERVAL);
 	
 	
 	initPages.splashscreen();
 	login.bindEvents();
+	userPage.bindEvents();
 	
 	console.log(dictionary.ready);
 }

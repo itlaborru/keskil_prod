@@ -1,7 +1,7 @@
-<?
+п»ї<?
 	header("Access-Control-Allow-Origin: *");
 	
-	if(!$_POST){//Если пустой запрос.
+	if(!$_POST){//в‰€СЃР»Рё РїСѓСЃС‚РѕР№ Р·Р°РїСЂРѕСЃ.
 		$array->text = 'pustoi zapros!';
 		exit(json_encode($array));
 	}
@@ -9,7 +9,7 @@
 	$loginFordb = 'valeratop';
 	$passFordb = '123456';
 	include('includes/time.php');
-	include('includes/functions.php');
+	include('../includes/functions.php');
 	
 	$db = connect($loginFordb, $passFordb);
 	
@@ -19,14 +19,16 @@
 		
 		rootCheck();
 		
-		if($_POST['type'] == 'upload') {//Загрузка на сервер
+		changeDB('cartoonslist');
+		
+		if($_POST['type'] == 'upload') {//В«Р°РіСЂСѓР·РєР° РЅР° СЃРµСЂРІРµСЂ
 			
-			$url = htmlspecialchars($_POST['url']);
+			$url = htmlspecialchars(stripslashes($_POST['url']));
 			$name = htmlspecialchars(stripslashes($_POST['name']));
 			$category = htmlspecialchars(stripslashes($_POST['category']));
 		
 			$sql = mysql_query('INSERT INTO `cartoonsList`(`url`, `name`,`category`) VALUES ("'.$url.'","'.$name.'","'.$category.'")');
-		}//Удаление
+		}//вЂќРґР°Р»РµРЅРёРµ РЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃ
 		
 		
 		
@@ -42,7 +44,7 @@
 				$array->text = 'error!';
 				echo(json_encode($array));
 			}
-		}//Обновление данных
+		}//СњР±РЅРѕРІР»РµРЅРёРµ РґР°РЅРЅС‹С… РЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃ
 		
 		
 		
@@ -76,7 +78,7 @@
 		
 		$sql;
 		
-		if($_POST['type'] == 'upload'){//Загрузка сообщения на фидбек.
+		if($_POST['type'] == 'upload'){//В«Р°РіСЂСѓР·РєР° СЃРѕРѕР±С‰РµРЅРёВ¤ РЅР° С„РёРґР±РµРє.
 			
 			$content = htmlspecialchars(stripslashes($_POST['content']));
 			$user = htmlspecialchars(stripslashes($_SESSION['login']));
@@ -97,7 +99,7 @@
 			$id = htmlspecialchars(stripslashes($_POST['id']));
 			$sql;
 			
-			rootCheck();//Проверка на права админа.
+			rootCheck();//С•СЂРѕРІРµСЂРєР° РЅР° РїСЂР°РІР° Р°РґРјРёРЅР°.
 			
 			$sql = mysql_query('DELETE FROM `feedback` WHERE id="'.$id.'"');
 			
@@ -119,67 +121,73 @@
 	
 	else if($_POST['file'] == 'fileChecker'){
 		
-		//Подключение к бд и подключение функций.
+		//С•РѕРґРєР»СЋС‡РµРЅРёРµ Рє Р±Рґ Рё РїРѕРґРєР»СЋС‡РµРЅРёРµ С„СѓРЅРєС†РёР№.
 		
 		$type = htmlspecialchars(stripslashes($_POST['type']));
 		$contest = htmlspecialchars(stripslashes($_POST['contest']));
 		$filetype = '';
 		$photoUploadDir = '';
-		$login = $_SESSION['login'];
 		$text = htmlspecialchars(stripslashes($_POST['text']));
 		$result = '';
 		$sqlData = '';
 		$fileDelete = '';
 		
-		
-		session_start();
-		
 		loginCheck();
 		
-		if($type == 'contest' && (gettype($contest) != 'integer' || $contest * 10 <= 0 )){
+		/*if($type == 'contest' && (gettype($contest) != 'integer' || $contest * 10 <= 0 )){
 			$array->text = 'Ne pravilnii tip "contest\'a"';
 			exit(json_encode($array));
-		};
+		};*/
 		
-		if($_FILES['userfile']['size'] > 10485760 || $_FILES['userfile']['size'] == 0){//Проверка на вес файла.
+		if($_FILES['userfile']['size'] > 10485760 || $_FILES['userfile']['size'] == 0){//С•СЂРѕРІРµСЂРєР° РЅР° РІРµСЃ С„Р°Р№Р»Р°.
 			
 			$array->text = 'File vesit slishkom mnogo. ('.$_FILES['userfile']['size'].')';
 			exit(json_encode($array));
 			
 		}
 		
-		$filetype = pathinfo($_FILES['userfile']['name']);//Тут должна быть проверка на тип файла, но она почему-то не работает. Возможно ошибка на стороне отправки названия файла со стороны клиента.
+		if(!file_exists('images/'.$type.'Photo')){
+			mkdir('images/'.$type.'Photo');
+		}
+		
+		echo pathinfo($_FILES['userfile']['name']);
+		
+		$filetype = pathinfo($_FILES['userfile']['name']);//вЂњСѓС‚ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РїСЂРѕРІРµСЂРєР° РЅР° С‚РёРї С„Р°Р№Р»Р°, РЅРѕ РѕРЅР° РїРѕС‡РµРјСѓ-С‚Рѕ РЅРµ СЂР°Р±РѕС‚Р°РµС‚. В¬РѕР·РјРѕР¶РЅРѕ РѕС€РёР±РєР° РЅР° СЃС‚РѕСЂРѕРЅРµ РѕС‚РїСЂР°РІРєРё РЅР°Р·РІР°РЅРёВ¤ С„Р°Р№Р»Р° СЃРѕ СЃС‚РѕСЂРѕРЅС‹ РєР»РёРµРЅС‚Р°.
 		$filetype = $filetype['extension'];
 		if(($filetype != 'jpeg') && ($filetype != 'jpg') && ($filetype != 'png')){
 			//exit('Ne pravilnii tip faila ('.$filetype.')');
 		};
 		
-		$photoUploadDir = 'images/'.$type.'Photo/'.getRandomFileName('images/contestPhoto/', $filetype).'.'.$filetype;//Генерация рандомного названия файла
+		//$photoUploadDir = __DIR__ . '/images/'.$type.'Photo/'.getRandomFileName('images/'.$type.'Photo/', $filetype).'.'.$filetype;//в€љРµРЅРµСЂР°С†РёВ¤ СЂР°РЅРґРѕРјРЅРѕРіРѕ РЅР°Р·РІР°РЅРёВ¤ С„Р°Р№Р»Р°
 		
-		if(move_uploaded_file($_FILES['userfile']['tmp_name'], $photoUploadDir)){//Если файл переместится
-			$photoUploadDir = 'http://it-labor.ru/playground/valera/'.$photoUploadDir;
-			$sqlData = 'INSERT INTO `filelist`(`user`, `type`, `contest`, `name`, `date`, `text`) VALUES ("'.$login.'", "'.$type.'","'.$contest.'", "'.$photoUploadDir.'","'.$time['year'].$time['month'].$time['day'].'","'.$text.'")';
+		$server = '/var/www/domains/ovz1.itlaborykt.zm9y1.vps.myjino.ru/';
+		
+		$photoUploadDir = 'assets/'.getRandomFileName('../assets/', $filetype).'.'.$filetype;//в€љРµРЅРµСЂР°С†РёВ¤ СЂР°РЅРґРѕРјРЅРѕРіРѕ РЅР°Р·РІР°РЅРёВ¤ С„Р°Р№Р»Р°
+		
+		if(move_uploaded_file($_FILES['userfile']['tmp_name'], $server.$photoUploadDir)){//в‰€СЃР»Рё С„Р°Р№Р» РїРµСЂРµРјРµСЃС‚РёС‚СЃВ¤
+			$photoUploadDir = 'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/'.$photoUploadDir;
+			$sqlData = 'INSERT INTO `filelist`(`user`, `type`, `contest`, `name`, `date`, `text`) VALUES ("'.$_SESSION['login'].'", "'.$type.'","'.$contest.'", "'.$photoUploadDir.'","'.$time['year'].$time['month'].$time['day'].'","'.$text.'")';
 			$result = mysql_query($sqlData);
 		} else {
-			$array->text = 'Neizvestnaya oshibka pri peremeshenii faila! (nomer oshibki : '.$_FILES['userfile']['error'].' )';
+			$array->text = 'Neizvestnaya oshibka pri peremeshenii faila! (nomer oshibki : '.$_FILES['userfile']['error'].' )'.$photoUploadDir;
 			exit(json_encode($array));
 		}
 		
-		if($type == 'avatar'){//Если это аватарка юзера, то скрипт обновляет данные пользователя.
+		if($type == 'avatar'){//в‰€СЃР»Рё СЌС‚Рѕ Р°РІР°С‚Р°СЂРєР° СЋР·РµСЂР°, С‚Рѕ СЃРєСЂРёРїС‚ РѕР±РЅРѕРІР»В¤РµС‚ РґР°РЅРЅС‹Рµ РїРѕР»СЊР·РѕРІР°С‚РµР»В¤.
 			session_start();
 			$sqlData = 'SELECT `icon` FROM `users` WHERE id="'.$_SESSION['id'].'"';
 			$fileDelete = mysql_query($sqlData);
 			$fileDelete = mysql_fetch_assoc($fileDelete)['icon'];
-			if($fileDelete != 'http://it-labor.ru/playground/valera/images/avatarPhoto/changeMe.png'){//Если аватарка уже есть, но она не равна дефолтной, то скрипт удаляет прежний файл.
+			if($fileDelete != 'http://it-labor.ru/playground/valera/images/avatarPhoto/changeMe.png'){//в‰€СЃР»Рё Р°РІР°С‚Р°СЂРєР° СѓР¶Рµ РµСЃС‚СЊ, РЅРѕ РѕРЅР° РЅРµ СЂР°РІРЅР° РґРµС„РѕР»С‚РЅРѕР№, С‚Рѕ СЃРєСЂРёРїС‚ СѓРґР°Р»В¤РµС‚ РїСЂРµР¶РЅРёР№ С„Р°Р№Р».
 				
-				unlink(substr($fileDelete, 37));
+				unlink($fileDelete);
 				
 			};
 			$sqlData = 'UPDATE `users` SET `icon`="'.$photoUploadDir.'" WHERE id = "'.$_SESSION['id'].'"';
 			$result = mysql_query($sqlData);
 		};
 		
-		if($result) {//Сообщение в конце скрипта.
+		if($result) {//вЂ”РѕРѕР±С‰РµРЅРёРµ РІ РєРѕРЅС†Рµ СЃРєСЂРёРїС‚Р°.
 			$array->text = 'Vash file sohranen na servere!';
 			echo(json_encode($array));
 		} else {
@@ -194,6 +202,8 @@
 	else if($_POST['file'] == 'news'){
 		
 		$rootCheck();
+		
+		changeDB('newslist');
 		
 		if($_POST['type'] == 'upload') {
 			
@@ -210,7 +220,7 @@
 			//}
 		}
 		
-		//Добавление категории
+		//Ж’РѕР±Р°РІР»РµРЅРёРµ РєР°С‚РµРіРѕСЂРёРё
 		else if($_POST['type'] == 'uploadCat') {
 			
 			$const = stripslashes(htmlspecialchars($_POST['category']));
@@ -222,21 +232,21 @@
 				$array->text = 'error';
 				exit(json_encode($array));
 			}
-			//Вставка новой категории в таблицу
+			//В¬СЃС‚Р°РІРєР° РЅРѕРІРѕР№ РєР°С‚РµРіРѕСЂРёРё РІ С‚Р°Р±Р»РёС†Сѓ
 			else {
 				$sql = mysql_query('INSERT INTO `newscategs`(`category`) VALUES ("'.$category.'")');
 				$array->text = 'nice';
 				echo(json_encode($array));
 			}
 		}
-		//Отправка списка категорий, мультфильмов
+		//СњС‚РїСЂР°РІРєР° СЃРїРёСЃРєР° РєР°С‚РµРіРѕСЂРёР№, РјСѓР»СЊС‚С„РёР»СЊРјРѕРІ
 
 		
 		
-		//Удаление
+		//вЂќРґР°Р»РµРЅРёРµ
 		else if($_POST['type'] == 'delete') {
 			
-			//Добавить удаление файлов
+			//Ж’РѕР±Р°РІРёС‚СЊ СѓРґР°Р»РµРЅРёРµ С„Р°Р№Р»РѕРІ
 			
 			$id = stripslashes(htmlspecialchars($_POST['id']));
 			
@@ -251,7 +261,7 @@
 			}
 		}
 		
-		//Обновление данных
+		//СњР±РЅРѕРІР»РµРЅРёРµ РґР°РЅРЅС‹С…
 		else if($_POST['type'] == 'update') {
 			
 			$content = stripslashes(htmlspecialchars($_POST['content']));
@@ -276,23 +286,23 @@
 	else if($_POST['file'] == 'user-data-edit'){
 		if($_POST['type'] == 'data'){
 			
-			$loginCheck();
+			loginCheck();
 			
 			$fname = stripslashes(htmlspecialchars($_POST['fname']));
 			$mname = stripslashes(htmlspecialchars($_POST['mname']));
 			$lname = stripslashes(htmlspecialchars($_POST['lname']));
 			$result = '';
 			
-			$sql = 'UPDATE `users` SET ';//Создание переменной sql, которая и будет потом пушить данные
+			$sql = 'UPDATE `users` SET ';//вЂ”РѕР·РґР°РЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№ sql, РєРѕС‚РѕСЂР°В¤ Рё Р±СѓРґРµС‚ РїРѕС‚РѕРј РїСѓС€РёС‚СЊ РґР°РЅРЅС‹Рµ
 			
-			if(!empty($fname)){//Добавление изменения переменных при их наличии
+			if(!empty($fname)){//Ж’РѕР±Р°РІР»РµРЅРёРµ РёР·РјРµРЅРµРЅРёВ¤ РїРµСЂРµРјРµРЅРЅС‹С… РїСЂРё РёС… РЅР°Р»РёС‡РёРё
 				$sql .= '`fname`=';
 				$sql .= '"'.$fname.'"';
 				$zapyataya = true;
 			};
 			
 			if(!empty($mname)){
-				if($zapyataya){//Добавление запятой при наличии вставленных до нее переменных
+				if($zapyataya){//Ж’РѕР±Р°РІР»РµРЅРёРµ Р·Р°РїВ¤С‚РѕР№ РїСЂРё РЅР°Р»РёС‡РёРё РІСЃС‚Р°РІР»РµРЅРЅС‹С… РґРѕ РЅРµРµ РїРµСЂРµРјРµРЅРЅС‹С…
 					$sql .= ', ';
 				};
 				$zapyataya = true;
@@ -309,7 +319,7 @@
 				$sql .= ' "'.$lname.'"';
 			};
 			
-			$result = mysql_query($sql.' WHERE id = "'.$_SESSION['id'].'"');//sql запрос на бдшку
+			$result = mysql_query($sql.' WHERE id = "'.$_SESSION['id'].'"');//sql Р·Р°РїСЂРѕСЃ РЅР° Р±РґС€РєСѓ
 			
 			$array->text = 'Dannie izmeneni! '; 
 			
@@ -348,6 +358,112 @@
 				echo 'Vash parol izmenen!';
 			};
 		}
+	}
+	
+	
+	
+	else if($_POST['file'] == 'pulsegoroda'){
+		
+		$sql;
+		
+		loginCheck();
+		
+		if($_POST['type'] == 'upload') {//В«Р°РіСЂСѓР·РєР° РЅР° СЃРµСЂРІРµСЂ
+			
+			$name = htmlspecialchars(stripslashes($_POST['name']));
+			$lat = htmlspecialchars(stripslashes($_POST['lat']));
+			$lang = htmlspecialchars(stripslashes($_POST['lang']));
+			$story_name = htmlspecialchars(stripslashes($_POST['story_name']));
+			$story = htmlspecialchars(stripslashes($_POST['story']));
+			$user = htmlspecialchars(stripslashes($_POST['user']));
+		
+			$sql = mysql_query('INSERT INTO `pulsegorodaModeration`(`name`, `lat`, `lang`, `story_name`, `story`, `user`) VALUES ("'.name.'", "'.lat.'", "'.lang.'", "'.story_name.'", "'.story.'", "'.user.'")');
+		}//вЂќРґР°Р»РµРЅРёРµ РЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃ
+		
+		
+		
+		else if($_POST['type'] == 'delete') {
+			$id = htmlspecialchars(stripslashes($_POST['id']));
+			$user = htmlspecialchars(stripslashes($_POST['user']));
+			
+			$sql = mysql_query('DELETE FROM `pulsegorodaModeration` WHERE id="'.$id.'" AND user="'.$user.'"');
+			
+			if($sql){
+				$array->text = 'success!';
+				echo(json_encode($array));
+			} else {
+				$array->text = 'error!';
+				echo(json_encode($array));
+			}
+		}//СњР±РЅРѕРІР»РµРЅРёРµ РґР°РЅРЅС‹С… РЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃРЃ
+		
+		
+		
+		else if($_POST['type'] == 'update') {
+			
+			$name = htmlspecialchars(stripslashes($_POST['name']));
+			$lat = htmlspecialchars(stripslashes($_POST['lat']));
+			$lang = htmlspecialchars(stripslashes($_POST['lang']));
+			$story_name = htmlspecialchars(stripslashes($_POST['story_name']));
+			$story = htmlspecialchars(stripslashes($_POST['story']));
+			$user = htmlspecialchars(stripslashes($_POST['user']));
+			
+			$sql = 'UPDATE `pulsegorodaModeration` SET ';
+			
+			if(!empty($name)){//Ж’РѕР±Р°РІР»РµРЅРёРµ РёР·РјРµРЅРµРЅРёВ¤ РїРµСЂРµРјРµРЅРЅС‹С… РїСЂРё РёС… РЅР°Р»РёС‡РёРё
+				$sql .= '`name`=';
+				$sql .= '"'.$name.'"';
+				$zapyataya = true;
+			};
+			
+			if(!empty($lat)){
+				if($zapyataya){//Ж’РѕР±Р°РІР»РµРЅРёРµ Р·Р°РїВ¤С‚РѕР№ РїСЂРё РЅР°Р»РёС‡РёРё РІСЃС‚Р°РІР»РµРЅРЅС‹С… РґРѕ РЅРµРµ РїРµСЂРµРјРµРЅРЅС‹С…
+					$sql .= ', ';
+				};
+				$zapyataya = true;
+				$sql .= '`lat`=';
+				$sql .= '"'.$lat.'"';
+			};
+			
+			if(!empty($lang)){
+				if($zapyataya){//Ж’РѕР±Р°РІР»РµРЅРёРµ Р·Р°РїВ¤С‚РѕР№ РїСЂРё РЅР°Р»РёС‡РёРё РІСЃС‚Р°РІР»РµРЅРЅС‹С… РґРѕ РЅРµРµ РїРµСЂРµРјРµРЅРЅС‹С…
+					$sql .= ', ';
+				};
+				$zapyataya = true;
+				$sql .= '`lang`=';
+				$sql .= '"'.$lang.'"';
+			};
+			
+			if(!empty($story_name)){
+				if($zapyataya){//Ж’РѕР±Р°РІР»РµРЅРёРµ Р·Р°РїВ¤С‚РѕР№ РїСЂРё РЅР°Р»РёС‡РёРё РІСЃС‚Р°РІР»РµРЅРЅС‹С… РґРѕ РЅРµРµ РїРµСЂРµРјРµРЅРЅС‹С…
+					$sql .= ', ';
+				};
+				$zapyataya = true;
+				$sql .= '`story_name`=';
+				$sql .= '"'.$story_name.'"';
+			};
+			
+			if(!empty($story)){
+				if($zapyataya){//Ж’РѕР±Р°РІР»РµРЅРёРµ Р·Р°РїВ¤С‚РѕР№ РїСЂРё РЅР°Р»РёС‡РёРё РІСЃС‚Р°РІР»РµРЅРЅС‹С… РґРѕ РЅРµРµ РїРµСЂРµРјРµРЅРЅС‹С…
+					$sql .= ', ';
+				};
+				$zapyataya = true;
+				$sql .= '`story`=';
+				$sql .= '"'.$story.'"';
+			};
+			
+			$sql = mysql_query($sql);
+			
+			if($sql){
+				$array->text = 'success!';
+				echo(json_encode($array));
+			} else {
+				$array->text = 'error!';
+				echo(json_encode($array));
+			}	
+			
+		}
+		
 	}
 	
 

@@ -17,13 +17,13 @@ var initPages = {
 		$(".loadingScreen").addClass("hideLoadingScreen");
 		setTimeout(function() {
 			$(".loadingScreen").addClass("display-none");
-		}, 2000); //change 1 to 2000
+		}, SPLASH_SCREEN_TIMEOUT); //change 1 to 2000
 
 	},
 	handler: 	function(){
 		$(document).on('pageBeforeAnimation', function (e) {
 			var page = e.detail.page.name;
-			if(page != "index" && page != "pulsegoroda") {
+			if(page != "index") {
 				window[page].render();
 			}
 		});
@@ -42,3 +42,9 @@ var ajax = function(url, data, onSuccess){
 		}
 	});
 };
+
+//Show/Hide
+$(".show__element-call").click(function() {
+	$(".show__element[data-id='"+$(this).attr('data-id')+"']").toggleClass("state_active");
+	return false;
+});

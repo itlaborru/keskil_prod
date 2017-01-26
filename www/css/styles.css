@@ -18,6 +18,60 @@
     background: #000000;
 }
 
+.content-block {
+	margin-top: 15px;
+}
+
+.page,
+.toolbar {
+	background: #fff;
+}
+
+.navbar {
+	background: none;
+}
+
+.navbar:after { 
+	display: none;
+}
+
+
+
+@font-face {
+	src : url("/assets/fonts/rubik.ttf");
+	font-family: "rubik";
+}
+@font-face {
+	src : url("/assets/fonts/merriweather.ttf");
+	font-family: "merriweather";
+}
+@font-face {
+	src : url("/assets/fonts/firasans.ttf");
+	font-family: "firasans";
+}
+@font-face {
+	src : url("/assets/fonts/yanone.ttf");
+	font-family: "yanone";
+}
+
+body {
+	font-family: "merriweather", serif;
+}
+
+ul, li { 
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: #000;
+}
+
+h3 {
+	margin:	0;
+}
+
 .loadingScreen{
 	position:absolute;
 	left: 0;
@@ -38,4 +92,49 @@
 }
 .display-none {
 	display:	none;
+}
+
+.index-links__item {
+	
+}
+
+.index-links__link {
+	height: 125px;
+	position: relative;
+	background: #00aba9;
+	margin: 0 0 15px;
+	display: block;
+}
+
+.index-links__text {
+	position: absolute;
+	left: 15px; bottom: 15px;
+	font-family: "rubik", sans-serif;
+	font-size: 24px;
+	color: #fff;
+}
+
+.news__tag {
+	color:	#000;
+}
+
+.post {
+	margin-bottom:	30px;
+}
+.post__content {
+	overflow:	hidden;
+	text-overflow:	ellipsis;
+	max-height:	100px;
+}
+.show__element {
+	display: none;
+}
+.show__element.state_active {
+	display: block;
+}
+.userPanel a {
+	color:	#fff;
+}
+.loginPanel a {
+	color:	#fff;
 }

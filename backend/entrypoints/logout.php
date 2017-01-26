@@ -13,6 +13,11 @@
 		echo 'Vi dazhe ne voshli! :D';
 	};
 	
+	$adminClient = htmlspecialchars(stripslashes($_POST['adminClient']));
+	
+	if($adminClient){
+		header('Location: /admin/index.php');
+	};
 	
 	
 

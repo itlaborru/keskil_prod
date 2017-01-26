@@ -1,20 +1,25 @@
 var userPage = {
+	render: function() {
+	},
 	updateUserinfo: function() {
 		ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
 	},
 	bindEvents: function(){
-		$('.userPanel__icon').on('click', function(){
-			
+		$('.userPage').on('click', '.userPanel__icon', function (e) {
+			transferImages.type.name = "avatar";
 			transferImages.getImage();
-			globalVar.imgData = '';
-			globalVar.typeData = 'avatar';
-			userOptions.updateUserinfo();
-			
+		});
+		$('.userPanel').on('click', '.userPanel__icon', function (e) {
+			transferImages.type.name = "avatar";
+			transferImages.getImage();
+			userPage.updateUserinfo();
 		});
 		$('.changeUserInfo').on('click', function(){
 			ajax(
-				'http://it-labor.ru/playground/valera/user-data-edit.php',
+				serverAdress + "entrypoints/set.php",
 				{
+					'file':	'user-data-edit',
+					'type':	'data',
 					'fname': $('.userPage__fullname__fname__change').val(),
 					'mname': $('.userPage__fullname__mname__change').val(),
 					'lname': $('.userPage__fullname__lname__change').val(),
@@ -23,6 +28,10 @@ var userPage = {
 				},
 				function(data){
 					app.alert(data,dictionary.success);
+					$('.userPage__fullname__fname__change').val("");
+					$('.userPage__fullname__mname__change').val("");
+					$('.userPage__fullname__lname__change').val("");
+					userPage.updateUserinfo();
 				}
 			);
 		});

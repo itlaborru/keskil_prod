@@ -1,4 +1,4 @@
-<?
+﻿<?
 	
 	$loginFordb = 'valeratop';
 	$passFordb = '123456';
@@ -20,18 +20,18 @@
 	$pushCode = '';
 	
 	if(strlen($fname) < 2){//Проверка на наличие введенных данных.
-		$array->text = 'Imya ne mozhet bit koroche dvuh simvolov!'; 
-		exit json_encode($array);
+		$array->text = 'Минимальная длина - 2 символа.'; 
+		exit(json_encode($array));
 	}
 	if(strlen($lname) == 0){
-		$array->text = 'Vvedite familiyu!'; 
-		exit json_encode($array);
+		$array->text = 'Заполните все поля!'; 
+		exit(json_encode($array));
 	}
 	
 	$checkCode = mysql_query('SELECT * FROM `registercode` WHERE login="'.$login.'"');//Проверка на наличие кода в бдшке.
-	$checkCodeRes = mysql_fetch_assoc($checkCode)['code'];
+	$checkCodeRes = mysql_fetch_assoc($checkCode);
 	
-	if($checkCodeRes == $code ){//Если код верный.
+	if($checkCodeRes['code'] == $code ){//Если код верный.
 		$delCode = mysql_query('DELETE FROM `registercode` WHERE login="'.$login.'"');//Удаление с бдшки кода.
 		if($delCode){
 			$pass = $checkCodeRes['pass'];
@@ -40,21 +40,21 @@
 			$result = mysql_query('INSERT INTO `users`(`login`, `pass`, `mail`, `icon`, `fname`,  `lname`) VALUES ("'.$login.'","'.$pass.'","'.$mail.'","http://it-labor.ru/playground/valera/images/avatarPhoto/changeMe.png","'.$fname.'","'.$lname.'")');//Пуш на сервер нового аккаунта.
 			
 			if($result){
-				$array->text = 'Dannie prinyati'; 
-				exit json_encode($array);
+				$array->text = 'Данные приняты.'; 
+				exit(json_encode($array));
 			} else {
-				$array->text = 'Oshibka otpravki!'; 
-				exit json_encode($array);
+				$array->text = 'Ошибка!'; 
+				exit(json_encode($array));
 				
 				$pushCode = mysql_query('INSERT INTO `registercode`(`login`, `code`) VALUES ("'.$login.'","'.$code.'")');
 			};
 		} else {
-			$array->text = 'Poprobuite esche raz!'; 
-			echo json_encode($array);
+			$array->text = 'Попробуйте еще раз!'; 
+			exit(json_encode($array));
 		}
 	} else {
-		$array->text = 'Ne vernii code! Scopiruite ssilku tochnee!'; 
-		echo json_encode($array);
+		$array->text = 'Не верный код! Скопируйте ссылку точнее!'; 
+		exit(json_encode($array));
 	}
 
 ?>

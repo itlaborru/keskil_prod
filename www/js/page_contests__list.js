@@ -15,8 +15,9 @@ var contests__list = {
 				$('.contestBlock').attr("data-id",categ);
 			});
 			$('.contestBlock').on('click', '.contestSend', function (e) {
-				//app.alert(dictionary.withoutUserContent,dictionary.error);
 				transferImages.getImage();
+				transferImages.type.name = "contest";
+				transferImages.type.contest = $('.contestBlock').attr("data-id") ;
 			});
 		}
 		contests__list.notFirstUse = true;

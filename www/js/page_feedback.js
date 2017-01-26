@@ -6,11 +6,11 @@
 		if(!feedback.notFirstUse) {
 			$('.feedbackSend').on('click', function(){
 				if($('.feedback').val() != "") {
-					if(localStorage.getItem("userName") == null) {
+					if(localStorage.getItem("userInfo") == null) {
 						app.alert(dictionary.plsLogin, dictionary.error);
 					}
 					else {
-						ajax(entrypoints.feedback.url,entrypoints.feedback.data,entrypoints.feedback.success);
+						entrypoints.feedbackSend();
 					}
 				}
 				else {
