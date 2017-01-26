@@ -15,13 +15,3 @@ $('.pulseGorodapush').on('click',function(){
 		
 	});
 });
-var map;
-function initAutocomplete() {
-	map = new google.maps.Map(document.getElementById('map'), {
-		center: {lat: 62.031030526953856, lng: 129.72959222272038},
-		zoom: 1,
-		minZoom: 10,
-		maxZoom: 18,
-		disableDefaultUI: true,
-	});
-}
