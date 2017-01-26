@@ -11,8 +11,9 @@
 	
 	$login = stripslashes($_POST['login']);
 	$login = htmlspecialchars($login);
-	$pass = md5(stripslashes($_POST['pass']));
-	$pass = htmlspecialchars($pass);
+	$pass = stripslashes($_POST['pass']);
+	$pass = md5(htmlspecialchars($pass));
+	$adminClient = htmlspecialchars(stripslashes($_POST['adminClient']));
 	$exittext = array();
 	$result = '';
 	$usersList = '';
@@ -23,7 +24,6 @@
 	
 	
 	//Проверка на верность login'a.
-	
 	$result = mysql_query('SELECT `id`, `login`, `pass` FROM `users` WHERE login="'.$login.'"');
 	$usersList = mysql_fetch_array($result);
 	
@@ -60,7 +60,9 @@
 		
 		$exittext['text'] = "Здравствуйте, ".$login."!";
 		$exittext['sessionId'] = $_COOKIE['PHPSESSID'];
-		
+		if($adminClient){
+			header('Location: /admin/index.php');
+		};
 	} else {
 		
 		//При ошибке нахождения пароля или логина

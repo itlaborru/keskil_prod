@@ -92,7 +92,8 @@
 				} else {
 					var data = {
 						type: "push",
-						category: $(".category[data-file='categorysql.php']").val()
+						category: $(".category[data-file='categorysql.php']").val(),
+						categoryType: "cartoon"
 					};
 				}
 				shortAjax(
@@ -127,7 +128,7 @@
 					var data = {
 						type: "update",
 						id: $(".id[data-file='categorysql.php']").val(),
-						category: $(".category[data-file='categorysql.php']").val()
+						//category: $(".category[data-file='categorysql.php']").val()
 					};
 				}
 				

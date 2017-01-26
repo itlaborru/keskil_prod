@@ -1,4 +1,4 @@
-<?
+п»ї<?
 
 	include('rootChecker.php');
 	
@@ -12,7 +12,7 @@
 		<html>
 		<head>
 			<meta charset="utf-8" />
-			<title>Название</title>
+			<title>РќР°Р·РІР°РЅРёРµ</title>
 		</head>
 		<body>
 		
@@ -24,7 +24,7 @@
 				
 				$sql = mysql_query('SELECT * FROM `categorylist` WHERE type = "news"');
 				
-				while ($result = mysql_fetch_assoc($sql)) //Пуш данных в массив для вывода.
+				while ($result = mysql_fetch_assoc($sql)) //РџСѓС€ РґР°РЅРЅС‹С… РІ РјР°СЃСЃРёРІ РґР»СЏ РІС‹РІРѕРґР°.
 				{ 
 					echo "<input type='checkbox' class='categoryid".$result['id']."' value='".$result['category']." '>".$result['category']."</br>";
 					
@@ -40,7 +40,7 @@
 	
 	$sql = mysql_query('SELECT * FROM `newslist` WHERE 1');
 	
-	while ($result = mysql_fetch_assoc($sql)) //Пуш данных в массив для вывода.
+	while ($result = mysql_fetch_assoc($sql)) //РџСѓС€ РґР°РЅРЅС‹С… РІ РјР°СЃСЃРёРІ РґР»СЏ РІС‹РІРѕРґР°.
 	{ 
 		echo $result['id'].' ';
 		echo $result['title'].' ';
@@ -52,6 +52,7 @@
 		?>
 		
 		<input class="id" name="id" type="text" placeholder="id" data-file='categorysql.php'>
+		<input class="category" name="category" type="text" placeholder="category" data-file='categorysql.php'>
 		
 		<input class="push" name="push" type="button" value="push" data-file="categorysql.php"> 
 		<input class="update" name="update" type="button" value="update" data-file="categorysql.php"> </br>
@@ -60,7 +61,7 @@
 		
 	$sql = mysql_query('SELECT * FROM `categorylist` WHERE type = "news"');
 	
-	while ($result = mysql_fetch_assoc($sql)) //Пуш данных в массив для вывода.
+	while ($result = mysql_fetch_assoc($sql)) //РџСѓС€ РґР°РЅРЅС‹С… РІ РјР°СЃСЃРёРІ РґР»СЏ РІС‹РІРѕРґР°.
 	{ 
 		echo $result['id'].' ';
 		echo $result['category'].' ';
@@ -91,21 +92,18 @@
 						type: "push",
 						title: $(".title[data-file='newssql.php']").val(),
 						content: $(".content[data-file='newssql.php']").val(),
-<<<<<<< HEAD
-						//category: JSON.stringify(category)
-=======
 						category: JSON.stringify(category)
->>>>>>> cbb6aed668b139b9f139da7e7a042cdf48c6ffd8
 					};
 					console.log(data.category);
 				} else {
 					data = {
 						type: "push",
-						//category: $(".category[data-file='categorysql.php']").val()
+						category: $(".category[data-file='categorysql.php']").val(),
+						categoryType: "news"
 					};
 				};
-				
 				shortAjax(
+					
 					$(this).attr("data-file"),
 					data,
 					function(data){
@@ -133,17 +131,14 @@
 						title: $(".title[data-file='newssql.php']").val(),
 						content: $(".content[data-file='newssql.php']").val(),
 						//category: JSON.stringify(category)
-<<<<<<< HEAD
-=======
 						
->>>>>>> cbb6aed668b139b9f139da7e7a042cdf48c6ffd8
 					};
 					
 				} else {
 					data = {
 						type: "update",
 						id: $(".id[data-file='categorysql.php']").val(),
-						//category: $(".category[data-file='categorysql.php']").val()
+						category: $(".category[data-file='categorysql.php']").val()
 					};
 				}
 				
@@ -175,6 +170,9 @@
 					url: url,
 					data: data,
 					success: onSuccess,
+					error: function(data){
+						alert(data);
+					}
 				
 				});
 			};

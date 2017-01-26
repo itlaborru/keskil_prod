@@ -1,4 +1,4 @@
-<?
+﻿<?
 	
 	$loginFordb = 'Keskil';
 	$passFordb = '123456';
@@ -73,7 +73,7 @@
 	}
 	
 	if(empty($login) || empty($pass)){//Проверка на пустоту login и pass
-		$array->text = 'Login ili parol pusti';
+		$array->text = 'Заполните все поля!';
 		exit(json_encode($array));
 	}
 	
@@ -82,23 +82,23 @@
 	$pushCode = mysql_query('INSERT INTO `registercode`(`login`, `code`, `pass`, `mail`) VALUES ("'.$login.'","'.$randomCode.'","'.md5($pass).'","'.$mail.'")');//Отправка данных на сервер со списком регистрирующихся пользователей
 	
 	if(!$pushCode){//Проверка на удачность sql запроса на таблицу
-		$array->text = 'Poprobuite esche raz!';
+		$array->text = 'Попробуйте снова!';
 		exit(json_encode($array));
 	}
 
 	$to = $mail;//Генерация и отправка письма на почту
-	$subject = 'Registraciya';
-	$message = 'Pereidite po ssilke! ' . "\r\n" .
+	$subject = 'Регистрация';
+	$message = 'Перейдите по ссылке! ' . "\r\n" .
 		'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/registerCode.php?login='.$login.'&code='.$randomCode;
-	$headers = 'From: "valerii777999@gmail.com"' . "\r\n" .
-		'Reply-To: "valerii777999@gmail.com"' . "\r\n" .
+	$headers = 'From: "Keskil-Online@robot.ru"' . "\r\n" .
+		'Reply-To: "Keskil-Online@robot.ru"' . "\r\n" .
 		'X-Mailer: "Keskil_prod"';
 	$array->text = 'OK';
 	if(!mail($to, $subject, $message, $headers)){//Если сообщение не было отправлено
-		$array->text = 'Pochta vvedena ne pravilno!';
+		$array->text = 'Не верная почта';
 		exit(json_encode($array));
 	};
 	
-	$array->text = 'Podtverdite pochtu! Posleduite instrukciyam otpravlennim na pochtu';
+	$array->text = 'Подтвердите почту! Последуйте инструкциям отправленным на вашу почту';
 	exit(json_encode($array));
 ?>

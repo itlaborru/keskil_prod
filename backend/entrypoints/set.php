@@ -1,7 +1,7 @@
-<?
+ï»¿<?
 	header("Access-Control-Allow-Origin: *");
 	
-	if(!$_POST){//Åñëè ïóñòîé çàïðîñ.
+	if(!$_POST){//â‰ˆÑÐ»Ð¸ Ð¿ÑƒÑÑ‚Ð¾Ð¹ Ð·Ð°Ð¿Ñ€Ð¾Ñ.
 		$array->text = 'pustoi zapros!';
 		exit(json_encode($array));
 	}
@@ -9,7 +9,7 @@
 	$loginFordb = 'valeratop';
 	$passFordb = '123456';
 	include('includes/time.php');
-	include('includes/functions.php');
+	include('../includes/functions.php');
 	
 	$db = connect($loginFordb, $passFordb);
 	
@@ -19,14 +19,16 @@
 		
 		rootCheck();
 		
-		if($_POST['type'] == 'upload') {//Çàãðóçêà íà ñåðâåð
+		changeDB('cartoonslist');
+		
+		if($_POST['type'] == 'upload') {//Â«Ð°Ð³Ñ€ÑƒÐ·ÐºÐ° Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€
 			
-			$url = htmlspecialchars($_POST['url']);
+			$url = htmlspecialchars(stripslashes($_POST['url']));
 			$name = htmlspecialchars(stripslashes($_POST['name']));
 			$category = htmlspecialchars(stripslashes($_POST['category']));
 		
 			$sql = mysql_query('INSERT INTO `cartoonsList`(`url`, `name`,`category`) VALUES ("'.$url.'","'.$name.'","'.$category.'")');
-		}//Óäàëåíèå ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ
+		}//â€Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ ÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐ
 		
 		
 		
@@ -42,7 +44,7 @@
 				$array->text = 'error!';
 				echo(json_encode($array));
 			}
-		}//Îáíîâëåíèå äàííûõ ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ
+		}//ÑœÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ Ð´Ð°Ð½Ð½Ñ‹Ñ… ÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐ
 		
 		
 		
@@ -76,7 +78,7 @@
 		
 		$sql;
 		
-		if($_POST['type'] == 'upload'){//Çàãðóçêà ñîîáùåíèÿ íà ôèäáåê.
+		if($_POST['type'] == 'upload'){//Â«Ð°Ð³Ñ€ÑƒÐ·ÐºÐ° ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Â¤ Ð½Ð° Ñ„Ð¸Ð´Ð±ÐµÐº.
 			
 			$content = htmlspecialchars(stripslashes($_POST['content']));
 			$user = htmlspecialchars(stripslashes($_SESSION['login']));
@@ -97,7 +99,7 @@
 			$id = htmlspecialchars(stripslashes($_POST['id']));
 			$sql;
 			
-			rootCheck();//Ïðîâåðêà íà ïðàâà àäìèíà.
+			rootCheck();//Ñ•Ñ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð¿Ñ€Ð°Ð²Ð° Ð°Ð´Ð¼Ð¸Ð½Ð°.
 			
 			$sql = mysql_query('DELETE FROM `feedback` WHERE id="'.$id.'"');
 			
@@ -119,7 +121,7 @@
 	
 	else if($_POST['file'] == 'fileChecker'){
 		
-		//Ïîäêëþ÷åíèå ê áä è ïîäêëþ÷åíèå ôóíêöèé.
+		//Ñ•Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ðº Ð±Ð´ Ð¸ Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¹.
 		
 		$type = htmlspecialchars(stripslashes($_POST['type']));
 		$contest = htmlspecialchars(stripslashes($_POST['contest']));
@@ -137,7 +139,7 @@
 			exit(json_encode($array));
 		};*/
 		
-		if($_FILES['userfile']['size'] > 10485760 || $_FILES['userfile']['size'] == 0){//Ïðîâåðêà íà âåñ ôàéëà.
+		if($_FILES['userfile']['size'] > 10485760 || $_FILES['userfile']['size'] == 0){//Ñ•Ñ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð²ÐµÑ Ñ„Ð°Ð¹Ð»Ð°.
 			
 			$array->text = 'File vesit slishkom mnogo. ('.$_FILES['userfile']['size'].')';
 			exit(json_encode($array));
@@ -148,20 +150,22 @@
 			mkdir('images/'.$type.'Photo');
 		}
 		
-		$filetype = pathinfo($_FILES['userfile']['name']);//Òóò äîëæíà áûòü ïðîâåðêà íà òèï ôàéëà, íî îíà ïî÷åìó-òî íå ðàáîòàåò. Âîçìîæíî îøèáêà íà ñòîðîíå îòïðàâêè íàçâàíèÿ ôàéëà ñî ñòîðîíû êëèåíòà.
+		echo pathinfo($_FILES['userfile']['name']);
+		
+		$filetype = pathinfo($_FILES['userfile']['name']);//â€œÑƒÑ‚ Ð´Ð¾Ð»Ð¶Ð½Ð° Ð±Ñ‹Ñ‚ÑŒ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ñ‚Ð¸Ð¿ Ñ„Ð°Ð¹Ð»Ð°, Ð½Ð¾ Ð¾Ð½Ð° Ð¿Ð¾Ñ‡ÐµÐ¼Ñƒ-Ñ‚Ð¾ Ð½Ðµ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚. Â¬Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾ Ð¾ÑˆÐ¸Ð±ÐºÐ° Ð½Ð° ÑÑ‚Ð¾Ñ€Ð¾Ð½Ðµ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÐºÐ¸ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Â¤ Ñ„Ð°Ð¹Ð»Ð° ÑÐ¾ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ñ‹ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð°.
 		$filetype = $filetype['extension'];
 		if(($filetype != 'jpeg') && ($filetype != 'jpg') && ($filetype != 'png')){
 			//exit('Ne pravilnii tip faila ('.$filetype.')');
 		};
 		
-		//$photoUploadDir = __DIR__ . '/images/'.$type.'Photo/'.getRandomFileName('images/'.$type.'Photo/', $filetype).'.'.$filetype;//Ãåíåðàöèÿ ðàíäîìíîãî íàçâàíèÿ ôàéëà
+		//$photoUploadDir = __DIR__ . '/images/'.$type.'Photo/'.getRandomFileName('images/'.$type.'Photo/', $filetype).'.'.$filetype;//âˆšÐµÐ½ÐµÑ€Ð°Ñ†Ð¸Â¤ Ñ€Ð°Ð½Ð´Ð¾Ð¼Ð½Ð¾Ð³Ð¾ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Â¤ Ñ„Ð°Ð¹Ð»Ð°
 		
 		$server = '/var/www/domains/ovz1.itlaborykt.zm9y1.vps.myjino.ru/';
 		
-		$photoUploadDir = 'assets/'.getRandomFileName('../assets/', $filetype).'.'.$filetype;//Ãåíåðàöèÿ ðàíäîìíîãî íàçâàíèÿ ôàéëà
+		$photoUploadDir = 'assets/'.getRandomFileName('../assets/', $filetype).'.'.$filetype;//âˆšÐµÐ½ÐµÑ€Ð°Ñ†Ð¸Â¤ Ñ€Ð°Ð½Ð´Ð¾Ð¼Ð½Ð¾Ð³Ð¾ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Â¤ Ñ„Ð°Ð¹Ð»Ð°
 		
-		if(move_uploaded_file($_FILES['userfile']['tmp_name'], $server.$photoUploadDir)){//Åñëè ôàéë ïåðåìåñòèòñÿ
-			$photoUploadDir = 'ovz1.itlaborykt.zm9y1.vps.myjino.ru/'.$photoUploadDir;
+		if(move_uploaded_file($_FILES['userfile']['tmp_name'], $server.$photoUploadDir)){//â‰ˆÑÐ»Ð¸ Ñ„Ð°Ð¹Ð» Ð¿ÐµÑ€ÐµÐ¼ÐµÑÑ‚Ð¸Ñ‚ÑÂ¤
+			$photoUploadDir = 'http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/'.$photoUploadDir;
 			$sqlData = 'INSERT INTO `filelist`(`user`, `type`, `contest`, `name`, `date`, `text`) VALUES ("'.$_SESSION['login'].'", "'.$type.'","'.$contest.'", "'.$photoUploadDir.'","'.$time['year'].$time['month'].$time['day'].'","'.$text.'")';
 			$result = mysql_query($sqlData);
 		} else {
@@ -169,21 +173,21 @@
 			exit(json_encode($array));
 		}
 		
-		if($type == 'avatar'){//Åñëè ýòî àâàòàðêà þçåðà, òî ñêðèïò îáíîâëÿåò äàííûå ïîëüçîâàòåëÿ.
+		if($type == 'avatar'){//â‰ˆÑÐ»Ð¸ ÑÑ‚Ð¾ Ð°Ð²Ð°Ñ‚Ð°Ñ€ÐºÐ° ÑŽÐ·ÐµÑ€Ð°, Ñ‚Ð¾ ÑÐºÑ€Ð¸Ð¿Ñ‚ Ð¾Ð±Ð½Ð¾Ð²Ð»Â¤ÐµÑ‚ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Â¤.
 			session_start();
 			$sqlData = 'SELECT `icon` FROM `users` WHERE id="'.$_SESSION['id'].'"';
 			$fileDelete = mysql_query($sqlData);
 			$fileDelete = mysql_fetch_assoc($fileDelete)['icon'];
-			if($fileDelete != 'http://it-labor.ru/playground/valera/images/avatarPhoto/changeMe.png'){//Åñëè àâàòàðêà óæå åñòü, íî îíà íå ðàâíà äåôîëòíîé, òî ñêðèïò óäàëÿåò ïðåæíèé ôàéë.
+			if($fileDelete != 'http://it-labor.ru/playground/valera/images/avatarPhoto/changeMe.png'){//â‰ˆÑÐ»Ð¸ Ð°Ð²Ð°Ñ‚Ð°Ñ€ÐºÐ° ÑƒÐ¶Ðµ ÐµÑÑ‚ÑŒ, Ð½Ð¾ Ð¾Ð½Ð° Ð½Ðµ Ñ€Ð°Ð²Ð½Ð° Ð´ÐµÑ„Ð¾Ð»Ñ‚Ð½Ð¾Ð¹, Ñ‚Ð¾ ÑÐºÑ€Ð¸Ð¿Ñ‚ ÑƒÐ´Ð°Ð»Â¤ÐµÑ‚ Ð¿Ñ€ÐµÐ¶Ð½Ð¸Ð¹ Ñ„Ð°Ð¹Ð».
 				
-				unlink(substr($fileDelete, 37));
+				unlink($fileDelete);
 				
 			};
 			$sqlData = 'UPDATE `users` SET `icon`="'.$photoUploadDir.'" WHERE id = "'.$_SESSION['id'].'"';
 			$result = mysql_query($sqlData);
 		};
 		
-		if($result) {//Ñîîáùåíèå â êîíöå ñêðèïòà.
+		if($result) {//â€”Ð¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð² ÐºÐ¾Ð½Ñ†Ðµ ÑÐºÑ€Ð¸Ð¿Ñ‚Ð°.
 			$array->text = 'Vash file sohranen na servere!';
 			echo(json_encode($array));
 		} else {
@@ -198,6 +202,8 @@
 	else if($_POST['file'] == 'news'){
 		
 		$rootCheck();
+		
+		changeDB('newslist');
 		
 		if($_POST['type'] == 'upload') {
 			
@@ -214,7 +220,7 @@
 			//}
 		}
 		
-		//Äîáàâëåíèå êàòåãîðèè
+		//Æ’Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸
 		else if($_POST['type'] == 'uploadCat') {
 			
 			$const = stripslashes(htmlspecialchars($_POST['category']));
@@ -226,21 +232,21 @@
 				$array->text = 'error';
 				exit(json_encode($array));
 			}
-			//Âñòàâêà íîâîé êàòåãîðèè â òàáëèöó
+			//Â¬ÑÑ‚Ð°Ð²ÐºÐ° Ð½Ð¾Ð²Ð¾Ð¹ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸ Ð² Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñƒ
 			else {
 				$sql = mysql_query('INSERT INTO `newscategs`(`category`) VALUES ("'.$category.'")');
 				$array->text = 'nice';
 				echo(json_encode($array));
 			}
 		}
-		//Îòïðàâêà ñïèñêà êàòåãîðèé, ìóëüòôèëüìîâ
+		//ÑœÑ‚Ð¿Ñ€Ð°Ð²ÐºÐ° ÑÐ¿Ð¸ÑÐºÐ° ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¹, Ð¼ÑƒÐ»ÑŒÑ‚Ñ„Ð¸Ð»ÑŒÐ¼Ð¾Ð²
 
 		
 		
-		//Óäàëåíèå
+		//â€Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ
 		else if($_POST['type'] == 'delete') {
 			
-			//Äîáàâèòü óäàëåíèå ôàéëîâ
+			//Æ’Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ðµ Ñ„Ð°Ð¹Ð»Ð¾Ð²
 			
 			$id = stripslashes(htmlspecialchars($_POST['id']));
 			
@@ -255,7 +261,7 @@
 			}
 		}
 		
-		//Îáíîâëåíèå äàííûõ
+		//ÑœÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ Ð´Ð°Ð½Ð½Ñ‹Ñ…
 		else if($_POST['type'] == 'update') {
 			
 			$content = stripslashes(htmlspecialchars($_POST['content']));
@@ -280,23 +286,23 @@
 	else if($_POST['file'] == 'user-data-edit'){
 		if($_POST['type'] == 'data'){
 			
-			$loginCheck();
+			loginCheck();
 			
 			$fname = stripslashes(htmlspecialchars($_POST['fname']));
 			$mname = stripslashes(htmlspecialchars($_POST['mname']));
 			$lname = stripslashes(htmlspecialchars($_POST['lname']));
 			$result = '';
 			
-			$sql = 'UPDATE `users` SET ';//Ñîçäàíèå ïåðåìåííîé sql, êîòîðàÿ è áóäåò ïîòîì ïóøèòü äàííûå
+			$sql = 'UPDATE `users` SET ';//â€”Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð¾Ð¹ sql, ÐºÐ¾Ñ‚Ð¾Ñ€Ð°Â¤ Ð¸ Ð±ÑƒÐ´ÐµÑ‚ Ð¿Ð¾Ñ‚Ð¾Ð¼ Ð¿ÑƒÑˆÐ¸Ñ‚ÑŒ Ð´Ð°Ð½Ð½Ñ‹Ðµ
 			
-			if(!empty($fname)){//Äîáàâëåíèå èçìåíåíèÿ ïåðåìåííûõ ïðè èõ íàëè÷èè
+			if(!empty($fname)){//Æ’Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Â¤ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ… Ð¿Ñ€Ð¸ Ð¸Ñ… Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ð¸
 				$sql .= '`fname`=';
 				$sql .= '"'.$fname.'"';
 				$zapyataya = true;
 			};
 			
 			if(!empty($mname)){
-				if($zapyataya){//Äîáàâëåíèå çàïÿòîé ïðè íàëè÷èè âñòàâëåííûõ äî íåå ïåðåìåííûõ
+				if($zapyataya){//Æ’Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð·Ð°Ð¿Â¤Ñ‚Ð¾Ð¹ Ð¿Ñ€Ð¸ Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ð¸ Ð²ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð½Ñ‹Ñ… Ð´Ð¾ Ð½ÐµÐµ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ…
 					$sql .= ', ';
 				};
 				$zapyataya = true;
@@ -313,7 +319,7 @@
 				$sql .= ' "'.$lname.'"';
 			};
 			
-			$result = mysql_query($sql.' WHERE id = "'.$_SESSION['id'].'"');//sql çàïðîñ íà áäøêó
+			$result = mysql_query($sql.' WHERE id = "'.$_SESSION['id'].'"');//sql Ð·Ð°Ð¿Ñ€Ð¾Ñ Ð½Ð° Ð±Ð´ÑˆÐºÑƒ
 			
 			$array->text = 'Dannie izmeneni! '; 
 			
@@ -352,6 +358,112 @@
 				echo 'Vash parol izmenen!';
 			};
 		}
+	}
+	
+	
+	
+	else if($_POST['file'] == 'pulsegoroda'){
+		
+		$sql;
+		
+		loginCheck();
+		
+		if($_POST['type'] == 'upload') {//Â«Ð°Ð³Ñ€ÑƒÐ·ÐºÐ° Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€
+			
+			$name = htmlspecialchars(stripslashes($_POST['name']));
+			$lat = htmlspecialchars(stripslashes($_POST['lat']));
+			$lang = htmlspecialchars(stripslashes($_POST['lang']));
+			$story_name = htmlspecialchars(stripslashes($_POST['story_name']));
+			$story = htmlspecialchars(stripslashes($_POST['story']));
+			$user = htmlspecialchars(stripslashes($_POST['user']));
+		
+			$sql = mysql_query('INSERT INTO `pulsegorodaModeration`(`name`, `lat`, `lang`, `story_name`, `story`, `user`) VALUES ("'.name.'", "'.lat.'", "'.lang.'", "'.story_name.'", "'.story.'", "'.user.'")');
+		}//â€Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ ÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐ
+		
+		
+		
+		else if($_POST['type'] == 'delete') {
+			$id = htmlspecialchars(stripslashes($_POST['id']));
+			$user = htmlspecialchars(stripslashes($_POST['user']));
+			
+			$sql = mysql_query('DELETE FROM `pulsegorodaModeration` WHERE id="'.$id.'" AND user="'.$user.'"');
+			
+			if($sql){
+				$array->text = 'success!';
+				echo(json_encode($array));
+			} else {
+				$array->text = 'error!';
+				echo(json_encode($array));
+			}
+		}//ÑœÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ Ð´Ð°Ð½Ð½Ñ‹Ñ… ÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐ
+		
+		
+		
+		else if($_POST['type'] == 'update') {
+			
+			$name = htmlspecialchars(stripslashes($_POST['name']));
+			$lat = htmlspecialchars(stripslashes($_POST['lat']));
+			$lang = htmlspecialchars(stripslashes($_POST['lang']));
+			$story_name = htmlspecialchars(stripslashes($_POST['story_name']));
+			$story = htmlspecialchars(stripslashes($_POST['story']));
+			$user = htmlspecialchars(stripslashes($_POST['user']));
+			
+			$sql = 'UPDATE `pulsegorodaModeration` SET ';
+			
+			if(!empty($name)){//Æ’Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Â¤ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ… Ð¿Ñ€Ð¸ Ð¸Ñ… Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ð¸
+				$sql .= '`name`=';
+				$sql .= '"'.$name.'"';
+				$zapyataya = true;
+			};
+			
+			if(!empty($lat)){
+				if($zapyataya){//Æ’Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð·Ð°Ð¿Â¤Ñ‚Ð¾Ð¹ Ð¿Ñ€Ð¸ Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ð¸ Ð²ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð½Ñ‹Ñ… Ð´Ð¾ Ð½ÐµÐµ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ…
+					$sql .= ', ';
+				};
+				$zapyataya = true;
+				$sql .= '`lat`=';
+				$sql .= '"'.$lat.'"';
+			};
+			
+			if(!empty($lang)){
+				if($zapyataya){//Æ’Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð·Ð°Ð¿Â¤Ñ‚Ð¾Ð¹ Ð¿Ñ€Ð¸ Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ð¸ Ð²ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð½Ñ‹Ñ… Ð´Ð¾ Ð½ÐµÐµ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ…
+					$sql .= ', ';
+				};
+				$zapyataya = true;
+				$sql .= '`lang`=';
+				$sql .= '"'.$lang.'"';
+			};
+			
+			if(!empty($story_name)){
+				if($zapyataya){//Æ’Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð·Ð°Ð¿Â¤Ñ‚Ð¾Ð¹ Ð¿Ñ€Ð¸ Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ð¸ Ð²ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð½Ñ‹Ñ… Ð´Ð¾ Ð½ÐµÐµ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ…
+					$sql .= ', ';
+				};
+				$zapyataya = true;
+				$sql .= '`story_name`=';
+				$sql .= '"'.$story_name.'"';
+			};
+			
+			if(!empty($story)){
+				if($zapyataya){//Æ’Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð·Ð°Ð¿Â¤Ñ‚Ð¾Ð¹ Ð¿Ñ€Ð¸ Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ð¸ Ð²ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð½Ñ‹Ñ… Ð´Ð¾ Ð½ÐµÐµ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ…
+					$sql .= ', ';
+				};
+				$zapyataya = true;
+				$sql .= '`story`=';
+				$sql .= '"'.$story.'"';
+			};
+			
+			$sql = mysql_query($sql);
+			
+			if($sql){
+				$array->text = 'success!';
+				echo(json_encode($array));
+			} else {
+				$array->text = 'error!';
+				echo(json_encode($array));
+			}	
+			
+		}
+		
 	}
 	
 

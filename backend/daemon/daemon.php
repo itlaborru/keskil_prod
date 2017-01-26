@@ -7,13 +7,12 @@ $passFordb = '123456';
 $db = mysql_connect('localhost',$loginFordb, $passFordb) or die(mysql_error());
 
 mysql_select_db('lavr-ik_keskil', $db) or die("ERROR");
-mysql_query("SET NAMES utf8");
-mysql_set_charset("utf8");
 
 
 
-$tabels = array ("newslist","categorylist","cartoonslist","contestlist"); //список таблиц которые грузит демон в cache.json
+$tabels = array ("newslist","categorylist","cartoonslist","contestlist","lastChanges"); //список таблиц которые грузит демон в cache.json
 while($b){
+	$response = array();
 	echo "working ";
 	foreach($tabels as $value){
 		
@@ -29,12 +28,20 @@ while($b){
 				$decode = $row["post"];
 				$row["post"] = (json_decode($decode));
 			}
-			array_push($arr, $row);
+			if($value != "lastChanges") {
+				array_push($arr, $row);
+			} else {
+				$fp = fopen(dirname(__FILE__)."/lastChanges.json", "w");
+				fwrite($fp, json_encode($row,JSON_UNESCAPED_UNICODE));
+				fclose($fp);
+			}
 		};
-		$response[$value.""] = ($arr);
+		if($value != "lastChanges") {
+			$response[$value.""] = ($arr);
+		}
 	};
 	$fp = fopen(dirname(__FILE__)."/cache.json", "w");
-	fwrite($fp, json_encode($response));
+	fwrite($fp, json_encode($response,JSON_UNESCAPED_UNICODE));
 	fclose($fp);
 	sleep(5);
 };

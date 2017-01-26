@@ -5,8 +5,7 @@
 	$passFordb = '123456';
 	
 	include('includes/connect.php');
-	include('/var/www/domains/ovz1.itlaborykt.zm9y1.vps.myjino.ru/daemon/change.php');
-	changeDB('cartoonslist');
+	include('../includes/functions.php');
 	$search = ['https://www.youtube.com/watch?v=','http://youtu.be/'];
 	$type = htmlspecialchars(stripslashes($_POST['type']));
 	$id = htmlspecialchars(stripslashes($_POST['id']));
@@ -17,6 +16,25 @@
 	if($type == 'push'){
 		
 		$sql = mysql_query('INSERT INTO `cartoonslist`(`url`, `name`, `category`) VALUES ("'.$url.'","'.$name.'","'.$category.'")');
+		
+		$lastid = mysql_insert_id();
+		
+		$categorylist = json_decode($category);
+		
+		foreach ($categorylist as &$value) {
+			$sql = mysql_query('SELECT * FROM `categorylist` WHERE id="'.$value.'"');
+			
+			$result = mysql_fetch_assoc($sql);
+			
+			$json = json_decode($result['post']);
+			
+			array_push($json, $lastid);
+			
+			$json = json_encode($json);
+			
+			$sql = mysql_query('UPDATE `categorylist` SET `post`="'.$json.'" WHERE id = "'.$result['id'].'"');
+		}
+		
 		if($sql){
 			echo 'Gotovo!';
 		}
@@ -75,13 +93,5 @@
 		}
 	};
 	
-	$js = file_get_contents(dirname(__FILE__)."/../daemon/lastChanges.json");
-	$j =json_decode($js, true);
-	$val = 'cartoonslist';
-	$j[$val] = $j[$val]+1;
-	echo json_encode($j);
-	$fp = fopen(dirname(__FILE__)."/../daemon/lastChanges.json", "w");
-	fwrite($fp, json_encode($j));
-	fclose($fp);
-	
+	changeDB('cartoonslist');
 ?>

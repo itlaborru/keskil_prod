@@ -1,16 +1,15 @@
-
-<?
+﻿<?
 	include('rootChecker.php');
 	
 	$loginFordb = 'valeratop';
 	$passFordb = '123456';
 	
 	include('includes/connect.php');
-	include('/var/www/domains/ovz1.itlaborykt.zm9y1.vps.myjino.ru/daemon/change.php');
-	changeDB('categorylist');
+	include('../includes/functions.php');
 	$type = htmlspecialchars(stripslashes($_POST['type']));
 	$id = htmlspecialchars(stripslashes($_POST['id']));
 	$category = htmlspecialchars(stripslashes($_POST['category']));
+	$categoryType = htmlspecialchars(stripslashes($_POST['categoryType']));
 
 	if($type == 'push'){
 		
@@ -20,7 +19,7 @@
 			exit('Eta kategoriya uzhe zanyata ');
 		}
 		
-		$sql = mysql_query('INSERT INTO `categorylist`(`category`) VALUES ("'.$category.'")');
+		$sql = mysql_query('INSERT INTO `categorylist`(`category`,`type`,`post`) VALUES ("'.$category.'","'.$categoryType.'", "[]")');
 		if($sql){
 			echo 'Gotovo!';
 		}
@@ -51,14 +50,5 @@
 		}
 	};
 	
-	$js = file_get_contents(dirname(__FILE__)."/../daemon/lastChanges.json");
-	$j =json_decode($js, true);
-	$val = 'categorylist';
-	$j[$val] = $j[$val]+1;
-	echo json_encode($j);
-	$fp = fopen(dirname(__FILE__)."/../daemon/lastChanges.json", "w");
-	fwrite($fp, json_encode($j));
-	fclose($fp);
-	
-
+	changeDB('categorylist');
 ?>

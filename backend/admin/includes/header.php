@@ -7,3 +7,4 @@
 </head>
 <body>
 <div id="page">
+	<h1 style="padding: .5em 0">Кэскил-онлайн</h1>

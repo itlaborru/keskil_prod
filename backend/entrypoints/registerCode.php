@@ -1,17 +1,17 @@
-<!DOCTYPE html>
+п»ї<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Регистрация</title>
+	<title>вЂ“РµРіРёСЃС‚СЂР°С†РёВ¤</title>
 </head>
 <body>
-	<input class="fname" name="fname" size="32"  type="text" placeholder="fname">
-	<input class="lname" name="lname" size="32"  type="text" placeholder="lname">
+	<input class="fname" name="fname" size="32"  type="text" placeholder="РРјСЏ">
+	<input class="lname" name="lname" size="32"  type="text" placeholder="Р¤Р°РјРёР»РёСЏ">
 	<input class="push" name="push" type="button" value="push">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script>
 		
-		<?//Cам по себе это генератор аккаунта при наличии письма на почту.?>
+		<?//CР°Рј РїРѕ СЃРµР±Рµ СЌС‚Рѕ РіРµРЅРµСЂР°С‚РѕСЂ Р°РєРєР°СѓРЅС‚Р° РїСЂРё РЅР°Р»РёС‡РёРё РїРёСЃСЊРјР° РЅР° РїРѕС‡С‚Сѓ.?>
 		
 		$('.push').on('click', function(){
 			$.ajax({
