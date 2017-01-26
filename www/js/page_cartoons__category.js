@@ -4,7 +4,7 @@ var cartoons__category = {
 		$('.category__list__inPicker').html("");
 		$(".cartoonCatBlock").html("");
 		function createVideo() {
-			var block = $("<div class='video'><div> "+DataAjax.cartoonslist[i].name +"</div><iframe width='350' height='200' src='https://www.youtube.com/embed/"+DataAjax.cartoonslist[i].url+"?rel=0&amp;controls=0&amp;showinfo=0&feature=player_embedded' frameborder='0' allowfullscreen> </iframe></div>");
+			var block = $("<div class='video'><div> "+DataAjax.cartoonslist[i].name +"</div><iframe width='290' height='180' src='https://www.youtube.com/embed/"+DataAjax.cartoonslist[i].url+"?rel=0&amp;controls=0&amp;showinfo=0&feature=player_embedded' frameborder='0' allowfullscreen> </iframe></div>");
 			$(".cartoonCatBlock").append(block);
 		}
 		for(var i = 0; i < DataAjax.cartoonslist.length; i++) {
@@ -12,7 +12,7 @@ var cartoons__category = {
 		}
 		for(var i = 0; i < DataAjax.categorylist.length; i++) {
 			if(DataAjax.categorylist[i].type == "cartoon") {
-				var folder = $("<a href='#cartoons' data-cartooncat='"+DataAjax.categorylist[i].id+"' class='cartoonCategory'>"+DataAjax.categorylist[i].category+" </a></br>");
+				var folder = $("<a href='#cartoons' data-cartooncat='"+DataAjax.categorylist[i].id+"' class='cartoonCategory'>"+DataAjax.categorylist[i].category+" </a><br/>");
 				$('.categoryPicker .category__list__inPicker').append(folder);
 			}
 		};

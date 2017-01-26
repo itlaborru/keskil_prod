@@ -25,7 +25,7 @@ var news__category = {
 		}
 		for(var i = 0; i < DataAjax.categorylist.length; i++) {
 			if(DataAjax.categorylist[i].type == "news") {
-				var newsFolder = $("<a href='#news' data-newscat='"+DataAjax.categorylist[i].id+"' class='newsCategory'>"+DataAjax.categorylist[i].category+" </a></br>");
+				var newsFolder = $("<a href='#news' data-newscat='"+DataAjax.categorylist[i].id+"' class='newsCategory'>"+DataAjax.categorylist[i].category+" </a><br/>");
 				$('.categoryPicker .category__list__inPicker').append(newsFolder);
 			}
 		}

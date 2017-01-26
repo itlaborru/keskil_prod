@@ -126,3 +126,6 @@ h3 {
 	text-overflow:	ellipsis;
 	max-height:	100px;
 }
+.userPanel a {
+	color:	#fff;
+}
