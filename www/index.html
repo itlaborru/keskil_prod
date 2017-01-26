@@ -282,9 +282,46 @@
 				
 				<div data-page="pulsegoroda" class="page cached pulsegoroda">
 					<div class="page-content">
-						<p><a href="#add_story" class="open-about">ADD STORY </a></p>
+						<p><a href="#pulsegoroda_add_story" class="open-about">ADD STORY </a></p>
 						<div id="map">
 						</div>
+					</div>
+				</div>
+				<div data-page="pulsegoroda_add_story" class="page cached pulsegoroda_add_story">
+					<div class="page-content">
+						<div class="list-block">
+							<ul>
+								<li>
+								  <div class="item-content">
+									<div class="item-media"><i class="icon f7-icons">person</i></div>
+									<div class="item-inner">
+									  <div class="item-title label">Name</div>
+									  <div class="item-input">
+										<input type="text" class="story_name" name="story_name" placeholder="Story name">
+									  </div>
+									</div>
+								  </div>
+								</li>
+								<li class="align-top">
+									<div class="item-content">
+										<div class="item-media"><i class="icon f7-icons">chat</i></div>
+										<div class="item-inner">
+										  <div class="item-title label">Story</div>
+										  <div class="item-input">
+											<textarea class="story" placeholder="Your Story" name="story"></textarea>
+										  </div>
+										</div>
+									</div>
+								</li>
+								<li class="align-top">
+									<div class="item-content">
+										<div id="map">
+										</div>
+									</div>
+								</li>
+							</ul>
+							<input class="pulseGorodapush" type="button" value="Отправить данные"><br/>
+						</div>	
 					</div>
 				</div>
             </div>
@@ -339,7 +376,7 @@
     <script type="text/javascript" src="js/entrypoints.js"></script>
     <script type="text/javascript" src="js/cookie.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNx6_QhDELTpDbMHl3C43gShtuazM4Xew"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNx6_QhDELTpDbMHl3C43gShtuazM4Xew&libraries=places&callback=initAutocomplete" async defer"></script>
 	<script type="text/javascript" src="js/page_pulsegoroda.js"></script>
     <script type="text/javascript" src="js/page_contests__list.js"></script>
     <script type="text/javascript" src="js/page_contest.js"></script>
@@ -352,6 +389,8 @@
     <script type="text/javascript" src="js/page_userOptions.js"></script>
     <script type="text/javascript" src="js/dictionary.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
+	
+	<script type="text/javascript" src="js/page_pulsegoroda_addstory.js"></script>
 </body>
 <!--
 Buglist
