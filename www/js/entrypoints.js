@@ -165,28 +165,47 @@ var entrypoints = {
 			localStorage.setItem("lastChanges", JSON.stringify(DataAjax.lastChanges));
 		},
 	},
+	checkOneMore:	 function() {
+		console.log("null");
+		var lastChanges = JSON.parse(localStorage.getItem("lastChanges"));
+		ajax(entrypoints.checkForUpdates.url,
+		{
+			"object" : {
+				"coldStart":"no",
+				"lastChanges":lastChanges
+			},
+		},entrypoints.checkForUpdates.success);
+	},
 	checkForUpdates: {
 		url:	serverAdress + "daemon/get.php",
 		success:	function(data) {
-			var Data = JSON.parse(data);
-			console.log(Data);
-			if(Data) {
-				console.log("New data");
-				for(var key in Data) {
-					DataAjax[key] = Data[key];
-					if(key == "newslist"){
-						news__category.render();
-					}
-					else if(key == "cartoonslist"){
-						cartoons__category.render();
-					}
-					else if(key == "contestlist"){
-						contests__list.render();
-					}
+			if(data!= 'old') {
+				var Data = JSON.parse(data);
+				console.log(Data);
+				if(Data.lastChanges == undefined) {
+					entrypoints.checkOneMore();
 				}
-				localStorage.setItem("cache", JSON.stringify(DataAjax));
-				localStorage.setItem("lastChanges", JSON.stringify(Data.lastChanges));
+				else {
+					console.log("New data");
+					for(var key in Data) {
+						DataAjax[key] = Data[key];
+						if(key == "newslist"){
+							news__category.render();
+						}
+						else if(key == "cartoonslist"){
+							cartoons__category.render();
+						}
+						else if(key == "contestlist"){
+							contests__list.render();
+						}
+					}
+					localStorage.setItem("cache", JSON.stringify(DataAjax));
+					localStorage.setItem("lastChanges", JSON.stringify(Data.lastChanges));
+				}
 			}
-		},
-	}
+			else {
+				console.log(false);
+			}
+		}
+	},
 };
