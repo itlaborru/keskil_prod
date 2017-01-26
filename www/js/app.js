@@ -42,3 +42,9 @@ var ajax = function(url, data, onSuccess){
 		}
 	});
 };
+
+//Show/Hide
+$(".show__element-call").click(function() {
+	$(".show__element[data-id='"+$(this).attr('data-id')+"']").toggleClass("state_active");
+	return false;
+});

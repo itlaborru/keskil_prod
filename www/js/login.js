@@ -25,8 +25,7 @@ var login = {
 							userInfo.phpSessionId = dataLogin.sessionId;
 							userInfo.loggedIn = true;
 							localStorage.setItem("userInfo",JSON.stringify(userInfo));
-							$('.loginPanel').addClass('display-none');
-							$('.loginPanel').removeClass('display-block');
+							$('.loginPanel').toggleClass("state_active");
 							$('.userPanel').removeClass('display-none');
 							$('.userPanel').addClass('display-block');
 							$('.userPanel__icon').attr('src', '');
@@ -114,10 +113,9 @@ var login = {
 					cookies.getCookie('PHPSESSID', null);
 					userInfo = {};
 					localStorage.removeItem("userInfo");
-					$('.loginPanel').addClass('display-block');
+					$('.loginPanel').toggleClass("state_active");
 					$('.userPanel').addClass('display-none');
 					$('.userPanel').removeClass('display-block');
-					$('.loginPanel').removeClass('display-none');
 				}
 			);
 			

@@ -3,8 +3,7 @@
 	console.log(userInfo);
 	if(userInfo.loggedIn){//Проверка на сохраненность куки
 		cookies.setCookie('PHPSESSID', userInfo.phpSessionId);
-		$('.loginPanel').addClass('display-none');
-		$('.loginPanel').removeClass('display-block');
+		$('.loginPanel').toggleClass("state_active");
 		$('.userPanel').removeClass('display-none');
 		$('.userPanel').addClass('display-block');
 		$('.userPanel__icon').attr('src', '');

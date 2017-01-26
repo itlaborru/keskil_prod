@@ -126,6 +126,15 @@ h3 {
 	text-overflow:	ellipsis;
 	max-height:	100px;
 }
+.show__element {
+	display: none;
+}
+.show__element.state_active {
+	display: block;
+}
 .userPanel a {
+	color:	#fff;
+}
+.loginPanel a {
 	color:	#fff;
 }

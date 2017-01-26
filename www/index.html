@@ -42,16 +42,21 @@
     <div class="panel panel-right panel-reveal">
         <div class="content-block">
            	<!-- Поле для ввода данных для входа/регистрации -->
-			<div class="loginPanel">
-				<input class="login" name="login" size="32"  type="text" placeholder="Login">
-				<input class="pass" name="pass" size="32"  type="text" placeholder="Password">
-				<input class="signin" name="signin" type="button" value="Log in">
-				<input class="logout" name="logout" type="button" value="logout">
+			<div class="loginPanel show__element state_active" data-id='userPanel'>
+				<div class="show__element state_active" data-id="loginPanel">
+					<input class="login" name="login" size="32"  type="text" placeholder="Login">
+					<input class="pass" name="pass" size="32"  type="text" placeholder="Password">
+					<input class="signin show__element-call" name="signin" type="button" value="Log in" data-id="loginPanel"><br/>
+					<p><a href="#" class="show__element-call" data-id="loginPanel">Нет аккаунта? Регистрируйтесь</a></p>
+				</div>
 				
-				<input class="loginReg" name="login" size="32"  type="text" placeholder="Login">
-				<input class="passReg" name="pass" size="32"  type="text" placeholder="Password">
-				<input class="mail" name="mail" size="70"  type="text" placeholder="mail">
-				<input class="register" name="register" type="button" value="Register">
+				<div class="show__element" data-id="loginPanel">
+					<input class="loginReg" name="login" size="32"  type="text" placeholder="Login">
+					<input class="passReg" name="pass" size="32"  type="text" placeholder="Password">
+					<input class="mail" name="Mail" size="70"  type="text" placeholder="mail">
+					<input class="register" name="register" type="button" value="Register">
+					<p><a href="#" class="show__element-call" data-id="loginPanel">Уже есть аккаунт?</a></p>
+				</div>
 			</div>
 			<div class="userPanel">
 				
