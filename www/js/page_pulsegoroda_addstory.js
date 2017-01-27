@@ -15,3 +15,4 @@ $('.pulseGorodapush').on('click',function(){
 		
 	});
 });
+

@@ -17,6 +17,7 @@ var pulsegoroda = {
 		},
 	],
 	map : "",
+	map2 : "",
 	render:	function() {
 		this.initMap();
 	},
@@ -75,6 +76,19 @@ var pulsegoroda = {
 				infowindow.open(map,marker);
 			});  
 		};
+		
+		map2 = new google.maps.Map(document.getElementById('map2'), {
+			center: {lat: 62.031030526953856, lng: 129.72959222272038},
+			zoom: 1,
+			minZoom: 10,
+			maxZoom: 18,
+			disableDefaultUI: true,
+		});
+		
+		console.log(map2);
+		
+		map2.mapTypes.set('map_style', styledMap);
+		map2.setMapTypeId('map_style');
 	},
 };
 /*
