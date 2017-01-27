@@ -20,6 +20,21 @@
 #addstory_map{
 	height:40%;
 }
+.pulsegoroda__popup {
+	position: absolute;
+	width: 80%;
+	padding: 10px;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 5px #ccc;
+	z-index: 100;
+	display: none;
+	left: 10%;
+	top: 200px;
+}
+.pulsegoroda__popup.active {
+	display: block;
+}
 .statusbar-overlay {
     background: #000000;
 }

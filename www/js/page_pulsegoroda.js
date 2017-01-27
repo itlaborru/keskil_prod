@@ -20,6 +20,11 @@ var pulsegoroda = {
 	map2 : "",
 	render:	function() {
 		this.initMap();
+		
+		$("#pulsegoroda__addstory").click(function() {
+			$(".pulsegoroda__popup").toggleClass("active");
+			return false;
+		});
 	},
 	initMap : function() {
 		var styles = [
