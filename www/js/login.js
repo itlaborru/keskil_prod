@@ -26,8 +26,7 @@ var login = {
 							userInfo.loggedIn = true;
 							localStorage.setItem("userInfo",JSON.stringify(userInfo));
 							$('.loginPanel').toggleClass("state_active");
-							$('.userPanel').removeClass('display-none');
-							$('.userPanel').addClass('display-block');
+							$('.userPanel').toggleClass("state_active");
 							$('.userPanel__icon').attr('src', '');
 							$('.userPanel__name').html(dictionary.unableToConnect);
 							$('.login').val('');
@@ -114,8 +113,7 @@ var login = {
 					userInfo = {};
 					localStorage.removeItem("userInfo");
 					$('.loginPanel').toggleClass("state_active");
-					$('.userPanel').addClass('display-none');
-					$('.userPanel').removeClass('display-block');
+					$('.userPanel').toggleClass("state_active");
 				}
 			);
 			

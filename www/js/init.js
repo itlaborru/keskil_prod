@@ -4,8 +4,7 @@
 	if(userInfo.loggedIn){//Проверка на сохраненность куки
 		cookies.setCookie('PHPSESSID', userInfo.phpSessionId);
 		$('.loginPanel').toggleClass("state_active");
-		$('.userPanel').removeClass('display-none');
-		$('.userPanel').addClass('display-block');
+		$('.userPanel').toggleClass("state_active");
 		$('.userPanel__icon').attr('src', '');
 		$('.userPanel__icon').attr('src', userInfo.icon);
 		$('.userPanel__name').html(userInfo.login);
