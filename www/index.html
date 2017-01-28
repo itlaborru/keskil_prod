@@ -42,7 +42,7 @@
     <div class="panel panel-right panel-reveal">
         <div class="content-block">
            	<!-- Поле для ввода данных для входа/регистрации -->
-			<div class="loginPanel show__element state_active" data-id='userPanel'>
+			<div class="loginPanel show__element state_active">
 				<div class="show__element state_active" data-id="loginPanel">
 					<div class="list-block">
 						<ul>
@@ -68,7 +68,7 @@
 							</li>
 							
 							<li>
-								<a href="#" class="item-link list-button signin show__element-call"data-id="loginPanel">Log in</a>
+								<a href="#" class="item-link list-button signin">Log in</a>
 							</li>
 						</ul>
 					</div>
@@ -118,7 +118,7 @@
 					<p><a href="#" class="show__element-call" data-id="loginPanel">Уже есть аккаунт?</a></p>
 				</div>
 			</div>
-			<div class="userPanel">
+			<div class="userPanel show__element">
 				
 				<div class="userPanel__shortInfo">
 					
@@ -271,10 +271,7 @@
 				<div data-page="feedback" class="page cached">
 					<div class="page-content">
 						<div class="content-block">
-							<p>
-								Введите пожелание
-							</p>
-							<textarea class="feedback" ></textarea>
+							<textarea placeholder="О чем хотите сообщить?" class="feedback" style="width: 95%; margin-left: 5px; margin-top: 5px; height: 300px"></textarea>
 							<p><a href="#" class="button active feedbackSend">Отправить</a></p>
 						</div>
 					</div>
@@ -285,16 +282,10 @@
 						<p><a href="#" class="button" id="pulsegoroda__addstory">Добавить историю</a></p>
 						<div id="map">
 						</div>
-						<div class="pulsegoroda__popup">
-							Введите место <br>
-							<input id="pac-input" class="controls" type="text" placeholder="Search Box"><br>
-							или<br>
-							нажмите на карте</br>							
-						</div>
 					</div>
 				</div>
-				</div>
-            </div>
+			</div>
+		</div>
 			
 			<div class="login-screen" style="padding-top: 30px">
 				
@@ -359,8 +350,6 @@
     <script type="text/javascript" src="js/page_userOptions.js"></script>
     <script type="text/javascript" src="js/dictionary.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
-	
-	<script type="text/javascript" src="js/page_pulsegoroda_addstory.js"></script>
 </body>
 <!--
 Buglist

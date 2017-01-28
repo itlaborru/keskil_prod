@@ -14,4 +14,5 @@
 	withoutUserContent:	"Не прикреплен файл",
 	hello:	"Здравствуйте, ",
 	uploaded:	"Загружено ",
+	choosePlace:	"Выберите место на карте ",
 }
