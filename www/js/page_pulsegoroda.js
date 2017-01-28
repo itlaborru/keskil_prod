@@ -26,7 +26,6 @@ var pulsegoroda = {
 					{
 						file: "pulsegoroda",
 						type: "push",
-						story_name: $('.story_name').val(),
 						story: $('.story').val()
 					},
 					entrypoints.pulseAddStory.success
@@ -37,27 +36,15 @@ var pulsegoroda = {
 				app.alert(dictionary.choosePlace, dictionary.keskil);
 				pulsegoroda.setMapOnAll(null);
 				
-				var drawingManager = new google.maps.drawing.DrawingManager({
-					drawingMode: google.maps.drawing.OverlayType.MARKER,
-					drawingControl: true,
-					drawingControlOptions: {
-						position: google.maps.ControlPosition.TOP_CENTER,
-						drawingModes: [
-							google.maps.drawing.OverlayType.MARKER,
-						]
-					},
-					markerOptions: {
-						draggable: true,
-					},
-				});	
-
-				drawingManager.setMap(pulsegoroda.map);
+				pulsegoroda.drawingManager.setMap(pulsegoroda.map);
 				
 				return false;
+				
 			});
 			pulsegoroda.notFirstUse = true;
 		}
 	},
+	drawingManager:'',
 	setMapOnAll: function(map) {
 		for (var i = 0; i < pulsegoroda.actualMarkers.length; i++) {
 			pulsegoroda.actualMarkers[i].setMap(map);
@@ -105,26 +92,57 @@ var pulsegoroda = {
 			
 			pulsegoroda.map.mapTypes.set('map_style', styledMap);
 			pulsegoroda.map.setMapTypeId('map_style');
+			
+			pulsegoroda.drawingManager = new google.maps.drawing.DrawingManager({
+				drawingMode: google.maps.drawing.OverlayType.MARKER,
+				drawingControl: true,
+				drawingControlOptions: {
+					position: google.maps.ControlPosition.TOP_CENTER,
+					drawingModes: [
+						google.maps.drawing.OverlayType.MARKER,
+					]
+				},
+				markerOptions: {
+					draggable: true,
+				},
+			});	
+
 		}
 
+		google.maps.event.addListener(pulsegoroda.drawingManager, 'markercomplete', function(marker) {
+			console.log(marker.getPosition().toString());
+			pulsegoroda.drawingManager.setMap(null);
+			
+			var contentString = '<textarea placeholder="Ваша история" class="story" style="width: 95%; margin-left: 5px; margin-top: 5px; height: 300px">'+'</textarea>'+'<p>'+'<a href="#" class="button active pulseGorodapush">'+'Отправить'+'</a>'+'</p>';
+			
+			var addInfowindow = new google.maps.InfoWindow({
+				content: contentString
+			});
+			marker.addListener('click', function() {
+				addInfowindow.open(pulsegoroda.map, marker);
+			});
+			
+		});
 		
+				
 		pulsegoroda.setMapOnAll(null);
+		pulsegoroda.drawingManager.setMap(null);
 		
 		for(var i=0; i<pulsegoroda.markers.length; i++){
-			marker = new google.maps.Marker({
+			marker1 = new google.maps.Marker({
 				position: {lat: pulsegoroda.markers[i].lat, lng: pulsegoroda.markers[i].lng},
 				map: pulsegoroda.map,
 			});
-			pulsegoroda.actualMarkers.push(marker);
-			makeInfoWin(marker, pulsegoroda.markers[i].story)
+			pulsegoroda.actualMarkers.push(marker1);
+			makeInfoWin(marker1, pulsegoroda.markers[i].story)
 		}	
 		
 		
 		
-		function makeInfoWin(marker, data) {
+		function makeInfoWin(marker1, data) {
 			var infowindow = new google.maps.InfoWindow({ content: data });
-				google.maps.event.addListener(marker, 'click', function() {
-				infowindow.open(map,marker);
+				google.maps.event.addListener(marker1, 'click', function() {
+				infowindow.open(map,marker1);
 			});  
 		};
 	}
