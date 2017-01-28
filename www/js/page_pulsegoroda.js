@@ -21,16 +21,7 @@ var pulsegoroda = {
 	notFirstUse:	false,
 	bindEvents: function() {
 		if(!pulsegoroda.notFirstUse) {
-			$('.pulseGorodapush').on('click',function(){
-				ajax(entrypoints.pulseAddStory.url,
-					{
-						file: "pulsegoroda",
-						type: "push",
-						story: $('.story').val()
-					},
-					entrypoints.pulseAddStory.success
-				);
-			});
+		
 			
 			$("#pulsegoroda__addstory").click(function() {
 				app.alert(dictionary.choosePlace, dictionary.keskil);
@@ -120,6 +111,17 @@ var pulsegoroda = {
 			});
 			marker.addListener('click', function() {
 				addInfowindow.open(pulsegoroda.map, marker);
+				
+				$('.pulseGorodapush').on('click',function(){
+					ajax(entrypoints.pulseAddStory.url,
+						{
+							file: "pulsegoroda",
+							type: "push",
+							story: $('.story').val(),
+						},
+						entrypoints.pulseAddStory.success
+					);
+				});
 			});
 			
 		});
@@ -145,5 +147,8 @@ var pulsegoroda = {
 				infowindow.open(map,marker1);
 			});  
 		};
+		$(".pulseGorodapush").click(function() {
+			console.log('sadsad');
+		})
 	}
 };	
