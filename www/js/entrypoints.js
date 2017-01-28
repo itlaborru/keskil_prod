@@ -99,6 +99,9 @@ var entrypoints = {
 						else if(key == "contestlist"){
 							contests__list.render();
 						}
+						else if(key == "pulsegoroda"){
+							pulsegoroda.render();
+						}
 					}
 					localStorage.setItem("cache", JSON.stringify(DataAjax));
 					localStorage.setItem("lastChanges", JSON.stringify(Data.lastChanges));
