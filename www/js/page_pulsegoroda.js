@@ -1,4 +1,6 @@
 var pulsegoroda = {
+	latSend:	0,
+	lngSend:	0,
 	markers : [
 	],
 	actualMarkers:	[
@@ -24,11 +26,16 @@ var pulsegoroda = {
 		
 			
 			$("#pulsegoroda__addstory").click(function() {
-				app.alert(dictionary.choosePlace, dictionary.keskil);
-				pulsegoroda.setMapOnAll(null);
-				
-				pulsegoroda.drawingManager.setMap(pulsegoroda.map);
-				
+				if(localStorage.getItem("userInfo")) {
+					app.alert(dictionary.choosePlace, dictionary.keskil);
+					pulsegoroda.setMapOnAll(null);
+					$("#pulsegoroda__addstory").addClass("display-none");
+					
+					pulsegoroda.drawingManager.setMap(pulsegoroda.map);
+				}
+				else {
+					app.alert(dictionary.plsLogin, dictionary.keskil);
+				}
 				return false;
 				
 			});
@@ -42,7 +49,7 @@ var pulsegoroda = {
 		}
 	},
 	initMap : function() {	
-
+		$("#pulsegoroda__addstory").removeClass("display-none");
 		if(!pulsegoroda.notFirstUse) {
 			var styles = [
 				{
@@ -101,7 +108,9 @@ var pulsegoroda = {
 		}
 
 		google.maps.event.addListener(pulsegoroda.drawingManager, 'markercomplete', function(marker) {
-			console.log(marker.getPosition().toString());
+			pulsegoroda.latSend = marker.getPosition().lat();
+			pulsegoroda.lngSend = marker.getPosition().lng();
+			console.log(marker.getPosition().lat());
 			pulsegoroda.drawingManager.setMap(null);
 			
 			var contentString = '<textarea placeholder="Ваша история" class="story" style="width: 95%; margin-left: 5px; margin-top: 5px; height: 300px">'+'</textarea>'+'<p>'+'<a href="#" class="button active pulseGorodapush">'+'Отправить'+'</a>'+'</p>';
@@ -109,14 +118,22 @@ var pulsegoroda = {
 			var addInfowindow = new google.maps.InfoWindow({
 				content: contentString
 			});
+			marker.addListener('drag', function() {
+				
+				pulsegoroda.latSend = marker.getPosition().lat();
+				pulsegoroda.lngSend = marker.getPosition().lng();
+				console.log(pulsegoroda.latSend,pulsegoroda.lngSend);
+			});
 			marker.addListener('click', function() {
-				addInfowindow.open(pulsegoroda.map, marker);
+				addInfowindow.open(pulsegoroda.latSend,pulsegoroda.map, marker);
 				
 				$('.pulseGorodapush').on('click',function(){
 					ajax(entrypoints.pulseAddStory.url,
 						{
 							file: "pulsegoroda",
 							type: "push",
+							lang:	pulsegoroda.lngSend,
+							lat:	pulsegoroda.latSend,
 							story: $('.story').val(),
 						},
 						entrypoints.pulseAddStory.success
@@ -147,8 +164,5 @@ var pulsegoroda = {
 				infowindow.open(map,marker1);
 			});  
 		};
-		$(".pulseGorodapush").click(function() {
-			console.log('sadsad');
-		})
 	}
 };	
