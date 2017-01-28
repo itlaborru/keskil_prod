@@ -1,25 +1,20 @@
 var pulsegoroda = {
 	markers : [
-		{
-			lat :  62.04424687451881,
-			lng : 129.74153668619692,
-			text : "Якутск - место, где постоянно проходит схватка между искусством и прозой жизни. Ближайшее место, где вы сможете убедиться в этом лично находится в пяти минутах от центра города и подходит как для прогулки, так и для того, чтобы понять дух города. Здесь вы сможете увидеть примерно вот такие вещи .",
-		},
-		{
-			lat : 62.0300669311373,
-			lng : 129.7295600362122,
-			text : "В Якутске существует Невезучий Карась. Вкратце - благодаря этой рыбе, местные жители смогли пережить голод во время сложного исторического периода. К сожалению, чувство благодарности к этому историческому деятелю испытывают не все, поэтому скульптуру регулярно похищают. Прогулявшись к мосту, вы сможете лично узнать актуальное состояние Карася и сделать соответствующий пост в Instagram с хэш-тэгом #SaveYakitianFish.",
-		},
-		{
-			lat : 62.03079996961933,
-			lng : 129.729242362082,
-			text : "Немного прогулявшись в этом районе вы неминуемо столкнетесь со статуей Терминатора, который вылезает из-под земли. Когда будете фотографироваться с ним и заливать фотку в социальные сети, имейте в виду, что он такой же герой, как и Карась. Просто ему везет больше. Ну или настоящее искусство все же побеждает. ",
-		},
 	],
 	actualMarkers:	[
 	],
 	map : "",
 	render:	function() {
+		pulsegoroda.markers = [];
+		for (var i = 0; i < DataAjax.pulsegoroda.length; i++) {
+			if(DataAjax.pulsegoroda[i].available == "1") {
+				var thisMarker = DataAjax.pulsegoroda[i];
+				thisMarker.lng = JSON.parse(thisMarker.lang);
+				thisMarker.lat = JSON.parse(thisMarker.lat);
+				pulsegoroda.markers.push(thisMarker);
+				
+			}
+		}
 		pulsegoroda.initMap();
 		pulsegoroda.bindEvents();
 	},
@@ -27,20 +22,6 @@ var pulsegoroda = {
 	bindEvents: function() {
 		if(!pulsegoroda.notFirstUse) {
 			$('.pulseGorodapush').on('click',function(){
-				alert(1);
-				/*$.ajax({
-					type: "POST",
-					data:{
-						file: "pulsegoroda",
-						type: "push",
-						story_name: $('.story_name').val(),
-						story: $('.story').val()
-					},
-					url: "http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/entrypoints/set.php",
-					success:function(data){
-						alert(data);
-					}
-				});*/
 				ajax(entrypoints.pulseAddStory.url,
 					{
 						file: "pulsegoroda",
@@ -55,6 +36,23 @@ var pulsegoroda = {
 			$("#pulsegoroda__addstory").click(function() {
 				app.alert(dictionary.choosePlace, dictionary.keskil);
 				pulsegoroda.setMapOnAll(null);
+				
+				var drawingManager = new google.maps.drawing.DrawingManager({
+					drawingMode: google.maps.drawing.OverlayType.MARKER,
+					drawingControl: true,
+					drawingControlOptions: {
+						position: google.maps.ControlPosition.TOP_CENTER,
+						drawingModes: [
+							google.maps.drawing.OverlayType.MARKER,
+						]
+					},
+					markerOptions: {
+						draggable: true,
+					},
+				});	
+
+				drawingManager.setMap(pulsegoroda.map);
+				
 				return false;
 			});
 			pulsegoroda.notFirstUse = true;
@@ -66,22 +64,6 @@ var pulsegoroda = {
 		}
 	},
 	initMap : function() {	
-		var drawingManager = new google.maps.drawing.DrawingManager({
-			drawingMode: google.maps.drawing.OverlayType.MARKER,
-			drawingControl: true,
-			drawingControlOptions: {
-				position: google.maps.ControlPosition.TOP_CENTER,
-				drawingModes: [
-					google.maps.drawing.OverlayType.MARKER,
-				]
-			},
-			markerOptions: {
-				draggable: true,
-			},
-		});	
-		
-		console.log(i);
-		drawingManager.setMap(map);
 
 		if(!pulsegoroda.notFirstUse) {
 			var styles = [
@@ -134,7 +116,7 @@ var pulsegoroda = {
 				map: pulsegoroda.map,
 			});
 			pulsegoroda.actualMarkers.push(marker);
-			makeInfoWin(marker, pulsegoroda.markers[i].text)
+			makeInfoWin(marker, pulsegoroda.markers[i].story)
 		}	
 		
 		
