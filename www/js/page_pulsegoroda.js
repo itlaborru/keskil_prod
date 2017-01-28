@@ -17,7 +17,6 @@ var pulsegoroda = {
 		},
 	],
 	map : "",
-	map2 : "",
 	render:	function() {
 		this.initMap();
 		
@@ -62,7 +61,26 @@ var pulsegoroda = {
 			disableDefaultUI: true,
 		});
 		
-		console.log(map);
+		var drawingManager = new google.maps.drawing.DrawingManager({
+			drawingMode: google.maps.drawing.OverlayType.MARKER,
+			drawingControl: true,
+			drawingControlOptions: {
+				position: google.maps.ControlPosition.TOP_CENTER,
+				drawingModes: [
+					google.maps.drawing.OverlayType.MARKER,
+				]
+			},
+			markerOptions: {
+				draggable: true,
+			},
+		});	
+		
+		var i = true;
+		if($(".pulsegoroda__popup").toggleClass("active")){
+			i = false;
+		} 
+		console.log(i);
+		drawingManager.setMap(map);
 		
 		map.mapTypes.set('map_style', styledMap);
 		map.setMapTypeId('map_style');
@@ -75,27 +93,16 @@ var pulsegoroda = {
 			makeInfoWin(marker, this.markers[i].text)
 		}	
 		
+		
+		
 		function makeInfoWin(marker, data) {
 			var infowindow = new google.maps.InfoWindow({ content: data });
 				google.maps.event.addListener(marker, 'click', function() {
 				infowindow.open(map,marker);
 			});  
 		};
-		
-		map2 = new google.maps.Map(document.getElementById('map2'), {
-			center: {lat: 62.031030526953856, lng: 129.72959222272038},
-			zoom: 1,
-			minZoom: 10,
-			maxZoom: 18,
-			disableDefaultUI: true,
-		});
-		
-		console.log(map2);
-		
-		map2.mapTypes.set('map_style', styledMap);
-		map2.setMapTypeId('map_style');
-	},
-};
+	}
+};	
 /*
 $('.button').on('click', function () {
 	myApp.popup('.popup');

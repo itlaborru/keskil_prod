@@ -12,7 +12,6 @@ $('.pulseGorodapush').on('click',function(){
 		success:function(data){
 			alert(data);
 		}
-		
 	});
 });
 
