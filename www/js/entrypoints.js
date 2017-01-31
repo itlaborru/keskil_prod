@@ -1,6 +1,3 @@
-
- // Тут можешь переписывать на боевой сервак
- 
 var entrypoints = {
 	allDataUpdate: function() {
 		ajax(entrypoints.allData.url,entrypoints.allData.data,entrypoints.allData.success);
