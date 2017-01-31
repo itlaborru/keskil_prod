@@ -27,6 +27,10 @@ var initPages = {
 				window[page].render();
 			}
 		});
+		$(document).on('click', '.userHref', function (e) {
+			var userId = $(this).attr('user-id');
+			$(".userPage").attr("user-id", userId);
+		});
 	},
 };   
 	

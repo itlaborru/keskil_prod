@@ -21,11 +21,6 @@ function onDeviceReady() {
 			cookies.setCookie('PHPSESSID', userInfo.phpSessionId);
 			$('.loginPanel').toggleClass("state_active");
 			$('.userPanel').toggleClass("state_active");
-			$('.userPanel__icon').attr('src', '');
-			$('.userPanel__icon').attr('src', userInfo.icon);
-			$('.userPanel__name').html(userInfo.login);
-			$('.userPage__fullname').html(userInfo.lname + ' ' + userInfo.fname + ' ' +  userInfo.mname);
-			$('.userPanel__mail').html(userInfo.mail);
 			ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
 		} 
 	}

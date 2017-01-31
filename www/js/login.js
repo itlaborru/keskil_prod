@@ -27,8 +27,6 @@ var login = {
 							localStorage.setItem("userInfo",JSON.stringify(userInfo));
 							$('.loginPanel').toggleClass("state_active");
 							$('.userPanel').toggleClass("state_active");
-							$('.userPanel__icon').attr('src', '');
-							$('.userPanel__name').html(dictionary.unableToConnect);
 							$('.login').val('');
 							$('.pass').val('');
 							$('.loginReg').val('');
@@ -42,21 +40,7 @@ var login = {
 								},
 								
 								function(data){
-									var dataLogin = JSON.parse(data);
-									console.log(dataLogin);
-									$('.userPanel__icon').attr('src', dataLogin.icon);
-									$('.userPanel__name').html(dataLogin.login);
-									$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
-									$('.userPanel__mail').html(dataLogin.mail);
-									app.alert(dictionary.hello + dataLogin.login,dictionary.success);
-									
-									userInfo.login = dataLogin.login;
-									userInfo.fname = dataLogin.fname;
-									userInfo.lname = dataLogin.lname;
-									userInfo.mname = dataLogin.mname;
-									userInfo.mail = dataLogin.mail;
-									userInfo.icon = dataLogin.icon;
-									localStorage.setItem("userInfo", JSON.stringify(userInfo));
+									userOptions.updateUserinfoClient(data);
 								});
 						}
 					}
