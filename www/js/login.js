@@ -45,6 +45,7 @@ var login = {
 									$('.userPanel__name').html(dataLogin.login);
 									$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
 									$('.userPanel__mail').html(dataLogin.mail);
+									
 									app.alert(dictionary.hello + dataLogin.login,dictionary.success);
 									
 									userInfo.login = dataLogin.login;
@@ -55,6 +56,7 @@ var login = {
 									userInfo.mail = dataLogin.mail;
 									userInfo.icon = dataLogin.icon;
 									localStorage.setItem("userInfo", JSON.stringify(userInfo));
+									$(".myPage").attr("user-id", userInfo.id);
 								});
 						}
 					}
