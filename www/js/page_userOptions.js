@@ -20,8 +20,8 @@ var userOptions = {
 		userInfo.mname = dataLogin.mname;
 		userInfo.mail = dataLogin.mail;
 		userInfo.icon = dataLogin.icon;
-		localStorage.setItem("userInfo", JSON.stringify(userInfo));
 		$(".myPage").attr("user-id", userInfo.id);
+		localStorage.setItem("userInfo", JSON.stringify(userInfo));
 	},
 	bindEvents: function(){
 		$('.userPage').on('click', '.userPanel__icon', function (e) {
