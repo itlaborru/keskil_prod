@@ -4,6 +4,8 @@ var userOptions = {
 	updateUserinfo: function() {
 		ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
 	},
+	updateUserinfoClient:	function() {
+	},
 	bindEvents: function(){
 		$('.userPage').on('click', '.userPanel__icon', function (e) {
 			transferImages.type.name = "avatar";

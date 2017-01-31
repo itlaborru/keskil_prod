@@ -27,8 +27,6 @@ var login = {
 							localStorage.setItem("userInfo",JSON.stringify(userInfo));
 							$('.loginPanel').toggleClass("state_active");
 							$('.userPanel').toggleClass("state_active");
-							$('.userPanel__icon').attr('src', '');
-							$('.userPanel__name').html(dictionary.unableToConnect);
 							$('.login').val('');
 							$('.pass').val('');
 							$('.loginReg').val('');
@@ -43,7 +41,6 @@ var login = {
 								
 								function(data){
 									var dataLogin = JSON.parse(data);
-									console.log(dataLogin);
 									$('.userPanel__icon').attr('src', dataLogin.icon);
 									$('.userPanel__name').html(dataLogin.login);
 									$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
