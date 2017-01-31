@@ -1,6 +1,7 @@
 var pulsegoroda = {
 	latSend:	0,
 	lngSend:	0,
+	a: true,
 	markers : [
 	],
 	actualMarkers:	[
@@ -115,6 +116,12 @@ var pulsegoroda = {
 				console.log(pulsegoroda.latSend,pulsegoroda.lngSend);
 			});
 			
+			$(".back").click(function() {
+				pulsegoroda.infoWindow.setContent(pulsegoroda.infoWindow.content);
+				pulsegoroda.infoWindow.close();
+				marker.setMap(null);
+			})
+			
 			marker.addListener('click', function() {
 				pulsegoroda.infoWindow.open(pulsegoroda.map, marker);
 				
@@ -128,6 +135,7 @@ var pulsegoroda = {
 						},
 						entrypoints.pulseAddStory.success
 					);
+					pulsegoroda.infoWindow.setContent(pulsegoroda.infoWindow.content);
 					pulsegoroda.infoWindow.close();
 					marker.setMap(null);
 					pulsegoroda.initMap();
