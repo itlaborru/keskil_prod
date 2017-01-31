@@ -51,6 +51,7 @@ var login = {
 									app.alert(dictionary.hello + dataLogin.login,dictionary.success);
 									
 									userInfo.login = dataLogin.login;
+									userInfo.id = dataLogin.id;
 									userInfo.fname = dataLogin.fname;
 									userInfo.lname = dataLogin.lname;
 									userInfo.mname = dataLogin.mname;

@@ -37,6 +37,7 @@ var entrypoints = {
 			localStorage.setItem("userInfo", JSON.stringify(userInfo));
 			$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
 			$('.userPanel__mail').html(dataLogin.mail);
+			userInfo.id = dataLogin.id;
 			userInfo.login = dataLogin.login;
 			userInfo.fname = dataLogin.fname;
 			userInfo.lname = dataLogin.lname;
