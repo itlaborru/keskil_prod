@@ -50,7 +50,7 @@ var entrypoints = {
 	pulseAddStory: {
 		url:	serverAdress + "entrypoints/set.php",
 		success:	function(data){
-			alert(data);
+			app.alert(dictionary.storySent, dictionary.keskil);
 		}
 	},
 	allData: {
