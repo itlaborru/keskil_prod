@@ -128,7 +128,6 @@ var pulsegoroda = {
 						},
 						entrypoints.pulseAddStory.success
 					);
-					app.alert(dictionary.storySent, dictionary.keskil);
 					pulsegoroda.infoWindow.close();
 					marker.setMap(null);
 					pulsegoroda.initMap();
