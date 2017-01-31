@@ -14,7 +14,6 @@ var pulsegoroda = {
 				thisMarker.lng = JSON.parse(thisMarker.lang);
 				thisMarker.lat = JSON.parse(thisMarker.lat);
 				pulsegoroda.markers.push(thisMarker);
-				
 			}
 		}
 		pulsegoroda.initMap();
@@ -23,8 +22,6 @@ var pulsegoroda = {
 	notFirstUse:	false,
 	bindEvents: function() {
 		if(!pulsegoroda.notFirstUse) {
-		
-			
 			$("#pulsegoroda__addstory").click(function() {
 				if(localStorage.getItem("userInfo")) {
 					app.alert(dictionary.choosePlace, dictionary.keskil);
@@ -37,7 +34,6 @@ var pulsegoroda = {
 					app.alert(dictionary.plsLogin, dictionary.keskil);
 				}
 				return false;
-				
 			});
 			pulsegoroda.notFirstUse = true;
 		}
@@ -90,14 +86,12 @@ var pulsegoroda = {
 				disableDefaultUI: true,
 			});
 			
-			console.log(map);
-			
 			pulsegoroda.map.mapTypes.set('map_style', styledMap);
 			pulsegoroda.map.setMapTypeId('map_style');
 			
 			pulsegoroda.drawingManager = new google.maps.drawing.DrawingManager({
 				drawingMode: google.maps.drawing.OverlayType.MARKER,
-				drawingControl: true,
+				drawingControl: false,
 				drawingControlOptions: {
 					position: google.maps.ControlPosition.TOP_CENTER,
 					drawingModes: [
@@ -108,28 +102,24 @@ var pulsegoroda = {
 					draggable: true,
 				},
 			});	
-
 		}
 
 		google.maps.event.addListener(pulsegoroda.drawingManager, 'markercomplete', function(marker) {
 			pulsegoroda.latSend = marker.getPosition().lat();
 			pulsegoroda.lngSend = marker.getPosition().lng();
-			console.log(marker.getPosition().lat());
 			pulsegoroda.drawingManager.setMap(null);
 			
-			
 			marker.addListener('drag', function() {
-				
 				pulsegoroda.latSend = marker.getPosition().lat();
 				pulsegoroda.lngSend = marker.getPosition().lng();
 				console.log(pulsegoroda.latSend,pulsegoroda.lngSend);
 			});
+			
 			marker.addListener('click', function() {
 				pulsegoroda.infoWindow.open(pulsegoroda.map, marker);
 				
 				$('.pulseGorodapush').on('click',function(){
-					ajax(entrypoints.pulseAddStory.url,
-						{
+					ajax(entrypoints.pulseAddStory.url,{
 							file: "pulsegoroda",
 							type: "push",
 							lang:	pulsegoroda.lngSend,
@@ -138,6 +128,10 @@ var pulsegoroda = {
 						},
 						entrypoints.pulseAddStory.success
 					);
+					app.alert(dictionary.storySent, dictionary.keskil);
+					pulsegoroda.infoWindow.close();
+					marker.setMap(null);
+					pulsegoroda.initMap();
 				});
 			});
 			
@@ -155,8 +149,6 @@ var pulsegoroda = {
 			pulsegoroda.actualMarkers.push(marker1);
 			makeInfoWin(marker1, pulsegoroda.markers[i].story)
 		}	
-		
-		
 		
 		function makeInfoWin(marker1, data) {
 			var infowindow = new google.maps.InfoWindow({ content: data });
