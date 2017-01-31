@@ -45,7 +45,7 @@ function onDeviceReady() {
 	
 	initPages.splashscreen();
 	login.bindEvents();
-	userPage.bindEvents();
+	userOptions.bindEvents();
 	
 	console.log(dictionary.ready);
 }

@@ -1,4 +1,4 @@
-var userOptions = {
+var userPage = {
 	render: function() {
 	},
 	updateUserinfo: function() {
