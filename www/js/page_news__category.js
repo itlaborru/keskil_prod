@@ -1,5 +1,6 @@
 //Прорисовка списка категорий, получение и запись данных
 var news__category = {
+	scroll:	0,
 	actualHeight:	"",
 	render:	function() {
 		$('.category__list__inPicker').html("");
@@ -33,8 +34,10 @@ var news__category = {
 				$('.categoryPicker .category__list__inPicker').append(newsFolder);
 			}
 		}
+		//$('.newsMain').scrollTop($('.newsMain').height() - news__category.actualHeight + news__category.scroll , NEWS_SCROLL_SET_DELAY)
 		news__category.actualHeight = $('.newsMain').height();
-		console.log(news__category.actualHeight);
+		$('.newsMain').css('height',$('.newsMain').height() + 'px')
+		//console.log(news__category.actualHeight);
 		news__category.bindEvents();
 	},
 	bindEvents: function(){
@@ -56,7 +59,7 @@ var news__category = {
 
 		if(!news__category.notFirstUse) {
 			$('.open-categoryPicker').on('click', function () {
-				app.pickerModal('.categoryPicker')
+				app.pickerModal('.categoryPicker');
 			});
 		}
 		news__category.notFirstUse = true;
