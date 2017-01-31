@@ -137,7 +137,7 @@
 						</ul>
 					</div>
 					
-					<p><a href="#userPage" class="close-panel">Личный кабинет</a></p>
+					<p><a href="#userOptions" class="close-panel">Личный кабинет</a></p>
 					
 					<p><a href="#" class="updateUserinfo">Обновить данные</a></p>
 					
@@ -160,7 +160,7 @@
 					... login screen content ...				Кажется, это будет неплохо смотреться.
 				</div> -->
 				
-				<div data-page="userPage" class="page cached userPage">
+				<div data-page="userOptions" class="page cached userOptions">
                     <div class="page-content">
                         <div class="content-block">
                             <div style="margin: 0 auto 50px; max-height: 200px; max-width: 200px;">
@@ -208,6 +208,11 @@
 										<span class="index-links__text">Обратная связь</span>
 									</a>
 								</li>
+								<li>
+									<a href="#userPage" class="index-links__link">
+										<span class="index-links__text">моя страничка</span>
+									</a>
+								</li>
 							</ul>
 							<button onclick="localStorage.clear(); alert('Очищено');">Очистить</button>
                         </div>
@@ -217,6 +222,13 @@
 				<div data-page="contests__list" class="page cached contests">
 					<div class="page-content">
 						<div class="content-block contestListBlock">
+							
+						</div>
+					</div>
+				</div>
+				<div data-page="userPage" class="page cached userPage">
+					<div class="page-content">
+						<div class="content-block">
 							
 						</div>
 					</div>
@@ -348,6 +360,7 @@
     <script type="text/javascript" src="js/page_news __fullPost.js"></script>
     <script type="text/javascript" src="js/page_news__category.js"></script>
     <script type="text/javascript" src="js/page_userOptions.js"></script>
+    <script type="text/javascript" src="js/page_userPage.js"></script>
     <script type="text/javascript" src="js/dictionary.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
 </body>
