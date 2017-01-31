@@ -1,5 +1,6 @@
 //Прорисовка списка категорий, получение и запись данных
 var news__category = {
+	actualHeight:	"",
 	render:	function() {
 		$('.category__list__inPicker').html("");
 		$('.news__category .page-content .newsMain').html("");
@@ -32,6 +33,8 @@ var news__category = {
 				$('.categoryPicker .category__list__inPicker').append(newsFolder);
 			}
 		}
+		news__category.actualHeight = $('.newsMain').height();
+		console.log(news__category.actualHeight);
 		news__category.bindEvents();
 	},
 	bindEvents: function(){

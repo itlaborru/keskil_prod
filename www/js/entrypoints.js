@@ -75,6 +75,7 @@ var entrypoints = {
 					for(var key in Data) {
 						DataAjax[key] = Data[key];
 						if(key == "newslist"){
+							//$('.newsMain').html("");
 							news__category.render();
 						}
 						else if(key == "cartoonslist"){
