@@ -5,11 +5,14 @@ var news__category = {
 		$('.news__category .page-content .newsMain').html("");
 		function createPost() {
 			var block;
-			var tags = "Тэги: ";
-			for(var x = 0; x <DataAjax.newslist[i].category.length;x++) {
-				for(var y = 0; y<DataAjax.categorylist.length;y++) {
-					if(DataAjax.newslist[i].category[x] == DataAjax.categorylist[y].id){
-						tags = tags + DataAjax.categorylist[y].category +" ";
+			var tags = "";
+			if(DataAjax.newslist[i].category.length != 0 ) {
+				tags = "Тэги: ";
+				for(var x = 0; x <DataAjax.newslist[i].category.length;x++) {
+					for(var y = 0; y<DataAjax.categorylist.length;y++) {
+						if(DataAjax.newslist[i].category[x] == DataAjax.categorylist[y].id){
+							tags = tags + DataAjax.categorylist[y].category +" ";
+						}
 					}
 				}
 			}
