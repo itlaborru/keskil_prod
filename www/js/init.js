@@ -17,11 +17,13 @@ function onDeviceReady() {
 	if(localStorage.getItem("userInfo")) {
 		userInfo = JSON.parse(localStorage.getItem("userInfo"));
 		console.log(userInfo);
+		$(".myPage").attr("user-id", userInfo.id);
 		if(userInfo.loggedIn){//Проверка на сохраненность куки
 			cookies.setCookie('PHPSESSID', userInfo.phpSessionId);
 			$('.loginPanel').toggleClass("state_active");
 			$('.userPanel').toggleClass("state_active");
 			ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
+			
 		} 
 	}
 	else {
@@ -41,6 +43,8 @@ function onDeviceReady() {
 	initPages.splashscreen();
 	login.bindEvents();
 	userOptions.bindEvents();
-	
+	if(!localStorage.getItem("userInfo")) {
+		$(".myPage").attr("style","display: none;");
+	}
 	console.log(dictionary.ready);
 }

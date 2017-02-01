@@ -25,6 +25,7 @@ var login = {
 							userInfo.phpSessionId = dataLogin.sessionId;
 							userInfo.loggedIn = true;
 							localStorage.setItem("userInfo",JSON.stringify(userInfo));
+							$(".myPage").attr("style","display: block;");
 							$('.loginPanel').toggleClass("state_active");
 							$('.userPanel').toggleClass("state_active");
 							$('.login').val('');
@@ -96,6 +97,7 @@ var login = {
 					cookies.getCookie('PHPSESSID', null);
 					userInfo = {};
 					localStorage.removeItem("userInfo");
+					$(".myPage").attr("style","display: none;");
 					$('.loginPanel').toggleClass("state_active");
 					$('.userPanel').toggleClass("state_active");
 				}

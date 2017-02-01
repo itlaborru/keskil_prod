@@ -21,16 +21,17 @@ var initPages = {
 
 	},
 	handler: 	function(){
+		$(document).on('click', '.userHref', function (e) {
+			var userId = $(this).attr('user-id');
+			userPage.makingNewPage(userId);
+		});
 		$(document).on('pageBeforeAnimation', function (e) {
 			var page = e.detail.page.name;
 			if(page != "index") {
 				window[page].render();
 			}
 		});
-		$(document).on('click', '.userHref', function (e) {
-			var userId = $(this).attr('user-id');
-			$(".userPage").attr("user-id", userId);
-		});
+		
 	},
 };   
 	
@@ -52,3 +53,4 @@ $(".show__element-call").click(function() {
 	$(".show__element[data-id='"+$(this).attr('data-id')+"']").toggleClass("state_active");
 	return false;
 });
+

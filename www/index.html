@@ -184,6 +184,16 @@
                         <div class="content-block">
 							<ul class="index-links">
 								<li>
+									<a href="#" class="index-links__link userHref myPage" style="display: block;" user-id ="">
+										<span class="index-links__text">моя страничка</span>
+									</a>
+								</li>
+								<li>
+									<a href="#friends" class="index-links__link  myPage" style="display: block;" >
+										<span class="index-links__text">друзья</span>
+									</a>
+								</li>
+								<li>
 									<a href="#news__category" class="index-links__link">
 										<span class="index-links__text">Новости</span>
 									</a>
@@ -208,11 +218,7 @@
 										<span class="index-links__text">Обратная связь</span>
 									</a>
 								</li>
-								<li>
-									<a href="#userPage" class="index-links__link userHref myPage" user-id ="">
-										<span class="index-links__text">моя страничка</span>
-									</a>
-								</li>
+								
 							</ul>
 							<button onclick="localStorage.clear(); alert('Очищено');">Очистить</button>
                         </div>
@@ -226,16 +232,6 @@
 						</div>
 					</div>
 				</div>
-				<div data-page="userPage" class="page cached userPage" user-id="7">
-					<div class="page-content">
-						<div class="content-block">
-							<div class="profileInfo">
-								<!--<p><a href="#" class="open-login-screen">Изменить данные</a></p>-->
-								<div data-progress="0" class="progressbar userPage__progressbar color-blue"><span></span></div>
-							</div>
-						</div>
-					</div>
-				</div>
 				
 				<div data-page="contest" class="page cached contest">
 					<div class="page-content">
@@ -243,6 +239,13 @@
 							<div class="contestContent">
 							</div>
 							<p><a href="#" class="contestSend">Отправить фото</a></p>
+						</div>
+					</div>
+				</div>
+				<div data-page="friends" class="page cached friends">
+					<div class="page-content">
+						<div class="content-block friendsList ">
+						
 						</div>
 					</div>
 				</div>
@@ -364,6 +367,7 @@
     <script type="text/javascript" src="js/page_news__category.js"></script>
     <script type="text/javascript" src="js/page_userOptions.js"></script>
     <script type="text/javascript" src="js/page_userPage.js"></script>
+    <script type="text/javascript" src="js/page_friends.js"></script>
     <script type="text/javascript" src="js/dictionary.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
 </body>
