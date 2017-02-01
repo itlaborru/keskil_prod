@@ -20,7 +20,8 @@ var userOptions = {
 		userInfo.mname = dataLogin.mname;
 		userInfo.mail = dataLogin.mail;
 		userInfo.icon = dataLogin.icon;
-		//$(".myPage").attr("user-id", userInfo.id);
+		userInfo.friends = dataLogin.friends;
+		$(".myPage").attr("user-id", userInfo.id);
 		localStorage.setItem("userInfo", JSON.stringify(userInfo));
 	},
 	bindEvents: function(){
