@@ -52,3 +52,7 @@ $(".show__element-call").click(function() {
 	$(".show__element[data-id='"+$(this).attr('data-id')+"']").toggleClass("state_active");
 	return false;
 });
+
+$(".newsList").click(function() {
+	$(".newsMain").attr("data-category","without")
+});

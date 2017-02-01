@@ -75,8 +75,8 @@ var entrypoints = {
 					for(var key in Data) {
 						DataAjax[key] = Data[key];
 						if(key == "newslist"){
-							news__category.scroll = $('.newsMain').scrollTop();
-							news__category.render();
+							news.scroll = $('.newsMainTriggerScroll').scrollTop();
+							news.render("new");
 						}
 						else if(key == "cartoonslist"){
 							cartoons__category.render();
