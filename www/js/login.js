@@ -21,28 +21,33 @@ var login = {
 					
 					function(data){
 						var dataLogin = JSON.parse(data);
-						if(dataLogin.sessionId != undefined){
-							userInfo.phpSessionId = dataLogin.sessionId;
-							userInfo.loggedIn = true;
-							localStorage.setItem("userInfo",JSON.stringify(userInfo));
-							$(".myPage").attr("style","display: block;");
-							$('.loginPanel').toggleClass("state_active");
-							$('.userPanel').toggleClass("state_active");
-							$('.login').val('');
-							$('.pass').val('');
-							$('.loginReg').val('');
-							$('.passReg').val('');
-							$('.mail').val('');
-							ajax(
-								serverAdress + 'entrypoints/user-data-ajax.php', 
-								
-								{
-									'type': 'get',
-								},
-								
-								function(data){
-									userOptions.updateUserinfoClient(data);
-								});
+						if(dataLogin.text == "error") {
+							app.alert(dictionary.error +dictionary.wrongLogin,dictionary.error);			
+						}
+						else {
+							if(dataLogin.sessionId != undefined){
+								userInfo.phpSessionId = dataLogin.sessionId;
+								userInfo.loggedIn = true;
+								localStorage.setItem("userInfo",JSON.stringify(userInfo));
+								$(".myPage").attr("style","display: block;");
+								$('.loginPanel').toggleClass("state_active");
+								$('.userPanel').toggleClass("state_active");
+								$('.login').val('');
+								$('.pass').val('');
+								$('.loginReg').val('');
+								$('.passReg').val('');
+								$('.mail').val('');
+								ajax(
+									serverAdress + 'entrypoints/user-data-ajax.php', 
+									
+									{
+										'type': 'get',
+									},
+									
+									function(data){
+										userOptions.updateUserinfoClient(data);
+									});
+							}
 						}
 					}
 				);
