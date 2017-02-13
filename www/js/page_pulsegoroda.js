@@ -144,6 +144,7 @@ var pulsegoroda = {
 						pulsegoroda.initMap();
 					}
 				});
+				google.maps.event.clearListeners(marker, 'click');
 			});
 		});
 		
