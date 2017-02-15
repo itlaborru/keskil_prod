@@ -1,22 +1,4 @@
-﻿if(localStorage.getItem("userInfo")) {
-	userInfo = JSON.parse(localStorage.getItem("userInfo"));
-	console.log(userInfo);
-	if(userInfo.loggedIn){//Проверка на сохраненность куки
-		cookies.setCookie('PHPSESSID', userInfo.phpSessionId);
-		$('.loginPanel').toggleClass("state_active");
-		$('.userPanel').toggleClass("state_active");
-		$('.userPanel__icon').attr('src', '');
-		$('.userPanel__icon').attr('src', userInfo.icon);
-		$('.userPanel__name').html(userInfo.login);
-		$('.userPage__fullname').html(userInfo.lname + ' ' + userInfo.fname + ' ' +  userInfo.mname);
-		$('.userPanel__mail').html(userInfo.mail);
-		ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
-	} 
-}
-else {
-	$('.userPanel').addClass('display-none');
-};
-// Handle Cordova Device Ready Event
+﻿// Handle Cordova Device Ready Event
 $(document).on('deviceready', function() {
 	onDeviceReady();
 });
@@ -32,6 +14,21 @@ function onDeviceReady() {
 	else {
 		entrypoints.allDataUpdate();
 	} 
+	if(localStorage.getItem("userInfo")) {
+		userInfo = JSON.parse(localStorage.getItem("userInfo"));
+		console.log(userInfo);
+		$(".myPage").attr("user-id", userInfo.id);
+		if(userInfo.loggedIn){//Проверка на сохраненность куки
+			cookies.setCookie('PHPSESSID', userInfo.phpSessionId);
+			$('.loginPanel').toggleClass("state_active");
+			$('.userPanel').toggleClass("state_active");
+			ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
+			
+		} 
+	}
+	else {
+		$('.userPanel').addClass('display-none');
+	};
 	setInterval(function() {
 		var lastChanges = JSON.parse(localStorage.getItem("lastChanges"));
 		ajax(entrypoints.checkForUpdates.url,{
@@ -45,7 +42,9 @@ function onDeviceReady() {
 	
 	initPages.splashscreen();
 	login.bindEvents();
-	userPage.bindEvents();
-	
+	userOptions.bindEvents();
+	if(!localStorage.getItem("userInfo")) {
+		$(".myPage").attr("style","display: none;");
+	}
 	console.log(dictionary.ready);
 }

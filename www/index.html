@@ -137,7 +137,7 @@
 						</ul>
 					</div>
 					
-					<p><a href="#userPage" class="close-panel">Личный кабинет</a></p>
+					<p><a href="#userOptions" class="close-panel">Личный кабинет</a></p>
 					
 					<p><a href="#" class="updateUserinfo">Обновить данные</a></p>
 					
@@ -160,7 +160,7 @@
 					... login screen content ...				Кажется, это будет неплохо смотреться.
 				</div> -->
 				
-				<div data-page="userPage" class="page cached userPage">
+				<div data-page="userOptions" class="page cached userOptions">
                     <div class="page-content">
                         <div class="content-block">
                             <div style="margin: 0 auto 50px; max-height: 200px; max-width: 200px;">
@@ -184,7 +184,17 @@
                         <div class="content-block">
 							<ul class="index-links">
 								<li>
-									<a href="#news__category" class="index-links__link">
+									<a href="#" class="index-links__link userHref myPage" style="display: block;" user-id ="">
+										<span class="index-links__text">моя страничка</span>
+									</a>
+								</li>
+								<li>
+									<a href="#friends" class="index-links__link  myPage" style="display: block;" >
+										<span class="index-links__text">друзья</span>
+									</a>
+								</li>
+								<li>
+									<a href="#news" class="index-links__link newsList">
 										<span class="index-links__text">Новости</span>
 									</a>
 								</li>
@@ -208,6 +218,7 @@
 										<span class="index-links__text">Обратная связь</span>
 									</a>
 								</li>
+								
 							</ul>
 							<button onclick="localStorage.clear(); alert('Очищено');">Очистить</button>
                         </div>
@@ -231,6 +242,13 @@
 						</div>
 					</div>
 				</div>
+				<div data-page="friends" class="page cached friends">
+					<div class="page-content">
+						<div class="content-block friendsList ">
+						
+						</div>
+					</div>
+				</div>
 				
 				<div data-page="cartoons__category" class="page cached cartoons__category">
 					<div class="page-content">
@@ -248,18 +266,13 @@
 						</div>
 					</div>
 				</div>
-				<div data-page="news__category" class="page cached news__category">
-					<div class="page-content">
-						<div class="content-block">
-							<p><a href="#" class="open-categoryPicker">Выбрать категорию</a></p>
-							<div class="newsMain">
-							</div>
-						</div>
-					</div>
-				</div>
 				<div data-page="news" class="page cached news">
-					<div class="page-content">
-						<div class="content-block newsFolder" data-category="">
+					<div class="page-content newsMainTriggerScroll">
+						<div class="content-block">
+							<p><a href="#" class="button button-round active show__element newNews">У вас есть новые посты</a></p> 
+							<p><a href="#" class="open-categoryPicker">Выбрать категорию</a></p>
+							<div class="newsMain"  data-category="">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -344,10 +357,11 @@
     <script type="text/javascript" src="js/page_feedback.js"></script>
     <script type="text/javascript" src="js/page_cartoons.js"></script>
     <script type="text/javascript" src="js/page_cartoons__category.js"></script>
-    <script type="text/javascript" src="js/page_news.js"></script>
     <script type="text/javascript" src="js/page_news __fullPost.js"></script>
-    <script type="text/javascript" src="js/page_news__category.js"></script>
+    <script type="text/javascript" src="js/page_news.js"></script>
     <script type="text/javascript" src="js/page_userOptions.js"></script>
+    <script type="text/javascript" src="js/page_userPage.js"></script>
+    <script type="text/javascript" src="js/page_friends.js"></script>
     <script type="text/javascript" src="js/dictionary.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
 </body>
@@ -371,5 +385,5 @@ Buglist
 
 1.Составить список всего того что можно получить через ajax
 файлы на которые стукается аякс могут и по простому отдавать обьекты и через конструктор
--->   
+-->  
 </html>

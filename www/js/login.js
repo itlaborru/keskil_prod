@@ -21,43 +21,33 @@ var login = {
 					
 					function(data){
 						var dataLogin = JSON.parse(data);
-						if(dataLogin.sessionId != undefined){
-							userInfo.phpSessionId = dataLogin.sessionId;
-							userInfo.loggedIn = true;
-							localStorage.setItem("userInfo",JSON.stringify(userInfo));
-							$('.loginPanel').toggleClass("state_active");
-							$('.userPanel').toggleClass("state_active");
-							$('.userPanel__icon').attr('src', '');
-							$('.userPanel__name').html(dictionary.unableToConnect);
-							$('.login').val('');
-							$('.pass').val('');
-							$('.loginReg').val('');
-							$('.passReg').val('');
-							$('.mail').val('');
-							ajax(
-								serverAdress + 'entrypoints/user-data-ajax.php', 
-								
-								{
-									'type': 'get',
-								},
-								
-								function(data){
-									var dataLogin = JSON.parse(data);
-									console.log(dataLogin);
-									$('.userPanel__icon').attr('src', dataLogin.icon);
-									$('.userPanel__name').html(dataLogin.login);
-									$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
-									$('.userPanel__mail').html(dataLogin.mail);
-									app.alert(dictionary.hello + dataLogin.login,dictionary.success);
+						if(dataLogin.text == "error") {
+							app.alert(dictionary.error +dictionary.wrongLogin,dictionary.error);			
+						}
+						else {
+							if(dataLogin.sessionId != undefined){
+								userInfo.phpSessionId = dataLogin.sessionId;
+								userInfo.loggedIn = true;
+								localStorage.setItem("userInfo",JSON.stringify(userInfo));
+								$(".myPage").attr("style","display: block;");
+								$('.loginPanel').toggleClass("state_active");
+								$('.userPanel').toggleClass("state_active");
+								$('.login').val('');
+								$('.pass').val('');
+								$('.loginReg').val('');
+								$('.passReg').val('');
+								$('.mail').val('');
+								ajax(
+									serverAdress + 'entrypoints/user-data-ajax.php', 
 									
-									userInfo.login = dataLogin.login;
-									userInfo.fname = dataLogin.fname;
-									userInfo.lname = dataLogin.lname;
-									userInfo.mname = dataLogin.mname;
-									userInfo.mail = dataLogin.mail;
-									userInfo.icon = dataLogin.icon;
-									localStorage.setItem("userInfo", JSON.stringify(userInfo));
-								});
+									{
+										'type': 'get',
+									},
+									
+									function(data){
+										userOptions.updateUserinfoClient(data);
+									});
+							}
 						}
 					}
 				);
@@ -112,6 +102,7 @@ var login = {
 					cookies.getCookie('PHPSESSID', null);
 					userInfo = {};
 					localStorage.removeItem("userInfo");
+					$(".myPage").attr("style","display: none;");
 					$('.loginPanel').toggleClass("state_active");
 					$('.userPanel').toggleClass("state_active");
 				}

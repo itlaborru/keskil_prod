@@ -5,7 +5,9 @@ var transferImages = {
 		options.fileKey="userfile";
 		options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
 		options.mimeType="image/*";
-
+		
+		var progresbar = 0;
+	
 		var params = new Object();
 		params.file =  'fileChecker';
 		params.user = userInfo.phpSessionId;
@@ -13,9 +15,10 @@ var transferImages = {
 			params.contest = transferImages.type.contest;
 			params.type = "contest";
 		}
-		if(transferImages.type.name == "avatar"){
+		else if(transferImages.type.name == "avatar"){
 			params.file = 'fileChecker';
 			params.type="avatar";
+			progresbar = $('.userPage__progressbar');
 		}
 		
 		options.params = params;
@@ -25,18 +28,20 @@ var transferImages = {
 		options.chunkedMode = false;
 		// ** Тут меняешь адрес сервера для картинок
 		var ft = new FileTransfer();
-		ft.onprogress = function(result) {
-			var percent =  result.loaded / result.total * 100;
-			percent = Math.round(percent);
-			app.setProgressbar($('.userPage__progressbar'), percent);
-			if(percent == 100) {
-				app.setProgressbar($('.userPage__progressbar'), 0);	
-				setTimeout(function() {
-					userPage.updateUserinfo();
-				}, CHANGE_USER_INFO_TIMEOUT);
+		if(progressbar !=0) {
+			ft.onprogress = function(result) {
+				var percent =  result.loaded / result.total * 100;
+				percent = Math.round(percent);
+				app.setProgressbar(progresbar, percent);
+				if(percent == 100) {
+					app.setProgressbar(progresbar, 0);	
+					setTimeout(function() {
+						userPage.updateUserinfo();
+					}, CHANGE_USER_INFO_TIMEOUT);
 
-			}
-		};
+				}
+			};
+		}
 		ft.upload(imageURI, serverAdress + "entrypoints/set.php", transferImages.win, transferImages.fail, options);
 	},
 	getImage:	function() {

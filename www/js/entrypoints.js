@@ -1,6 +1,3 @@
-
- // Тут можешь переписывать на боевой сервак
- 
 var entrypoints = {
 	allDataUpdate: function() {
 		ajax(entrypoints.allData.url,entrypoints.allData.data,entrypoints.allData.success);
@@ -30,26 +27,13 @@ var entrypoints = {
 			'type': 'get',
 		},
 		success:	function(data){
-			var dataLogin = JSON.parse(data);
-			$('.userPanel__icon').attr('src', dataLogin.icon);
-			$('.userPanel__name').html(dataLogin.login);
-			userInfo.userName = dataLogin.login;
-			localStorage.setItem("userInfo", JSON.stringify(userInfo));
-			$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
-			$('.userPanel__mail').html(dataLogin.mail);
-			userInfo.login = dataLogin.login;
-			userInfo.fname = dataLogin.fname;
-			userInfo.lname = dataLogin.lname;
-			userInfo.mname = dataLogin.mname;
-			userInfo.mail = dataLogin.mail;
-			userInfo.icon = dataLogin.icon;
-			localStorage.setItem("userInfo", JSON.stringify(userInfo));
+			userOptions.updateUserinfoClient(data);
 		},
 	},
 	pulseAddStory: {
 		url:	serverAdress + "entrypoints/set.php",
 		success:	function(data){
-			alert(data);
+			app.alert(dictionary.storySent, dictionary.keskil);
 		}
 	},
 	allData: {
@@ -91,7 +75,8 @@ var entrypoints = {
 					for(var key in Data) {
 						DataAjax[key] = Data[key];
 						if(key == "newslist"){
-							news__category.render();
+							news.scroll = $('.newsMainTriggerScroll').scrollTop();
+							news.render("new");
 						}
 						else if(key == "cartoonslist"){
 							cartoons__category.render();

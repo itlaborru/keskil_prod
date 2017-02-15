@@ -128,6 +128,13 @@ h3 {
 	color: #fff;
 }
 
+.newNews{
+	position:	fixed;
+	top:	20px;
+	display:	none;
+	width:	90%;
+}
+
 .news__tag {
 	color:	#000;
 }

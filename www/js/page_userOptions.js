@@ -1,8 +1,28 @@
-var userPage = {
+var userOptions = {
 	render: function() {
 	},
 	updateUserinfo: function() {
 		ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
+	},
+	updateUserinfoClient:	function(data) {
+		dataLogin = JSON.parse(data);
+		$('.userPanel__icon').attr('src', dataLogin.icon);
+		$('.userPanel__name').html(dataLogin.login);
+		$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
+		$('.userPanel__mail').html(dataLogin.mail);
+		
+		app.alert(dictionary.hello + dataLogin.login,dictionary.success);
+		
+		userInfo.login = dataLogin.login;
+		userInfo.id = dataLogin.id;
+		userInfo.fname = dataLogin.fname;
+		userInfo.lname = dataLogin.lname;
+		userInfo.mname = dataLogin.mname;
+		userInfo.mail = dataLogin.mail;
+		userInfo.icon = dataLogin.icon;
+		userInfo.friends = dataLogin.friends;
+		$(".myPage").attr("user-id", userInfo.id);
+		localStorage.setItem("userInfo", JSON.stringify(userInfo));
 	},
 	bindEvents: function(){
 		$('.userPage').on('click', '.userPanel__icon', function (e) {
