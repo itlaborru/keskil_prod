@@ -1,7 +1,6 @@
 var pulsegoroda = {
 	latSend:	0,
 	lngSend:	0,
-	a: true,
 	markers : [
 	],
 	actualMarkers:	[
@@ -126,22 +125,27 @@ var pulsegoroda = {
 				pulsegoroda.infoWindow.open(pulsegoroda.map, marker);
 				
 				$('.pulseGorodapush').on('click',function(){
-					ajax(entrypoints.pulseAddStory.url,{
-							file: "pulsegoroda",
-							type: "push",
-							lang:	pulsegoroda.lngSend,
-							lat:	pulsegoroda.latSend,
-							story: $('.story').val(),
-						},
-						entrypoints.pulseAddStory.success
-					);
-					pulsegoroda.infoWindow.setContent(pulsegoroda.infoWindow.content);
-					pulsegoroda.infoWindow.close();
-					marker.setMap(null);
-					pulsegoroda.initMap();
+					if($(".story").val()===""){
+						app.alert(dictionary.writeText, dictionary.keskil);
+					}
+					else{
+						ajax(entrypoints.pulseAddStory.url,{
+								file: "pulsegoroda",
+								type: "push",
+								lang:	pulsegoroda.lngSend,
+								lat:	pulsegoroda.latSend,
+								story: $('.story').val(),
+							},
+							entrypoints.pulseAddStory.success
+						);
+						pulsegoroda.infoWindow.setContent(pulsegoroda.infoWindow.content);
+						pulsegoroda.infoWindow.close();
+						marker.setMap(null);
+						pulsegoroda.initMap();
+					}
 				});
+				google.maps.event.clearListeners(marker, 'click');
 			});
-			
 		});
 		
 				
