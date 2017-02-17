@@ -6,15 +6,14 @@ var community = {
 	render:	function(update) {
 		$('.communityMain').html("");
 		var ifClear = true;
-		var cat = $(".newsMain").attr("data-category");
-		function createPost(value, key) {
+		function createGroup(value) {
 			var block;
-			block = $("<div class='community__group' data-id='"+key+"'><img src='"+value.icon+"' /><div class='community__name'>"+value.name+"</div><div class='post__group__users'>"+value.users.length+"</div></div>");
-			$(".newsMain").append(block);
+			block = $("<div class='community__group' data-id='"+value.id+"'><img src='"+value.icon+"' /><div class='community__name'>"+value.name+"</div><div class='post__group__users'>"+value.users.length+"</div></div>");
+			$(".communityMain").append(block);
 			ifClear = false;
 		}
 		for(var i = 0; i < DataAjax.grouplist.length; i++) {
-			createPost(DataAjax.grouplist[i],i);
+			createGroup(DataAjax.grouplist[i]);
 		}
 		
 		if(ifClear) {
