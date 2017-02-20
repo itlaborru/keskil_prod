@@ -146,7 +146,9 @@ h3 {
 }
 
 .community__group{
-	
+	height:200px;
+	width: 100%;
+	background: yellow;
 }
 
 /* Конец */
