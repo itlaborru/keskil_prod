@@ -1,5 +1,5 @@
 var userInfo = { };
-var serverAdress = "http://ovz1.itlaborykt.zm9y1.vps.myjino.ru/";
+var serverAdress = "http://keskil-online.ru/";
 var DataAjax;
 var DataLogin;
 var LAST_CHANGES_INTERVAL = 5000;
