@@ -6,15 +6,15 @@ var community = {
 	render:	function(update) {
 		$('.communityMain').html("");
 		var ifClear = true;
-		function createGroup(value) {
+		function createGroup(value,key) {
 			var block;
-			block = $("<div class='community__group' data-id='"+value.id+"'><img src='"+value.icon+"' /><div class='community__name'>"+value.name+"</div><div class='post__group__users'>"+JSON.parse(value.users).length+"</div></div>");
+			block = $("<div class='community__group' data-id='"+key+"'><img src='"+value.icon+"' /><div class='community__name'>"+value.name+"</div><div class='post__group__users'>"+JSON.parse(value.users).length+"</div></div>");
 			$(".communityMain").append(block);
 			ifClear = false;
 		}
 		
 		for(var i = 0; i < DataAjax.grouplist.length; i++) {
-			createGroup(DataAjax.grouplist[i]);
+			createGroup(DataAjax.grouplist[i],i);
 		}
 		
 		if(ifClear) {
@@ -29,8 +29,23 @@ var community = {
 			$('.community__fullPost').attr("data-id",postId);
 			mainView.router.load({pageName: 'community__full__post'});*/
 			var postId = $(this).attr('data-id');
-			$('.community__fullPost').attr("data-id",postId);
-			mainView.router.load({pageName: 'community__full__post'});
+			$('.community__full__post').attr("data-id",postId);
+			mainView.router.load({pageName: 'community__fullpost'});
+		});
+		
+		$('.community .pushGroup').on('click', function(){
+			
+			var pushData = {
+				
+				file: 'group',
+				type: 'newGroup',
+				name: $('.groupName').val()
+				
+				
+			};
+			
+			ajax(entrypoints.communityAddGroup.url, pushData, entrypoints.communityAddGroup.success);
+			
 		});
 	},
 	notFirstUse: false,
