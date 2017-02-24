@@ -33,20 +33,24 @@ var community = {
 			mainView.router.load({pageName: 'community__fullpost'});
 		});
 		
-		$('.community .pushGroup').on('click', function(){
+		if(!community.notFirstUse){
+			$('.community .pushGroup').on('click', function(){
 			
-			var pushData = {
+				var pushData = {
+					
+					file: 'group',
+					type: 'newGroup',
+					name: $('.groupName').val()
+					
+					
+				};
 				
-				file: 'group',
-				type: 'newGroup',
-				name: $('.groupName').val()
-				
-				
-			};
+				ajax(entrypoints.communityAddGroup.url, pushData, entrypoints.communityAddGroup.success);
 			
-			ajax(entrypoints.communityAddGroup.url, pushData, entrypoints.communityAddGroup.success);
+			});
 			
-		});
+			community.notFirstUse = true;
+		}
 	},
-	notFirstUse: false,
+	notFirstUse: false
 }

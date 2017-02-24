@@ -14,31 +14,77 @@ var community__fullpost = {
 				id: DataAjax.grouplist[postId].id
 			},
 			function(data){
+				console.log(data);
 				var postList = JSON.parse(data);
+				console.log(postList);
 				$.each(postList, function(key,val){
 					
 					block = $("<div class='post'>"+val.content+"</div>");
 					$(".community__full__post").append(block);
 					
-				})
+				});
 			}
 		);
+		
+		$('.joinGroupDiv').removeClass( 'display-none' );
+		$('.outGroupDiv').addClass( 'display-none' );
+		
+		$.each(userInfo.groups, function(key,val){
+			if(val == DataAjax.grouplist[postId].id){
+				$('.joinGroupDiv').addClass( 'display-none' );
+				$('.outGroupDiv').removeClass( 'display-none' );
+			}
+		});
+		
 		community__fullpost.bindEvents();
 	},
 	bindEvents: function(){
-		$('.community__fullpost .pushPost').on('click', function(){
-			
-			var pushData = {
+		
+		if(!community__fullpost.notFirstUse){
+			$('.community__fullpost .pushPost').on('click', function(){
 				
-				id: $(".community__full__post").attr("data-id"),
-				file: 'group',
-				type: 'addPost',
-				content: $('.content').val()
+				var pushData = {
+					
+					id: DataAjax.grouplist[$(".community__full__post").attr("data-id")].id,
+					file: 'group',
+					type: 'addPost',
+					content: $('.postName').val()
+					
+				};
 				
-			};
+				ajax(entrypoints.communityAddPost.url, pushData, entrypoints.communityAddPost.success);
+				
+			});
 			
-			ajax(entrypoints.communityAddPost.url, pushData, entrypoints.communityAddPost.success);
+			$('.community__fullpost .joinGroup').on('click', function(){
+				
+				var pushData = {
+					
+					id: DataAjax.grouplist[$(".community__full__post").attr("data-id")].id,
+					file: 'group',
+					type: 'joinGroup'
+					
+				};
+				
+				ajax(entrypoints.communityJoinGroup.url, pushData, entrypoints.communityJoinGroup.success);
+				
+			});
 			
-		});
-	}
+			$('.community__fullpost .outGroup').on('click', function(){
+				
+				var pushData = {
+					
+					id: DataAjax.grouplist[$(".community__full__post").attr("data-id")].id,
+					file: 'group',
+					type: 'outGroup'
+					
+				};
+				
+				ajax(entrypoints.communityOutGroup.url, pushData, entrypoints.communityJoinGroup.success);
+				
+			});
+			community__fullpost.notFirstUse = true;
+		}
+	},
+	notFirstUse: false
 }

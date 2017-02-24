@@ -46,6 +46,7 @@ var login = {
 									
 									function(data){
 										userOptions.updateUserinfoClient(data);
+										app.alert(dictionary.hello + dataLogin.login,dictionary.success);
 									});
 							}
 						}

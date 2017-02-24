@@ -11,8 +11,6 @@ var userOptions = {
 		$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
 		$('.userPanel__mail').html(dataLogin.mail);
 		
-		app.alert(dictionary.hello + dataLogin.login,dictionary.success);
-		
 		userInfo.login = dataLogin.login;
 		userInfo.id = dataLogin.id;
 		userInfo.fname = dataLogin.fname;
@@ -21,6 +19,7 @@ var userOptions = {
 		userInfo.mail = dataLogin.mail;
 		userInfo.icon = dataLogin.icon;
 		userInfo.friends = dataLogin.friends;
+		userInfo.groups = JSON.parse(dataLogin.groups);
 		$(".myPage").attr("user-id", userInfo.id);
 		localStorage.setItem("userInfo", JSON.stringify(userInfo));
 	},

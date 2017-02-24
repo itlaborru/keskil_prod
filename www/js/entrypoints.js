@@ -41,13 +41,28 @@ var entrypoints = {
 	communityAddGroup: {
 		url:	serverAdress + "entrypoints/set.php",
 		success:	function(data){
-			app.alert(dictionary.keskil);
+			app.alert(dictionary.keskil+' '+data);
+			userOptions.updateUserinfo();
+		}
+	},
+	communityJoinGroup: {
+		url:	serverAdress + "entrypoints/set.php",
+		success:	function(data){
+			app.alert(dictionary.keskil+' '+data);
+			userOptions.updateUserinfo();
+		}
+	},
+	communityOutGroup: {
+		url:	serverAdress + "entrypoints/set.php",
+		success:	function(data){
+			app.alert(dictionary.keskil+' '+data);
+			userOptions.updateUserinfo();
 		}
 	},
 	communityAddPost: {
 		url:	serverAdress + "entrypoints/set.php",
 		success:	function(data){
-			app.alert(dictionary.keskil);
+			app.alert(dictionary.keskil+' '+data);
 		}
 	},
 	communityGetPost: {
