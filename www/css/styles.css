@@ -150,6 +150,24 @@ h3 {
 	color:	#000;
 }
 
+/* Начало классов для community*/
+
+.community {
+	
+}
+
+.community__addGroup{
+	background: green;
+}
+
+.community__group{
+	height:200px;
+	width: 100%;
+	background: yellow;
+}
+
+/* Конец */
+
 .post {
 	margin-bottom:	30px;
 }
