@@ -46,8 +46,9 @@ var pulsegoroda = {
 	},
 	
 	infoWindow:	new google.maps.InfoWindow({
-		content: '<textarea placeholder="Ваша история" class="story" style="width: 95%; margin-left: 5px; margin-top: 5px; height: 300px">'+'</textarea>'+'<p>'+'<a href="#" class="button active pulseGorodapush">'+'Отправить'+'</a>'+'</p>'
+		content: '<textarea placeholder="Название истории" class="story_name">'+'</textarea>'+'<textarea placeholder="Ваша история" class="story">'+'</textarea>'+'<p>'+'<a href="#" class="button active pulseGorodapush">'+'Отправить'+'</a>'+'</p>'
 	}),
+	
 	initMap : function() {	
 		$("#pulsegoroda__addstory").removeClass("display-none");
 		if(!pulsegoroda.notFirstUse) {
@@ -135,6 +136,7 @@ var pulsegoroda = {
 								lang:	pulsegoroda.lngSend,
 								lat:	pulsegoroda.latSend,
 								story: $('.story').val(),
+								story_name: $('.story_name').val(),
 							},
 							entrypoints.pulseAddStory.success
 						);

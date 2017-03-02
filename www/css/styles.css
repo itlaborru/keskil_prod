@@ -25,6 +25,17 @@
 	left: 10%;
 	top: 200px;
 }
+.story{
+	width: 95%; 
+	margin-left: 5px; 
+	margin-top: 5px; 
+	height: 300px;
+}
+.story_name{
+	width: 85%;  
+	height: 30px;
+	margin-left: 5px; 
+}
 .pulsegoroda__popup.active {
 	display: block;
 }
