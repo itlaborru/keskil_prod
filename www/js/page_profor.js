@@ -19,7 +19,11 @@ var profor = {
 				else {
 					var questions = "";
 					for(var x = 0; x<DataAjax.profor[i].questions_stack.length;x++) {
-						questions+= "<p>"+DataAjax.profor[i].questions_stack[x].title+"<br/><input class='answer_profor' type='radio' data-weight='0' data-id='"+x+"' name='"+x+"' value='radiobutton'/>"+DataAjax.profor[i].questions_stack[x][0]+"<input name='"+x+"' class='answer_profor' data-id='"+x+"' type='radio' data-weight='1' value='radiobutton'/>"+DataAjax.profor[i].questions_stack[x][1]+"</p><br/>";
+						questions+= "<p>"+DataAjax.profor[i].questions_stack[x].title+"<br/>";
+						for(var key in DataAjax.profor[i].questions_stack[x].answers) {
+							questions+= "<input class='answer_profor' type='radio' data-weight='"+DataAjax.profor[i].questions_stack[x].answers[key].weight+"' data-id='"+x+"' name='"+x+"' value='radiobutton'/>"+DataAjax.profor[i].questions_stack[x].answers[key].name; 
+						}
+						questions+="</p><br/>";
 					}
 					info+= questions;
 					break;
