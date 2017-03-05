@@ -4,8 +4,7 @@ var userOptions = {
 	updateUserinfo: function() {
 		ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
 	},
-	updateUserinfoClient:	function(data) {
-		dataLogin = JSON.parse(data);
+	updateUserinfoClient:	function(dataLogin) {
 		$('.userPanel__icon').attr('src', dataLogin.icon);
 		$('.userPanel__name').html(dataLogin.login);
 		$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);

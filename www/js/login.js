@@ -45,7 +45,8 @@ var login = {
 									},
 									
 									function(data){
-										userOptions.updateUserinfoClient(data);
+										var dataLogin = JSON.parse(data);
+										userOptions.updateUserinfoClient(dataLogin);
 										app.alert(dictionary.hello + dataLogin.login,dictionary.success);
 									});
 							}
