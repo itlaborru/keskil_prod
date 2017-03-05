@@ -106,19 +106,20 @@ var entrypoints = {
 				}
 				else {
 					console.log("New data");
+					var pageName = $(".view-main").attr("data-page");
 					for(var key in Data) {
 						DataAjax[key] = Data[key];
-						if(key == "newslist"){
+						if(key == "newslist" && pageName == "news"){
 							news.scroll = $('.newsMainTriggerScroll').scrollTop();
 							news.render("new");
 						}
-						else if(key == "cartoonslist"){
+						else if(key == "cartoonslist" && pageName == "cartoons__category"){
 							cartoons__category.render();
 						}
-						else if(key == "contestlist"){
+						else if(key == "contestlist" && pageName == "contest"){
 							contests__list.render();
 						}
-						else if(key == "pulsegoroda"){
+						else if(key == "pulsegoroda" && pageName == "pulsegoroda"){
 							pulsegoroda.render();
 						}
 					}
