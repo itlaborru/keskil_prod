@@ -37,7 +37,7 @@ var profor = {
 			$('#profor_send').on('click', function () {
 				var results= [];
 				$('.answer_profor:checked').each(function() {
-					results.push(parseInt($(this).attr("data-weight")));
+					results.push(parseFloat($(this).attr("data-weight")));
 				});
 				var data = {
 					file: "proftest",
@@ -46,7 +46,7 @@ var profor = {
 					
 				}
 				ajax(
-					serverAdress+"entrypoints/set.php",
+					serverAdress+"entrypoints/get.php",
 					data,
 					function(Data){
 						app.alert(Data, dictionary.success);
