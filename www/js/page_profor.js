@@ -1,5 +1,6 @@
 //Прорисовка списка категорий, получение и запись данных
 var profor = {
+	id:	-2,
 	render:	function(parameter) {
 		$('.profor').html("");
 		var info ="";	
@@ -42,8 +43,8 @@ var profor = {
 				var data = {
 					file: "proftest",
 					type: "pull",
-					content: results
-					
+					content: results,
+					id:	profor.id
 				}
 				ajax(
 					serverAdress+"entrypoints/get.php",
@@ -56,6 +57,7 @@ var profor = {
 		}
 		$('.profor-test').on('click', function () {
 			profor.render($(this).attr('data-id'));
+			profor.id = $(this).attr('data-id');
 		});
 		profor.notFirstUse = true;
 	},
