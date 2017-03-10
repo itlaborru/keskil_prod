@@ -1,0 +1,5 @@
+var rating = {
+	render: function() {
+	
+	},
+}
