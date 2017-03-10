@@ -40,19 +40,30 @@ var profor = {
 				$('.answer_profor:checked').each(function() {
 					results.push(parseFloat($(this).attr("data-weight")));
 				});
-				/*var data = {
-					file: "proftest",
-					type: "pull",
-					content: results,
-					id:	profor.id
-				}
-				ajax(
-					serverAdress+"entrypoints/get.php",
-					data,
-					function(Data){
-						app.alert(Data, dictionary.success);
+				var bestMatch = {
+					sum:	0,
+					name:	"",
+				};
+				console.log(results);
+				for(var i=0;i<profor.answers.length;i++) {
+					var difference = 0;
+					for(var j=0;j<profor.answers[i].graph.length;j++) {
+						difference += Math.abs(results[j] - profor.answers[i].graph[j]);
+					};
+					if(i == 0) {
+						bestMatch.sum = difference;
+						bestMatch.name = profor.answers[i].name;
 					}
-				);*/
+					else{
+						if(bestMatch.sum > difference) {
+							bestMatch.sum = difference;
+							bestMatch.name = profor.answers[i].name;
+						}
+					}
+
+				};
+				app.alert(bestMatch.name, dictionary.success);
+				
 			});
 		}
 		$('.profor-test').on('click', function () {
@@ -63,17 +74,16 @@ var profor = {
 				type: "pull",
 				id:	profor.id
 			};
-			console.log(data);
 			ajax(
 				serverAdress+"entrypoints/get.php",
 				data,
 				function(Data){
-					console.log(Data);
+					profor.answers= JSON.parse(Data)[0];
 				}
 			);
 		});
 		profor.notFirstUse = true;
 	},
-	answers:[],
+	answers: "",
 	notFirstUse: false,
 }
