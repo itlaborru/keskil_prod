@@ -40,7 +40,7 @@ var profor = {
 				$('.answer_profor:checked').each(function() {
 					results.push(parseFloat($(this).attr("data-weight")));
 				});
-				var data = {
+				/*var data = {
 					file: "proftest",
 					type: "pull",
 					content: results,
@@ -52,14 +52,28 @@ var profor = {
 					function(Data){
 						app.alert(Data, dictionary.success);
 					}
-				);
+				);*/
 			});
 		}
 		$('.profor-test').on('click', function () {
 			profor.render($(this).attr('data-id'));
 			profor.id = $(this).attr('data-id');
+			var data = {
+				file: "proftest",
+				type: "pull",
+				id:	profor.id
+			};
+			console.log(data);
+			ajax(
+				serverAdress+"entrypoints/get.php",
+				data,
+				function(Data){
+					console.log(Data);
+				}
+			);
 		});
 		profor.notFirstUse = true;
 	},
+	answers:[],
 	notFirstUse: false,
 }
