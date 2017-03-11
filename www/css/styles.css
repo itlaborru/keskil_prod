@@ -149,7 +149,9 @@ h3 {
 .news__tag {
 	color:	#000;
 }
-
+.proforActive {
+	background:	rgba(240,10,10,0.5);
+}
 /* Начало классов для community*/
 
 .community {

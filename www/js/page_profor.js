@@ -5,6 +5,7 @@ var profor = {
 		$('.profor').html("");
 		var info ="";	
 		if(parameter == undefined) {
+			$("#profor_send").addClass("display-none");
 			for(var i = 0; i<DataAjax.profor.length;i++) {
 				var title = DataAjax.profor[i].title;
 				info+= "<h3 class='profor-test' data-id='"+DataAjax.profor[i].id+"'>"+title+"</h3>";
@@ -13,6 +14,7 @@ var profor = {
 			profor.bindEvents();
 		}
 		else {
+			$("#profor_send").removeClass("display-none");
 			for(var i = 0; i<DataAjax.profor.length;i++) {
 				if(DataAjax.profor[i].id != parameter) {
 					continue;
@@ -20,7 +22,7 @@ var profor = {
 				else {
 					var questions = "";
 					for(var x = 0; x<DataAjax.profor[i].questions_stack.length;x++) {
-						questions+= "<p>"+DataAjax.profor[i].questions_stack[x].title+"<br/>";
+						questions+= "<p class='questionBlock' data-id='"+x+"'>"+DataAjax.profor[i].questions_stack[x].title+"<br/>";
 						for(var key in DataAjax.profor[i].questions_stack[x].answers) {
 							questions+= "<input class='answer_profor' type='radio' data-weight='"+DataAjax.profor[i].questions_stack[x].answers[key].weight+"' data-id='"+x+"' name='"+x+"' value='radiobutton'/>"+DataAjax.profor[i].questions_stack[x].answers[key].name; 
 						}
@@ -36,34 +38,61 @@ var profor = {
 	bindEvents: function(){
 		if(!profor.notFirstUse) {
 			$('#profor_send').on('click', function () {
-				var results= [];
+				var results= new Object();
 				$('.answer_profor:checked').each(function() {
-					results.push(parseFloat($(this).attr("data-weight")));
+					results[$(this).attr("data-id")] = $(this).attr("data-weight");
 				});
-				var bestMatch = {
-					sum:	0,
-					name:	"",
-				};
-				console.log(results);
-				for(var i=0;i<profor.answers.length;i++) {
-					var difference = 0;
-					for(var j=0;j<profor.answers[i].graph.length;j++) {
-						difference += Math.abs(results[j] - profor.answers[i].graph[j]);
-					};
-					if(i == 0) {
-						bestMatch.sum = difference;
-						bestMatch.name = profor.answers[i].name;
+				profor.incorr = false;	
+				for( var i = 0; i<profor.answers[0].graph.length;i++){
+					if(i in results){
+						if ($('.questionBlock[data-id="'+i+'"]').hasClass("proforActive")) {
+							$('.questionBlock[data-id="'+i+'"]').removeClass("proforActive");
+						}
+						continue;
 					}
-					else{
-						if(bestMatch.sum > difference) {
+					else {
+						$('.questionBlock[data-id="'+i+'"]').addClass("proforActive");
+						profor.incorr = true;	
+					}
+				}
+				if(profor.incorr) {
+					app.alert(dictionary.proforLess, dictionary.error);
+				}
+				else {
+					var bestMatch = {
+						sum:	0,
+						name:	"",
+						first: true,
+					};
+					for(var i=0;i<profor.answers.length;i++) {
+						var difference = 0;
+						for(var j=0;j<profor.answers[i].graph.length;j++) {
+							difference += Math.abs(results[j] - profor.answers[i].graph[j]);
+						};
+						if(i == 0) {
 							bestMatch.sum = difference;
 							bestMatch.name = profor.answers[i].name;
+							bestMatch.first = false;
 						}
-					}
+						else{
+							if(bestMatch.sum > difference) {
+								bestMatch.sum = difference;
+								bestMatch.name = profor.answers[i].name;
+								bestMatch.first = false;
+							}
+							else if(bestMatch.sum == difference && !bestMatch.first) {
+								bestMatch.name = bestMatch.name+", "+ profor.answers[i].name;
+								bestMatch.first = false;
+							}
+							else if(bestMatch.sum == difference && bestMatch.first) {
+								bestMatch.name = profor.answers[i].name;
+								bestMatch.first = false;
+							}
+						}
 
-				};
-				app.alert(bestMatch.name, dictionary.success);
-				
+					};
+					app.alert(bestMatch.name, dictionary.success);
+				}
 			});
 		}
 		$('.profor-test').on('click', function () {
@@ -85,5 +114,6 @@ var profor = {
 		profor.notFirstUse = true;
 	},
 	answers: "",
-	notFirstUse: false,
+	incorr:	false,
+	notFirstUse: false
 }
