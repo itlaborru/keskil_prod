@@ -6,22 +6,39 @@ var friends = {
 	render:	function(update) {
 		$('.friendsMain').html("");
 		var ifClear = true;
+		var friendsData = [];
 		function createGroup(value,key) {
 			var block;
-			block = $("<div class='friends__group' data-id='"+key+"'><img src='"+value.icon+"' /><div class='friends__name'>"+value.name+"</div><div class='post__group__users'>"+JSON.parse(value.users).length+"</div></div>");
+			block = $("<div class='friends__group' data-id='"+value.id+"'><img src='"+value.icon+"' style='height: 100px; width: 100px;' /><div class='friends__name'>"+value.login+"</div><div class='post__group__users'>"+JSON.parse(value.friends).length+"</div></div>");
 			$(".friendsMain").append(block);
 			ifClear = false;
 		}
 		
-		for(var i = 0; i < DataAjax.grouplist.length; i++) {
-			createGroup(DataAjax.grouplist[i],i);
-		}
+		ajax(
+			
+			entrypoints.friendsGetAllFriends.url,
+			{
+				
+				file: 'friends',
+				type: 'friendStackData',
+				id: JSON.stringify(userInfo.friends)
+				
+			},
+			function(data){
+				friendsData = JSON.parse(data);
+				for(var i = 0; i < friendsData.length; i++) {
+					createGroup(friendsData[i],i);
+				};
+				
+				if(ifClear) {
+					app.alert(dictionary.noContent, dictionary.sorry);
+				};
+				
+				friends.bindEvents();
+			}
+			
+		);	
 		
-		if(ifClear) {
-			app.alert(dictionary.noContent, dictionary.sorry);
-		}
-		
-		friends.bindEvents();
 	},
 	bindEvents: function(){
 		$('.friendsMain').on('click', '.friends__group', function (e) {

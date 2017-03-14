@@ -62,6 +62,10 @@ var entrypoints = {
 	friendsGetPost: {
 		url:	serverAdress + "entrypoints/get.php"
 	},
+	friendsGetAllFriends: {
+		url:	serverAdress + "entrypoints/get.php"
+	},
+	
 	
 	
 	allData: {
