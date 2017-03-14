@@ -38,34 +38,28 @@ var entrypoints = {
 	},
 	
 	
-	communityAddGroup: {
+	
+	friendsJoinGroup: {
 		url:	serverAdress + "entrypoints/set.php",
 		success:	function(data){
 			app.alert(dictionary.keskil+' '+data);
 			userOptions.updateUserinfo();
 		}
 	},
-	communityJoinGroup: {
+	friendsOutGroup: {
 		url:	serverAdress + "entrypoints/set.php",
 		success:	function(data){
 			app.alert(dictionary.keskil+' '+data);
 			userOptions.updateUserinfo();
 		}
 	},
-	communityOutGroup: {
-		url:	serverAdress + "entrypoints/set.php",
-		success:	function(data){
-			app.alert(dictionary.keskil+' '+data);
-			userOptions.updateUserinfo();
-		}
-	},
-	communityAddPost: {
+	friendsAddPost: {
 		url:	serverAdress + "entrypoints/set.php",
 		success:	function(data){
 			app.alert(dictionary.keskil+' '+data);
 		}
 	},
-	communityGetPost: {
+	friendsGetPost: {
 		url:	serverAdress + "entrypoints/get.php"
 	},
 	

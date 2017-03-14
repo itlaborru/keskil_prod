@@ -152,15 +152,15 @@ h3 {
 
 /* Начало классов для community*/
 
-.community {
+.friends {
 	
 }
 
-.community__addGroup{
+.friends__addGroup{
 	background: green;
 }
 
-.community__group{
+.friends__group{
 	height:200px;
 	width: 100%;
 	background: yellow;
