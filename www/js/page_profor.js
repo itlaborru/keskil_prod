@@ -40,7 +40,7 @@ var profor = {
 			$('#profor_send').on('click', function () {
 				var results= new Object();
 				$('.answer_profor:checked').each(function() {
-					results[$(this).attr("data-id")] = $(this).attr("data-weight");
+					results[$(this).attr("data-id")] = parseFloat($(this).attr("data-weight"));
 				});
 				profor.incorr = false;	
 				for( var i = 0; i<profor.answers[0].graph.length;i++){
@@ -66,9 +66,13 @@ var profor = {
 					};
 					for(var i=0;i<profor.answers.length;i++) {
 						var difference = 0;
+						console.log(difference + " Разрыв и номер"+i );
 						for(var j=0;j<profor.answers[i].graph.length;j++) {
 							difference += Math.abs(results[j] - profor.answers[i].graph[j]);
+							console.log(difference);
+							//console.log(Math.abs(results[j] - profor.answers[i].graph[j]));
 						};
+						
 						if(i == 0) {
 							bestMatch.sum = difference;
 							bestMatch.name = profor.answers[i].name;
@@ -83,6 +87,7 @@ var profor = {
 							else if(bestMatch.sum == difference && !bestMatch.first) {
 								bestMatch.name = bestMatch.name+", "+ profor.answers[i].name;
 								bestMatch.first = false;
+								console.log( "kek kek kek");	
 							}
 							else if(bestMatch.sum == difference && bestMatch.first) {
 								bestMatch.name = profor.answers[i].name;
@@ -91,6 +96,7 @@ var profor = {
 						}
 
 					};
+					console.log(bestMatch.sum);
 					app.alert(bestMatch.name, dictionary.success);
 				}
 			});
