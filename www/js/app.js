@@ -21,14 +21,6 @@ var initPages = {
 
 	},
 	handler: 	function(){
-		$(document).on('click', '.userHref', function (e) {
-			var userId = $(this).attr('user-id');
-			userPage.makingNewPage(userId);
-		});
-		$(document).on('click', '.userFriendsHref', function (e) {
-			var userId = $(this).attr('user-id');
-			friends.makingNewPage(userId);
-		});
 		$(document).on('pageBeforeAnimation', function (e) {
 			var page = e.detail.page.name;
 			if(page != "index") {
