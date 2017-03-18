@@ -62,15 +62,12 @@ var profor = {
 					var bestMatch = {
 						sum:	0,
 						name:	"",
-						first: true,
+						first: true
 					};
 					for(var i=0;i<profor.answers.length;i++) {
 						var difference = 0;
-						console.log(difference + " Разрыв и номер"+i );
 						for(var j=0;j<profor.answers[i].graph.length;j++) {
 							difference += Math.abs(results[j] - profor.answers[i].graph[j]);
-							console.log(difference);
-							//console.log(Math.abs(results[j] - profor.answers[i].graph[j]));
 						};
 						
 						if(i == 0) {
@@ -86,8 +83,6 @@ var profor = {
 							}
 							else if(bestMatch.sum == difference && !bestMatch.first) {
 								bestMatch.name = bestMatch.name+", "+ profor.answers[i].name;
-								bestMatch.first = false;
-								console.log( "kek kek kek");	
 							}
 							else if(bestMatch.sum == difference && bestMatch.first) {
 								bestMatch.name = profor.answers[i].name;
@@ -96,7 +91,6 @@ var profor = {
 						}
 
 					};
-					console.log(bestMatch.sum);
 					app.alert(bestMatch.name, dictionary.success);
 				}
 			});
