@@ -18,7 +18,6 @@ var userOptions = {
 		userInfo.mail = dataLogin.mail;
 		userInfo.icon = dataLogin.icon;
 		userInfo.friends = dataLogin.friends;
-		userInfo.groups = JSON.parse(dataLogin.groups);
 		$(".myPage").attr("user-id", userInfo.id);
 		localStorage.setItem("userInfo", JSON.stringify(userInfo));
 	},

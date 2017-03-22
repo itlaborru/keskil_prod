@@ -3,13 +3,13 @@ var friends = {
 	actualHeight:	"",
 	actualScroll:	0,
 	activeScroll:	false,
+	friendsData:	[],
 	render:	function(update) {
 		$('.friendsMain').html("");
 		var ifClear = true;
-		var friendsData = [];
 		function createGroup(value,key) {
 			var block;
-			block = $("<div class='friends__group' data-id='"+value.id+"'><img src='"+value.icon+"' style='height: 100px; width: 100px;' /><div class='friends__name'>"+value.login+"</div><div class='post__group__users'>"+JSON.parse(value.friends).length+"</div></div>");
+			block = $("<div class='friends__group' data-id='"+key+"'><img src='"+value.icon+"' style='height: 100px; width: 100px;' /><div class='friends__name'>"+value.login+"</div><div class='post__group__users'>"+JSON.parse(value.friends).length+"</div></div>");
 			$(".friendsMain").append(block);
 			ifClear = false;
 		}
@@ -25,19 +25,21 @@ var friends = {
 				
 			},
 			function(data){
-				friendsData = JSON.parse(data);
-				for(var i = 0; i < friendsData.length; i++) {
-					createGroup(friendsData[i],i);
+				friends.friendsData = JSON.parse(data);
+				console.log(friends.friendsData);
+				for(var i = 0; i < friends.friendsData.length; i++) {
+					createGroup(friends.friendsData[i],i);
 				};
 				
 				if(ifClear) {
 					app.alert(dictionary.noContent, dictionary.sorry);
 				};
 				
-				friends.bindEvents();
 			}
 			
-		);	
+		);
+		
+		friends.bindEvents();
 		
 	},
 	bindEvents: function(){

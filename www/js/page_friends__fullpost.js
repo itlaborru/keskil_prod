@@ -4,14 +4,14 @@ var friends__fullpost = {
 		$(".friends__full__post").html("");
 		var postId = $(".friends__full__post").attr("data-id");
 		var block;
-		block = $("<div class='post'><img src='"+DataAjax.grouplist[postId].icon+"' /><div class='friends__name'>"+DataAjax.grouplist[postId].name+"</div><div class='post__group__users'>"+JSON.parse(DataAjax.grouplist[postId].users).length+"</div></div>");
+		block = $("<div class='post'><img src='"+friends.friendsData[postId].icon+"' /><div class='friends__name'>"+friends.friendsData[postId].login+"</div><div class='post__group__users'>"+JSON.parse(friends.friendsData[postId].friends).length+"</div></div>");
 		$(".friends__full__post").append(block);
 		ajax(
 			entrypoints.friendsGetPost.url,
 			{
 				file: 'friends',
-				type: 'friendsPostData',
-				id: DataAjax.grouplist[postId].id
+				type: 'friendPostData',
+				id: friends.friendsData[postId].id
 			},
 			function(data){
 				console.log(data);
@@ -19,22 +19,24 @@ var friends__fullpost = {
 				console.log(postList);
 				$.each(postList, function(key,val){
 					
-					block = $("<div class='post'>"+val.content+"</div>");
+					block = $("<div class='post'><p>"+val.content+"</p> <p> Автор: " + val.user + "</p></div>");
 					$(".friends__full__post").append(block);
 					
 				});
 			}
 		);
 		
-		$('.joinGroupDiv').removeClass( 'display-none' );
 		$('.outGroupDiv').addClass( 'display-none' );
+		$('.joinGroupDiv').removeClass( 'display-none' );
 		
-		$.each(userInfo.groups, function(key,val){
-			if(val == DataAjax.grouplist[postId].id){
-				$('.joinGroupDiv').addClass( 'display-none' );
+		$.each(friends.friendsData, function(key, value){
+			if(key == postId){
 				$('.outGroupDiv').removeClass( 'display-none' );
+				$('.joinGroupDiv').addClass( 'display-none' );
 			}
 		});
+		
+		
 		
 		friends__fullpost.bindEvents();
 	},
@@ -45,7 +47,7 @@ var friends__fullpost = {
 				
 				var pushData = {
 					
-					id: DataAjax.grouplist[$(".friends__full__post").attr("data-id")].id,
+					id: friends.friendsData[$(".friends__full__post").attr("data-id")].id,
 					file: 'friends',
 					type: 'addPost',
 					content: $('.postName').val()
@@ -60,7 +62,7 @@ var friends__fullpost = {
 				
 				var pushData = {
 					
-					id: DataAjax.grouplist[$(".friends__full__post").attr("data-id")].id,
+					id: friends.friendsData[$(".friends__full__post").attr("data-id")].id,
 					file: 'friends',
 					type: 'joinFriend'
 					
@@ -74,7 +76,7 @@ var friends__fullpost = {
 				
 				var pushData = {
 					
-					id: DataAjax.grouplist[$(".friends__full__post").attr("data-id")].id,
+					id: friends.friendsData[$(".friends__full__post").attr("data-id")].id,
 					file: 'friends',
 					type: 'outFriend'
 					
