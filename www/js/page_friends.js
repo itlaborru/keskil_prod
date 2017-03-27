@@ -21,7 +21,7 @@ var friends = {
 				
 				file: 'friends',
 				type: 'friendStackData',
-				id: JSON.stringify(userInfo.friends)
+				id: JSON.stringify(DataAjax.users)
 				
 			},
 			function(data){

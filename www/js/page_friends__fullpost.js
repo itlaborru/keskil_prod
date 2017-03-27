@@ -29,8 +29,9 @@ var friends__fullpost = {
 		$('.outGroupDiv').addClass( 'display-none' );
 		$('.joinGroupDiv').removeClass( 'display-none' );
 		
-		$.each(friends.friendsData, function(key, value){
-			if(key == postId){
+		$.each(userInfo.friends, function(key, value){
+			if(userInfo.friends[key] == DataAjax.users[postId]){
+				console.log('Drug -'+value+' '+key+' '+postId);
 				$('.outGroupDiv').removeClass( 'display-none' );
 				$('.joinGroupDiv').addClass( 'display-none' );
 			}
@@ -43,7 +44,7 @@ var friends__fullpost = {
 	bindEvents: function(){
 		
 		if(!friends__fullpost.notFirstUse){
-			$('.friends__fullpost .pushPost').on('click', function(){
+			$('.friends__fullpost').on('click', '.pushPost', function(){
 				
 				var pushData = {
 					
@@ -58,7 +59,9 @@ var friends__fullpost = {
 				
 			});
 			
-			$('.friends__fullpost .joinGroup').on('click', function(){
+			$('.friends__fullpost').on('click', '.joinGroup', function(){
+				
+				console.log('click');
 				
 				var pushData = {
 					
@@ -70,9 +73,12 @@ var friends__fullpost = {
 				
 				ajax(entrypoints.friendsJoinGroup.url, pushData, entrypoints.friendsJoinGroup.success);
 				
+				$('.outGroupDiv').removeClass( 'display-none' );
+				$('.joinGroupDiv').addClass( 'display-none' );
+				
 			});
 			
-			$('.friends__fullpost .outGroup').on('click', function(){
+			$('.friends__fullpost').on('click', '.outGroup', function(){
 				
 				var pushData = {
 					
@@ -81,6 +87,9 @@ var friends__fullpost = {
 					type: 'outFriend'
 					
 				};
+				
+				$('.outGroupDiv').addClass( 'display-none' );
+				$('.joinGroupDiv').removeClass( 'display-none' );
 				
 				ajax(entrypoints.friendsOutGroup.url, pushData, entrypoints.friendsJoinGroup.success);
 				
