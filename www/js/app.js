@@ -53,3 +53,8 @@ $(".show__element-call").click(function() {
 $(".newsList").click(function() {
 	$(".newsMain").attr("data-category","without")
 });
+
+$(".userHref").click(function() {
+	$('.friends__full__post').attr("data-id",'me');
+	mainView.router.load({pageName: 'friends__fullpost'});
+});

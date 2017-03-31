@@ -1,17 +1,24 @@
 var friends__fullpost = {
 	//Прорисовка категории
+	data: {},
 	render:	function() {
 		$(".friends__full__post").html("");
 		var postId = $(".friends__full__post").attr("data-id");
 		var block;
-		block = $("<div class='post'><img src='"+friends.friendsData[postId].icon+"' /><div class='friends__name'>"+friends.friendsData[postId].login+"</div><div class='post__group__users'>"+JSON.parse(friends.friendsData[postId].friends).length+"</div></div>");
+		if(postId = 'me'){
+			friends__fullpost.data = userInfo;
+		} else {
+			friends__fullpost.data = friends.friendsData[postId];
+		}
+		
+		block = $("<div class='post'><img src='"+friends__fullpost.data.icon+"' /><div class='friends__name'>"+friends__fullpost.data.login+"</div></div>");
 		$(".friends__full__post").append(block);
 		ajax(
 			entrypoints.friendsGetPost.url,
 			{
 				file: 'friends',
 				type: 'friendPostData',
-				id: friends.friendsData[postId].id
+				id: friends__fullpost.data.id
 			},
 			function(data){
 				console.log(data);
@@ -48,7 +55,7 @@ var friends__fullpost = {
 				
 				var pushData = {
 					
-					id: friends.friendsData[$(".friends__full__post").attr("data-id")].id,
+					id: friends__fullpost.data.id,
 					file: 'friends',
 					type: 'addPost',
 					content: $('.postName').val()
@@ -65,7 +72,7 @@ var friends__fullpost = {
 				
 				var pushData = {
 					
-					id: friends.friendsData[$(".friends__full__post").attr("data-id")].id,
+					id: friends__fullpost.data.id,
 					file: 'friends',
 					type: 'joinFriend'
 					
@@ -82,7 +89,7 @@ var friends__fullpost = {
 				
 				var pushData = {
 					
-					id: friends.friendsData[$(".friends__full__post").attr("data-id")].id,
+					id: friends__fullpost.data.id,
 					file: 'friends',
 					type: 'outFriend'
 					
