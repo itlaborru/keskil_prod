@@ -5,9 +5,10 @@ var friends__fullpost = {
 		$(".friends__full__post").html("");
 		var postId = $(".friends__full__post").attr("data-id");
 		var block;
-		if(postId = 'me'){
+		if(postId == 'me'){
 			friends__fullpost.data = userInfo;
 		} else {
+			console.log(postId);
 			friends__fullpost.data = friends.friendsData[postId];
 		}
 		

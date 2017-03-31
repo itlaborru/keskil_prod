@@ -5,6 +5,10 @@ var userOptions = {
 		ajax(entrypoints.newUserInfo.url,entrypoints.newUserInfo.data,entrypoints.newUserInfo.success);
 	},
 	updateUserinfoClient:	function(dataLogin) {
+		console.log(dataLogin);
+		if(typeof(dataLogin) == 'string'){
+			dataLogin = JSON.parse(dataLogin);
+		};
 		$('.userPanel__icon').attr('src', dataLogin.icon);
 		$('.userPanel__name').html(dataLogin.login);
 		$('.userPage__fullname').html(dataLogin.lname + ' ' + dataLogin.fname + ' ' +  dataLogin.mname);
