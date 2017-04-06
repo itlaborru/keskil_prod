@@ -21,6 +21,19 @@ var entrypoints = {
 			app.alert(dictionary.feedbackSent, dictionary.success);
 		},
 	},
+	proforDb: {
+		url:	serverAdress + "entrypoints/get.php", 
+		data:	{
+			'file':'proftest',
+			'type': 'pullDb',
+		},
+		success:	function(data) {
+			data = JSON.parse(data);
+			data[0] = JSON.parse(data[0]);
+			data[1] = JSON.parse(data[1]);
+			DataAjax.proforDB = data;
+		},
+	},
 	newUserInfo: {
 		url:	serverAdress + 'entrypoints/user-data-ajax.php',
 		data:	{

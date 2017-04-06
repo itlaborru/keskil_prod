@@ -23,7 +23,7 @@ var initPages = {
 	handler: 	function(){
 		$(document).on('pageBeforeAnimation', function (e) {
 			var page = e.detail.page.name;
-			if(page != "index") {
+			if( page != "index" ) {
 				window[page].render();
 			}
 		});
