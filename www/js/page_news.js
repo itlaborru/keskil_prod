@@ -53,6 +53,7 @@ var news = {
 		}
 		if(ifClear) {
 			app.alert(dictionary.noContent, dictionary.sorry);
+			mainView.router.load({pageName: 'index'});
 		}
 		for(var i = 0; i < DataAjax.categorylist.length; i++) {
 			if(DataAjax.categorylist[i].type == "news") {
