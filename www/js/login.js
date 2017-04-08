@@ -75,6 +75,7 @@ var login = {
 					'mail': $('.mail').val()
 				},
 				function(data){
+					data = JSON.parse(data).text;
 					app.alert(data,dictionary.keskil);
 					$('.login').val('');
 					$('.pass').val('');

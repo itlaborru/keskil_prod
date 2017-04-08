@@ -15,8 +15,8 @@ var contests__list = {
 				$('.contestBlock').attr("data-id",categ);
 			});
 			$('.contestBlock').on('click', '.contestSend', function (e) {
-				transferImages.getImage();
 				transferImages.type.name = "contest";
+				transferImages.getImage();
 				transferImages.type.contest = $('.contestBlock').attr("data-id") ;
 			});
 		}

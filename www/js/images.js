@@ -6,7 +6,7 @@ var transferImages = {
 		options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
 		options.mimeType="image/*";
 		
-		var progresbar = 0;
+		var progressbar = 0;
 	
 		var params = new Object();
 		params.file =  'fileChecker';
@@ -14,11 +14,13 @@ var transferImages = {
 		if(transferImages.type.name == "contest") {
 			params.contest = transferImages.type.contest;
 			params.type = "contest";
+			params.file = 'fileChecker';
+			progressbar = $('.contest__progressbar');
 		}
 		else if(transferImages.type.name == "avatar"){
 			params.file = 'fileChecker';
 			params.type="avatar";
-			progresbar = $('.userPage__progressbar');
+			progressbar = $('.userPage__progressbar');
 		}
 		
 		options.params = params;
@@ -32,9 +34,9 @@ var transferImages = {
 			ft.onprogress = function(result) {
 				var percent =  result.loaded / result.total * 100;
 				percent = Math.round(percent);
-				app.setProgressbar(progresbar, percent);
+				app.setProgressbar(progressbar, percent);
 				if(percent == 100) {
-					app.setProgressbar(progresbar, 0);	
+					app.setProgressbar(progressbar, 0);	
 					setTimeout(function() {
 						userPage.updateUserinfo();
 					}, CHANGE_USER_INFO_TIMEOUT);
@@ -66,6 +68,7 @@ var transferImages = {
 		console.log("Sent = " + r.bytesSent);
 		//alert(r.response,dictionary.keskil);
 		app.alert(dictionary.uploaded,dictionary.success);
+		console.log(r);
 	},
 	fail: function(error) {
 		alert(dictionary.error +  error.code);
