@@ -91,7 +91,7 @@ var profor = {
 						}
 
 					};
-					app.alert(bestMatch.name, dictionary.success);
+					app.alert(dictionary.proforJobs + bestMatch.name +".<br/>"+dictionary.proforFin, dictionary.success);
 				}
 			});
 		}

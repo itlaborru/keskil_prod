@@ -97,6 +97,11 @@ h3 {
 	margin:	0;
 }
 
+.avatar {
+	max-width:	200px;
+	max-height:	200px;
+}
+
 .loadingScreen{
 	position:absolute;
 	left: 0;
@@ -165,7 +170,9 @@ h3 {
 .friends__group{
 	height:200px;
 	width: 100%;
-	background: yellow;
+	background: #ccc;
+	padding:	5px;
+	margin-bottom:	20px;
 }
 
 /* Конец */

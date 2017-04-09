@@ -9,7 +9,8 @@ var friends = {
 		var ifClear = true;
 		function createGroup(value,key) {
 			var block;
-			block = $("<div class='friends__group' data-id='"+key+"'><img src='"+value.icon+"' style='height: 100px; width: 100px;' /><div class='friends__name'>"+value.login+"</div><div class='post__group__users'>"+JSON.parse(value.friends).length+"</div></div>");
+			block = $("<div class='friends__group' data-id='"+key+"'><img src='"+value.icon+"' style='max-height: 150px; max-width: 150px;' /><div class='friends__name'>"+value.login+"</div></div>");
+			//<div class='post__group__users'>"+JSON.parse(value.friends).length+"</div>
 			$(".friendsMain").append(block);
 			ifClear = false;
 		}

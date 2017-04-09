@@ -12,7 +12,7 @@ var friends__fullpost = {
 			friends__fullpost.data = friends.friendsData[postId];
 		}
 		
-		block = $("<div class='post'><img src='"+friends__fullpost.data.icon+"' /><div class='friends__name'>"+friends__fullpost.data.login+"</div></div>");
+		block = $("<div class='post'><img class='avatar' src='"+friends__fullpost.data.icon+"' /><div class='friends__name'>"+friends__fullpost.data.login+"</div></div>");
 		$(".friends__full__post").append(block);
 		ajax(
 			entrypoints.friendsGetPost.url,
