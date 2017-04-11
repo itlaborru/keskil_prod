@@ -7,32 +7,15 @@ var friends__fullpost = {
 		var block;
 		if(postId == 'me'){
 			friends__fullpost.data = userInfo;
-		} else {
+		} 
+		else {
 			console.log(postId);
 			friends__fullpost.data = friends.friendsData[postId];
 		}
 		
 		block = $("<div class='post'><img class='avatar' src='"+friends__fullpost.data.icon+"' /><div class='friends__name'>"+friends__fullpost.data.login+"</div></div>");
 		$(".friends__full__post").append(block);
-		ajax(
-			entrypoints.friendsGetPost.url,
-			{
-				file: 'friends',
-				type: 'friendPostData',
-				id: friends__fullpost.data.id
-			},
-			function(data){
-				console.log(data);
-				var postList = JSON.parse(data);
-				console.log(postList);
-				$.each(postList, function(key,val){
-					
-					block = $("<div class='post'><p>"+val.content+"</p> <p> Автор: " + val.user + "</p></div>");
-					$(".friends__full__post").append(block);
-					
-				});
-			}
-		);
+		entrypoints.friendsGetPost();
 		
 		$('.outGroupDiv').addClass( 'display-none' );
 		$('.joinGroupDiv').removeClass( 'display-none' );

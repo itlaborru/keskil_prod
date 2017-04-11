@@ -28,7 +28,6 @@ var transferImages = {
 		globalVar.imageURI = imageURI;
 
 		options.chunkedMode = false;
-		// ** Тут меняешь адрес сервера для картинок
 		var ft = new FileTransfer();
 		if(progressbar !=0) {
 			ft.onprogress = function(result) {
@@ -66,9 +65,7 @@ var transferImages = {
 		console.log("Code = " + r.responseCode);
 		console.log("Response = " + r.response);
 		console.log("Sent = " + r.bytesSent);
-		//alert(r.response,dictionary.keskil);
 		app.alert(dictionary.uploaded,dictionary.success);
-		console.log(r);
 	},
 	fail: function(error) {
 		alert(dictionary.error +  error.code);

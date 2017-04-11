@@ -49,9 +49,6 @@ var entrypoints = {
 			app.alert(dictionary.storySent, dictionary.keskil);
 		}
 	},
-	
-	
-	
 	friendsJoinGroup: {
 		url:	serverAdress + "entrypoints/set.php",
 		success:	function(data){
@@ -70,17 +67,49 @@ var entrypoints = {
 		url:	serverAdress + "entrypoints/set.php",
 		success:	function(data){
 			app.alert(dictionary.keskil+' '+data);
+			$('.postName').val("");
 		}
 	},
-	friendsGetPost: {
-		url:	serverAdress + "entrypoints/get.php"
+	friendsGetPost: function(){
+		ajax(serverAdress + "entrypoints/get.php",
+			{
+				file: 'friends',
+				type: 'friendPostData',
+				id: friends__fullpost.data.id
+			},
+			function(data){
+				console.log(data);
+				var postList = JSON.parse(data);
+				console.log(postList);
+				$.each(postList, function(key,val){
+					var block = $("<div class='post'><p>"+val.content+"</p> <p> Автор: " + val.user + "</p></div>");
+					$(".friends__full__post").append(block);
+					
+				});
+			}
+		);
 	},
 	friendsGetAllFriends: {
 		url:	serverAdress + "entrypoints/get.php"
 	},
-	
-	
-	
+	friendsGetAllFriends: function(){
+		ajax(serverAdress + "entrypoints/get.php",
+			{
+				file: 'friends',
+				type: 'friendStackData',
+				id: JSON.stringify(DataAjax.users)
+			},
+			function(data){
+				friends.friendsData = JSON.parse(data);
+				console.log(friends.friendsData);
+				for(var i = 0; i < friends.friendsData.length; i++) {
+					friends.createGroup(friends.friendsData[i],i);
+				};
+				if(friends.ifClear) {
+					app.alert(dictionary.noContent, dictionary.sorry);
+				};
+			});
+	},
 	allData: {
 		url:	serverAdress + "daemon/get.php",
 		data:	{
