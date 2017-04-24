@@ -45,9 +45,10 @@ var map = {
 			return new google.maps.Marker({
 				position: location
 			});
+			console.log("kek");
 		}); 
 		var markerCluster = new MarkerClusterer(map.map, markers,
-            {imagePath: 'assets/m'});
+        {imagePath: 'assets/m'});
 	},
 	map: ""
 };
