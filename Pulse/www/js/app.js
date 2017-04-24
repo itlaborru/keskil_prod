@@ -8,12 +8,14 @@ var $ = Dom7;
 // Add view
 var mainView = app.addView('.view-main', {
     // Because we want to use dynamic navbar, we need to enable it for this view:
-    dynamicNavbar: true
+    dynamicNavbar: true,
+	domCache : true
 });
 
 // Handle Cordova Device Ready Event
 $(document).on('deviceready', function() {
     console.log("Device is ready!");
+	map.render();
 });
 var map = {
 	markers : [
