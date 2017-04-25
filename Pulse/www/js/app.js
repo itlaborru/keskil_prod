@@ -2,12 +2,10 @@
 var app = new Framework7();
 
 
-// If we need to use custom DOM library, let's save it to $$ variable:
 var $ = Dom7;
 
 // Add view
 var mainView = app.addView('.view-main', {
-    // Because we want to use dynamic navbar, we need to enable it for this view:
     dynamicNavbar: true,
 	domCache : true
 });
@@ -18,6 +16,12 @@ $(document).on('deviceready', function() {
 	map.render();
 });
 var map = {
+	infoWindow: function(marker,data) {
+		var infowindow = new google.maps.InfoWindow({ content: data });
+			google.maps.event.addListener(marker, 'click', function() {
+			infowindow.open(map,marker);
+		});  
+	},
 	markers : [
 		{
 			lat:62.0271247323787,lng:129.73246335983276
@@ -41,22 +45,20 @@ var map = {
 			disableDefaultUI: true,
 		});
 		
-		var markers = map.markers.map(function(location, i) {
-			return new google.maps.Marker({
-				position: location
+		var infowindow = new google.maps.InfoWindow({
+			content: "Hello"
+		});
+		var markers = [];
+		for(var i=0; i<map.markers.length; i++){
+			var marker = new google.maps.Marker({
+				position: {lat: map.markers[i].lat, lng: map.markers[i].lng},
+				map: map.map
 			});
-			console.log("kek");
-		}); 
+			map.infoWindow(marker, "Hello")
+			markers.push(marker);
+		}
 		var markerCluster = new MarkerClusterer(map.map, markers,
         {imagePath: 'assets/m'});
 	},
 	map: ""
 };
-
-
-// Option 2. Using one 'pageInit' event handler for all pages:
-$(document).on('pageBeforeAnimation', function (e) {
-    // Get page data from event data
-    var page = e.detail.page.name;
-	window[page].render();
-});
