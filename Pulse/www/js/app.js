@@ -1,7 +1,6 @@
 // Initialize app
 var app = new Framework7();
 
-
 var $ = Dom7;
 
 // Add view
@@ -10,11 +9,7 @@ var mainView = app.addView('.view-main', {
 	domCache : true
 });
 
-// Handle Cordova Device Ready Event
-$(document).on('deviceready', function() {
-    console.log("Device is ready!");
-	map.render(true,"stories");
-});
+//ПОТОМ НЕОБХОДИМО ПЕРЕМЕСТИТЬ ЭТО В ДРУГОЕ МЕСТО
 var Data = {
 	//Эмуляция полученных данных
 	stories: {
