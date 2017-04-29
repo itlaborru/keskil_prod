@@ -41,7 +41,7 @@ var Data = {
 		]
 	}
 }
-var map = {
+var mapManager = {
 	//Показ информационного окна
 	infoWindow: function(marker,data) {
 		var infowindow = new google.maps.InfoWindow({ content: data });
@@ -52,7 +52,7 @@ var map = {
 	//Прорисовывание карты
 	render: function(ifFirst,category) {
 		if(ifFirst){
-			map.map = new google.maps.Map(document.getElementById('map'), {
+			mapManager.map = new google.maps.Map(document.getElementById('map'), {
 				center: {lat: 62.031030526953856, lng: 129.72959222272038},
 				zoom: 12,
 				minZoom: 4,
@@ -61,24 +61,24 @@ var map = {
 			});
 		}
 		else {	
-			for (var i = 0; i < map.markers.length; i++) {
-				map.markers[i].setMap(null);
+			for (var i = 0; i < mapManager.markers.length; i++) {
+				mapManager.markers[i].setMap(null);
 			}
-			map.markers = [];
+			mapManager.markers = [];
 		}
 		//Чтение и отрисовывание маркеров
 		for(var i=0; i<Data[category].markers.length; i++){
 			var marker = new google.maps.Marker({
 				position: {lat: Data[category].markers[i].lat, lng: Data[category].markers[i].lng},
-				map: map.map
+				map: mapManager.map
 			});
-			map.infoWindow(marker, Data[category].markers[i].content)
-			map.markers.push(marker);
+			mapManager.infoWindow(marker, Data[category].markers[i].content)
+			mapManager.markers.push(marker);
 		}
 		//Кластеризация маркеров
-		var markerCluster = new MarkerClusterer(map.map, map.markers,
-        {imagePath: 'assets/m'});
-		map.oldCateg = category;
+		//var markerCluster = new MarkerClusterer(map.map, map.markers,
+       // {imagePath: 'assets/m'});
+		mapManager.oldCateg = category;
 	},
 	markers: [],
 	oldCateg: "",
