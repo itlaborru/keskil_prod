@@ -41,6 +41,17 @@ var Data = {
 		]
 	}
 }
+var ajax = function(url, data, onSuccess){
+	$.ajax({
+		method : 'POST',
+		url: url,
+		data: data,
+		success: onSuccess,
+		error: function(xhr, stat){
+			console.log(stat);
+		}
+	});
+};
 var mapManager = {
 	//Показ информационного окна
 	infoWindow: function(marker,data) {

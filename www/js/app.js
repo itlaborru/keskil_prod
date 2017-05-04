@@ -1,4 +1,4 @@
-// Initialize app
+﻿// Initialize app
 var app = new Framework7();
 
 var globalVar = {};
