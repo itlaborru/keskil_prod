@@ -53,6 +53,11 @@ var ajax = function(url, data, onSuccess){
 	});
 };
 var mapManager = {
+	renderParameters: {
+		city:"",
+		lat:0,
+		lng:0
+	},
 	//Показ информационного окна
 	infoWindow: function(marker,data) {
 		var infowindow = new google.maps.InfoWindow({ content: data });
@@ -64,8 +69,8 @@ var mapManager = {
 	render: function(ifFirst,category) {
 		if(ifFirst){
 			mapManager.map = new google.maps.Map(document.getElementById('map'), {
-				center: {lat: 62.031030526953856, lng: 129.72959222272038},
-				zoom: 12,
+				center: {lat: mapManager.renderParameters.lat, lng: mapManager.renderParameters.lng},
+				zoom: mapManager.renderParameters.zoom,
 				minZoom: 4,
 				maxZoom: 18,
 				disableDefaultUI: true,

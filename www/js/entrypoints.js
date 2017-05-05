@@ -32,7 +32,6 @@ var entrypoints = {
 			data[0] = JSON.parse(data[0]);
 			data[1] = JSON.parse(data[1]);
 			DataAjax.proforDB = data;
-		},
 	},
 	newUserInfo: {
 		url:	serverAdress + 'entrypoints/user-data-ajax.php',

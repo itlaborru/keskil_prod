@@ -90,6 +90,7 @@
 		//When the app starts
 		function onDeviceReady() {
 			console.log("Device is ready!");
+			entrypoints.getCities();
 			$(".menu__links").on('click', function () {
 				var category = $(this).attr("data-category");
 				mapManager.render(false,category);
