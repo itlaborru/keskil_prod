@@ -55,8 +55,8 @@ var ajax = function(url, data, onSuccess){
 var mapManager = {
 	renderParameters: {
 		city:"",
-		lat:0,
-		lng:0
+		lat:"",
+		lng:""
 	},
 	//Показ информационного окна
 	infoWindow: function(marker,data) {
@@ -64,6 +64,21 @@ var mapManager = {
 			google.maps.event.addListener(marker, 'click', function() {
 			infowindow.open(map,marker);
 		});  
+	},
+	setUpCity: function(ifFirst,city) {
+		var category;
+		if(ifFirst) {
+			category = "stories";
+		}
+		else {
+			category = mapManager.oldCateg;
+		}
+		mapManager.firstCall = true;
+		mapManager.renderParameters.city = cities[city].name;
+		mapManager.renderParameters.lat = parseFloat(cities[city].lat);
+		mapManager.renderParameters.lng = parseFloat(cities[city].lng);
+		mapManager.renderParameters.zoom = parseInt(cities[city].zoom);
+		mapManager.render(mapManager.firstCall,category);
 	},
 	//Прорисовывание карты
 	render: function(ifFirst,category) {
@@ -75,6 +90,7 @@ var mapManager = {
 				maxZoom: 18,
 				disableDefaultUI: true,
 			});
+			mapManager.firstCall = false;
 		}
 		else {	
 			for (var i = 0; i < mapManager.markers.length; i++) {
@@ -98,5 +114,6 @@ var mapManager = {
 	},
 	markers: [],
 	oldCateg: "",
-	map: ""
+	map: "",
+	firstCall:	true
 };
