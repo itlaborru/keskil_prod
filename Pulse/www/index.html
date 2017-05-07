@@ -85,19 +85,22 @@
 	<script src="js/markerclusterer.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPrAwuEKJB5JEbLOXjN4Yn9X4xN7H6vzY&libraries=places&signed_in=true&libraries=drawing"></script>
     <script type="text/javascript" src="js/globalvars.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/entrypoints.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript">
-		//When the app starts
+		//Инициация загрузки приложения
 		function onDeviceReady() {
 			console.log("Device is ready!");
+			//Костыль, потом эта функция не должна выполняться здесь
+			
+			//Необходимо встроить checker кэша и загрузчик данных
 			entrypoints.getCities();
 			$(".menu__links").on('click', function () {
 				var category = $(this).attr("data-category");
-				mapManager.render(mapManager.firstCall,category);
+				mapManager.render(mapManager.firstCall,category,currentCity);
 				app.closePanel();
 			});
-		}// Handle Cordova Device Ready Event
+		}// Готовность устройства к работе
 		$(document).on('deviceready', function() {
 			onDeviceReady();
 		});

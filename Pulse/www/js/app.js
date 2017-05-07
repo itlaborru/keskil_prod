@@ -8,51 +8,16 @@ var mainView = app.addView('.view-main', {
     dynamicNavbar: true,
 	domCache : true
 });
-
-//ПОТОМ НЕОБХОДИМО ПЕРЕМЕСТИТЬ ЭТО В ДРУГОЕ МЕСТО
-var Data = {
-	//Эмуляция полученных данных
-	stories: {
-		markers : [
-			{
-				lat:62.0271247323787,lng:129.73246335983276,
-				content: "Здесь так красиво!"
-			},
-			{
-				lat:62.035698730736634,lng:129.67437744140625,
-				content: "Якутск - место, где постоянно проходит схватка между искусством и прозой жизни. Ближайшее место, где вы сможете убедиться в этом лично находится в пяти минутах от центра города и подходит как для прогулки, так и для того, чтобы понять дух города. Здесь вы сможете увидеть примерно вот такие вещи ."
-			},
-			{
-				lat:62.059154174081044,lng:129.7342872619629,
-				content: "Го катать в 21:00"
-			},
-			{
-				lat:62.03920009142909,lng:129.7002124786377,
-				content: "I w.h."
-			}
-		]
-	},
-	food: {
-		markers : [
-			{
-				lat:62.03920009142909,lng:129.7002124786377,
-				content: "I w.h."
-			}
-		]
+//Движок меню
+var menuManager = {
+	//Функция выбора города
+	chooseCity:function() {
+		
 	}
-}
-var ajax = function(url, data, onSuccess){
-	$.ajax({
-		method : 'POST',
-		url: url,
-		data: data,
-		success: onSuccess,
-		error: function(xhr, stat){
-			console.log(stat);
-		}
-	});
 };
+//Движок карты и действий с ней
 var mapManager = {
+	//Параметры, по которым рисуется карта (дизайн, центр и тд)
 	renderParameters: {
 		city:"",
 		lat:"",
@@ -65,10 +30,13 @@ var mapManager = {
 			infowindow.open(map,marker);
 		});  
 	},
+	//Изменение параметров карты в соответствии с выбранным городом, загрузка данных, связанных с городом
 	setUpCity: function(ifFirst,city) {
 		var category;
+		currentCity = city;
 		if(ifFirst) {
 			category = "stories";
+			entrypoints.getStories(city);
 		}
 		else {
 			category = mapManager.oldCateg;
@@ -78,10 +46,9 @@ var mapManager = {
 		mapManager.renderParameters.lat = parseFloat(cities[city].lat);
 		mapManager.renderParameters.lng = parseFloat(cities[city].lng);
 		mapManager.renderParameters.zoom = parseInt(cities[city].zoom);
-		mapManager.render(mapManager.firstCall,category);
 	},
 	//Прорисовывание карты
-	render: function(ifFirst,category) {
+	render: function(ifFirst,category,city) {
 		if(ifFirst){
 			mapManager.map = new google.maps.Map(document.getElementById('map'), {
 				center: {lat: mapManager.renderParameters.lat, lng: mapManager.renderParameters.lng},
@@ -99,12 +66,12 @@ var mapManager = {
 			mapManager.markers = [];
 		}
 		//Чтение и отрисовывание маркеров
-		for(var i=0; i<Data[category].markers.length; i++){
+		for(var i=0; i<Data[category].markers[city].length; i++){
 			var marker = new google.maps.Marker({
-				position: {lat: Data[category].markers[i].lat, lng: Data[category].markers[i].lng},
+				position: {lat: Data[category].markers[city][i].lat, lng: Data[category].markers[city][i].lng},
 				map: mapManager.map
 			});
-			mapManager.infoWindow(marker, Data[category].markers[i].content)
+			mapManager.infoWindow(marker, Data[category].markers[city][i].story)
 			mapManager.markers.push(marker);
 		}
 		//Кластеризация маркеров
@@ -112,6 +79,7 @@ var mapManager = {
        // {imagePath: 'assets/m'});
 		mapManager.oldCateg = category;
 	},
+	//Иные параметры
 	markers: [],
 	oldCateg: "",
 	map: "",
