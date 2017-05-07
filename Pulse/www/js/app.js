@@ -8,6 +8,36 @@ var mainView = app.addView('.view-main', {
     dynamicNavbar: true,
 	domCache : true
 });
+//Движок рисования
+var drawingManager = {
+	marker:"",
+	//Инициация рисования маркера
+	drawMarker:function() {
+		mapManager.clearMap();
+		drawingManager.marker.setMap(mapManager.map);
+	},
+	//Настройка модуля рисования маркеров и события
+	drawMarkerSetup: function() {
+		//Загрузка
+		drawingManager.marker = new google.maps.drawing.DrawingManager({
+			drawingMode: google.maps.drawing.OverlayType.MARKER,
+			drawingControl: false,
+			markerOptions: {
+				draggable: true,
+			},
+		});	
+		//Когда маркер поставлен
+		google.maps.event.addListener(drawingManager.marker, 'markercomplete', function(marker) {
+			drawingManager.marker.setMap(null);
+			marker.addListener('drag', function() {
+				console.log(marker.getPosition().lat(),marker.getPosition().lng());
+			});
+			mapManager.clearMap();
+			console.log("handler");
+			
+		});
+	}
+};
 //Движок меню
 var menuManager = {
 	//Функция выбора города
@@ -29,6 +59,12 @@ var mapManager = {
 			google.maps.event.addListener(marker, 'click', function() {
 			infowindow.open(map,marker);
 		});  
+	},
+	//Очистка карты
+	clearMap: function() {
+		for (var i = 0; i < mapManager.markers.length; i++) {
+			mapManager.markers[i].setMap(null);
+		}
 	},
 	//Изменение параметров карты в соответствии с выбранным городом, загрузка данных, связанных с городом
 	setUpCity: function(ifFirst,city) {
@@ -60,9 +96,7 @@ var mapManager = {
 			mapManager.firstCall = false;
 		}
 		else {	
-			for (var i = 0; i < mapManager.markers.length; i++) {
-				mapManager.markers[i].setMap(null);
-			}
+			mapManager.clearMap();
 			mapManager.markers = [];
 		}
 		//Чтение и отрисовывание маркеров
@@ -74,6 +108,7 @@ var mapManager = {
 			mapManager.infoWindow(marker, Data[category].markers[city][i].story)
 			mapManager.markers.push(marker);
 		}
+		drawingManager.drawMarkerSetup();
 		//Кластеризация маркеров
 		//var markerCluster = new MarkerClusterer(map.map, map.markers,
        // {imagePath: 'assets/m'});

@@ -61,7 +61,8 @@
                         <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
 					</div>
                     <div class="center sliding">Pulse</div>
-                    <div class="right">
+                    <div class="right" style="height:100%;">
+                        <a href="#" class="startDraw"><img src="assets/marker.png" style="max-height:100%;"/></a>
                     </div>
                 </div>
             </div>
@@ -82,7 +83,7 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
 	
-	<script src="js/markerclusterer.js"></script>
+	<!--<script src="js/markerclusterer.js"></script>-->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPrAwuEKJB5JEbLOXjN4Yn9X4xN7H6vzY&libraries=places&signed_in=true&libraries=drawing"></script>
     <script type="text/javascript" src="js/globalvars.js"></script>
     <script type="text/javascript" src="js/entrypoints.js"></script>
@@ -99,6 +100,9 @@
 				var category = $(this).attr("data-category");
 				mapManager.render(mapManager.firstCall,category,currentCity);
 				app.closePanel();
+			});
+			$(".startDraw").on('click', function () {
+				drawingManager.drawMarker();
 			});
 		}// Готовность устройства к работе
 		$(document).on('deviceready', function() {
