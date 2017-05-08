@@ -13,6 +13,31 @@ var ajax = function(url, data, onSuccess){
 //Адрес сервера
 var server = "http://keskil-online.ru/pulse/entrypoints/";
 var entrypoints = {
+	//Отправка поста
+	sendMarker: function(data,category){
+		ajax(server + "set.php",
+			{
+				'file':	category,
+				'lat': data.lat,
+				'lng': data.lng,
+				'content': data.content,
+				'city': data.city,
+				'checker': 'ok',
+				'type': 'marker'
+			},
+			function(data){
+				if(data =="ok") {
+					app.alert("Ваш пост опубликован", "Пульс");
+					drawingManager.clearDrawings();
+					$(".show__element[data-id='drawing']").toggleClass("state_active");
+					entrypoints.getMarkers(mapManager.oldCity,mapManager.oldCategory);
+				}
+				else {
+					app.alert("Произошла ошибка, попробуйте немного позднее", "Пульс");
+				}
+			}
+		);
+	},
 	//Получение списка городов и информации о них
 	getCities:function() {
 		ajax(server + "get.php",
@@ -30,13 +55,14 @@ var entrypoints = {
 			}
 		);
 	},
-	//Получение историй
-	getStories:function(city) {
+	//Получение постов
+	getMarkers:function(city,category) {
 		ajax(server + "get.php",
 			{
-				'file':	'stories',
+				'file':	'marker',
+				'category':category,
 				'data': 'all',
-				'city':	city,
+				'city':	city
 			},
 			function(data){
 				//Создание объекта историй
@@ -46,14 +72,14 @@ var entrypoints = {
 					}
 				};
 				newStories.markers[city] = JSON.parse(data);
-				Data['stories'] = newStories;
+				Data[category] = newStories;
 				//Парсинг координат
 				for(var i = 0;i<Data['stories'].markers[city].length;i++){
-					Data['stories'].markers[city][i].lat = parseFloat(Data['stories'].markers[city][i].lat);
-					Data['stories'].markers[city][i].lng = parseFloat(Data['stories'].markers[city][i].lng);
+					Data[category].markers[city][i].lat = parseFloat(Data[category].markers[city][i].lat);
+					Data[category].markers[city][i].lng = parseFloat(Data[category].markers[city][i].lng);
 				}
 				//Отрисовка карты
-				mapManager.render(mapManager.firstCall,'stories',city);
+				mapManager.render(mapManager.firstCall,category,city);
 			}
 		);
 	}

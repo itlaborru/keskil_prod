@@ -16,8 +16,31 @@
 #map {
 	height:	100%;
 }
-.startDraw {
+.customIcon {
 	display:	inline-block;
 	vertical-align:	middle;
 	height:	80%;
+}
+.display-none {
+	display:	none;
+}
+.show__element {
+	display: none;
+}
+.show__element.state_active {
+	display: block;
+}
+.loadingScreen{
+	position:absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: black;
+	z-index: 10000;
+	opacity:	1;
+	transition:	opacity 0.5s linear;
+}
+.hideLoadingScreen{
+	opacity:	0;
 }
