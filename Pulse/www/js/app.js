@@ -54,6 +54,7 @@ var drawingManager = {
 			});
 		});
 	},
+	//Очистка нарисованного маркера и прорисовка имеющихся
 	clearDrawings: function() {
 		google.maps.event.removeListener(drawingManager.clickListener);
 		
@@ -70,6 +71,7 @@ var drawingManager = {
 			mapManager.markers.push(marker);
 		}
 	},
+	//Текстовое окно при отправке маркера
 	infoWindow:	new google.maps.InfoWindow({
 		content: '<textarea placeholder="Введите текст" class="content__push">'+'</textarea>'+'<p>'+'<a href="#" class="button active button__push">'+'Отправить'+'</a>'+'</p>'
 	}),
