@@ -30,6 +30,7 @@
 
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
+	<link rel="stylesheet" href="lib/framework7/css/framework7-icons.css">
 
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -44,10 +45,10 @@
     <div class="panel panel-left panel-reveal" style="background:#fff;">
         <div class="content-block">
 			<h3>Меню</h3>
-			<a href="#" class="menu__links registration">Регистрация</a>
+			<a href="#login" class="menu__links close-panel">Регистрация</a>
 			
 			<!-- КОСТЫЛЬ НЕОБХОДИМО АВТОМАТИЗИРОВАТЬ -->
-			</br><a href="#" class="menu__links menu__links-map" data-category="stories">Истории</a>
+			</br><a href="#index" class="menu__links menu__links-map close-panel" data-category="stories">Истории</a>
         </div>
     </div>
 
@@ -75,6 +76,50 @@
                 <div data-page="index" class="page">
                     <div class="page-content" style="padding-bottom:0px;">
 						<div id="map">
+						</div>
+                    </div>
+                </div>
+                <div data-page="login" class="page cached">
+                    <div class="page-content">
+						<div>
+							<div class="list-block">
+								<ul>
+									<li>
+										<div class="item-content">
+											<div class="item-media"><i class="icon f7-icons">person</i></div>
+											<div class="item-inner">
+												<div class="item-input">
+													<input class="loginReg" name="login" size="32"  type="text"  placeholder="Your login">
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="item-content">
+											<div class="item-media"><i class="icon f7-icons">lock</i></div>
+											<div class="item-inner">
+												<div class="item-input">
+													<input class="passReg" name="pass" size="32"  type="password"  placeholder="Password">
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="item-content">
+											<div class="item-media"><i class="icon f7-icons">email</i></div>
+											<div class="item-inner">
+												<div class="item-input">
+													<input class="mailReg" name="Mail" size="70"  type="text"  placeholder="E-mail">
+												</div>
+											</div>
+										</div>
+									</li>
+									
+									<li>
+										<a href="#" class="item-link list-button register">Зарегистрироваться</a>
+									</li>
+								</ul>
+							</div>
 						</div>
                     </div>
                 </div>
@@ -113,6 +158,12 @@
 			$(".show__element-call").click(function() {
 				$(".show__element[data-id='"+$(this).attr('data-id')+"']").toggleClass("state_active");
 				return false;
+			});
+			$(document).on('pageBeforeAnimation', function (e) {
+				var page = e.detail.page.name;
+				if( page != "index" ) {
+					window[page].render();
+				}
 			});
 		}// Готовность устройства к работе
 		$(document).on('deviceready', function() {

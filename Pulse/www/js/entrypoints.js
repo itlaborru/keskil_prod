@@ -30,7 +30,7 @@ var entrypoints = {
 					app.alert("Ваш пост опубликован", "Пульс");
 					drawingManager.clearDrawings();
 					$(".show__element[data-id='drawing']").toggleClass("state_active");
-					entrypoints.getMarkers(mapManager.oldCity,mapManager.oldCategory);
+					entrypoints.getMarkers(mapManager.oldCity,mapManager.oldCateg);
 				}
 				else {
 					app.alert("Произошла ошибка, попробуйте немного позднее", "Пульс");
@@ -74,12 +74,25 @@ var entrypoints = {
 				newStories.markers[city] = JSON.parse(data);
 				Data[category] = newStories;
 				//Парсинг координат
-				for(var i = 0;i<Data['stories'].markers[city].length;i++){
+				for(var i = 0;i<Data[category].markers[city].length;i++){
+					
 					Data[category].markers[city][i].lat = parseFloat(Data[category].markers[city][i].lat);
 					Data[category].markers[city][i].lng = parseFloat(Data[category].markers[city][i].lng);
 				}
 				//Отрисовка карты
 				mapManager.render(mapManager.firstCall,category,city);
+			}
+		);
+	},
+	registration:function(login,pass,mail) {
+		ajax(server + "registration.php",
+			{
+				'login':login,
+				'pass': pass,
+				'mail':	mail
+			},
+			function(data){
+				console.log(data);
 			}
 		);
 	}
