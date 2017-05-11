@@ -9,6 +9,14 @@ var login = {
 					entrypoints.registration($('.loginReg').val(),$('.passReg').val(),$('.mailReg').val());
 				}
 			});
+			$('.signIn').on('click', function(){
+				if( ($('.loginSign').val() =="")  || ($('.passSign').val() =="") ) {
+					app.alert("Логин или пароль пустые");	
+				}
+				else {
+					entrypoints.signIn($('.loginSign').val(),$('.passSign').val());
+				}
+			});
 		}
 		login.ifFirst = false;
 	},

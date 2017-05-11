@@ -45,7 +45,7 @@
     <div class="panel panel-left panel-reveal" style="background:#fff;">
         <div class="content-block">
 			<h3>Меню</h3>
-			<a href="#login" class="menu__links close-panel">Регистрация</a>
+			<a href="#login" class="menu__links close-panel">Авторизация</a>
 			
 			<!-- КОСТЫЛЬ НЕОБХОДИМО АВТОМАТИЗИРОВАТЬ -->
 			</br><a href="#index" class="menu__links menu__links-map close-panel" data-category="stories">Истории</a>
@@ -81,7 +81,7 @@
                 </div>
                 <div data-page="login" class="page cached">
                     <div class="page-content">
-						<div>
+						<div class="registrationBlock show__element" data-id="logAndReg">
 							<div class="list-block">
 								<ul>
 									<li>
@@ -121,6 +121,37 @@
 								</ul>
 							</div>
 						</div>
+						<a href="#" class="show__element show__element-call" data-id="logAndReg">Уже зарегестрированы? </a>
+						<div class="loginBlock show__element state_active" data-id="logAndReg">
+							<div class="list-block">
+								<ul>
+									<li>
+										<div class="item-content">
+											<div class="item-media"><i class="icon f7-icons">person</i></div>
+											<div class="item-inner">
+												<div class="item-input">
+													<input class="loginSign" name="login" size="32"  type="text"  placeholder="Your login">
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="item-content">
+											<div class="item-media"><i class="icon f7-icons">lock</i></div>
+											<div class="item-inner">
+												<div class="item-input">
+													<input class="passSign" name="pass" size="32"  type="password"  placeholder="Password">
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<a href="#" class="item-link list-button signIn">Войти</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<a href="#" class="show__element show__element-call state_active" data-id="logAndReg">Нет аккаунта? </a>
                     </div>
                 </div>
             </div>

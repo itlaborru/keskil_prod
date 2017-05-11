@@ -92,7 +92,19 @@ var entrypoints = {
 				'mail':	mail
 			},
 			function(data){
+				app.alert('Подтвердите почту! Cледуйте инструкциям, отправленным на вашу почту. Если нет письма - проверьте папку "Спам"', 'Пульс');
+			}
+		);
+	},
+	signIn:function(login,pass) {
+		ajax(server + "signIn.php",
+			{
+				'login':login,
+				'pass': pass
+			},
+			function(data){
 				console.log(data);
+				//app.alert('Вы вошли в свой аккаунт', 'Пульс');
 			}
 		);
 	}
