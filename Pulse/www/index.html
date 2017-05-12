@@ -165,6 +165,7 @@
 	
 	<!--<script src="js/markerclusterer.js"></script>-->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPrAwuEKJB5JEbLOXjN4Yn9X4xN7H6vzY&libraries=places&signed_in=true"></script>
+    <script type="text/javascript" src="js/cookie.js"></script>
     <script type="text/javascript" src="js/globalvars.js"></script>
     <script type="text/javascript" src="js/entrypoints.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
@@ -174,7 +175,14 @@
 		function onDeviceReady() {
 			console.log("Device is ready!");
 			
-			
+			//Проверка загруженных данных
+			if(localStorage){
+				if(JSON.parse(localStorage.getItem("loggedIn")) == true){
+					var SID = localStorage.getItem("SID");
+					cookies.setCookie('PHPSESSID', SID)
+					console.log(SID);
+				}
+			}
 			//Необходимо встроить checker кэша и загрузчик данных (не такой запуск функции)
 			entrypoints.getCities();
 			
@@ -196,7 +204,8 @@
 					window[page].render();
 				}
 			});
-		}// Готовность устройства к работе
+		}
+		// Готовность устройства к работе
 		$(document).on('deviceready', function() {
 			onDeviceReady();
 		});

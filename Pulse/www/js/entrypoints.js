@@ -103,8 +103,16 @@ var entrypoints = {
 				'pass': pass
 			},
 			function(data){
-				console.log(data);
-				//app.alert('Вы вошли в свой аккаунт', 'Пульс');
+				data = JSON.parse(data);
+				if(data.check =="correct") {
+					app.alert('Вы вошли в свой аккаунт', 'Пульс');
+					var SID = data.cookie;
+					localStorage.setItem("SID",SID);
+					localStorage.setItem("loggedIn",true);
+				}
+				else {
+					app.alert('Ошибка: '+data.text, 'Пульс');
+				}
 			}
 		);
 	}
