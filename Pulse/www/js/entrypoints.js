@@ -93,6 +93,9 @@ var entrypoints = {
 			},
 			function(data){
 				app.alert('Подтвердите почту! Cледуйте инструкциям, отправленным на вашу почту. Если нет письма - проверьте папку "Спам"', 'Пульс');
+				$('.loginReg').val('');
+				$('.passReg').val('');
+				$('.mailReg').val('');
 			}
 		);
 	},
@@ -106,9 +109,35 @@ var entrypoints = {
 				data = JSON.parse(data);
 				if(data.check =="correct") {
 					app.alert('Вы вошли в свой аккаунт', 'Пульс');
-					var SID = data.cookie;
-					localStorage.setItem("SID",SID);
-					localStorage.setItem("loggedIn",true);
+					userInfo['sid'] = data.cookie;
+					userInfo['userName'] = data.login;
+					userInfo['loggedIn'] = true;
+					localStorage.setItem("userInfo",JSON.stringify(userInfo));
+					entrypoints.getCities();
+					mainView.router.load({pageName: 'index'});
+					cookies.setCookie('PHPSESSID', userInfo.sid);
+					$(".logOut").removeClass("display-none");
+					$('.loginSign').val('');
+					$('.passSign').val('');
+				}
+				else {
+					app.alert('Ошибка: '+data.text, 'Пульс');
+				}
+			}
+		);
+	},
+	logOut:function() {
+		ajax(server + "logout.php",
+			{
+			},
+			function(data){
+				data = JSON.parse(data);
+				console.log(data);
+				if(data.check =="correct") {
+					app.alert(data.text, 'Пульс');
+					userInfo = {};
+					localStorage.removeItem("userInfo");
+					mainView.router.load({pageName: 'login'});
 				}
 				else {
 					app.alert('Ошибка: '+data.text, 'Пульс');
@@ -116,4 +145,26 @@ var entrypoints = {
 			}
 		);
 	}
+	/*getUserData:function(sid) {
+		ajax(server + "get.php",
+			{
+				'file':	'userInfo',
+				'sid':sid
+			},
+			function(data){
+				data = JSON.parse(data);
+				if(data.check =="correct") {
+					/*app.alert('Вы вошли в свой аккаунт', 'Пульс');
+					userInfo['sid'] = data.cookie;
+					userInfo['userName'] = data.login;
+					userInfo['loggedIn'] = true;
+					localStorage.setItem("userInfo",JSON.stringify(userInfo));
+				}
+				else {
+					app.alert('Ошибка: '+data.text, 'Пульс');
+				}
+			}
+		);
+		
+	}*/
 }

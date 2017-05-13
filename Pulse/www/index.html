@@ -45,8 +45,7 @@
     <div class="panel panel-left panel-reveal" style="background:#fff;">
         <div class="content-block">
 			<h3>Меню</h3>
-			<a href="#login" class="menu__links close-panel">Авторизация</a>
-			
+			<a href="#index" class="menu__links close-panel display-none logOut">Выйти</a>
 			<!-- КОСТЫЛЬ НЕОБХОДИМО АВТОМАТИЗИРОВАТЬ -->
 			</br><a href="#index" class="menu__links menu__links-map close-panel" data-category="stories">Истории</a>
         </div>
@@ -172,19 +171,12 @@
     <script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript">
 		//Инициация загрузки приложения
+		// Готовность устройства к работе
+		$(document).on('deviceready', function() {
+			onDeviceReady();
+		});
 		function onDeviceReady() {
 			console.log("Device is ready!");
-			
-			//Проверка загруженных данных
-			if(localStorage){
-				if(JSON.parse(localStorage.getItem("loggedIn")) == true){
-					var SID = localStorage.getItem("SID");
-					cookies.setCookie('PHPSESSID', SID)
-					console.log(SID);
-				}
-			}
-			//Необходимо встроить checker кэша и загрузчик данных (не такой запуск функции)
-			entrypoints.getCities();
 			
 			
 			//Переход по категориям
@@ -204,11 +196,48 @@
 					window[page].render();
 				}
 			});
+			$(".logOut").on('click', function () {
+				entrypoints.logOut();
+			});
+			//Проверка загруженных данных
+			if(localStorage.getItem("userInfo")){
+				if(JSON.parse(localStorage.getItem("userInfo")).loggedIn == true) {
+					var userInfo = JSON.parse(localStorage.getItem("userInfo"));;
+					cookies.setCookie('PHPSESSID', userInfo.sid);
+					
+					
+					
+					//Необходимо встроить checker кэша и загрузчик данных (не такой запуск функции)
+					entrypoints.getCities();
+					
+					
+					
+					//Открыть карту
+					$(".loadingScreen").addClass("hideLoadingScreen");
+					setTimeout(function() {
+						$(".loadingScreen").addClass("display-none");
+					}, SPLASH_SCREEN_TIMEOUT);
+					$(".logOut").removeClass("display-none");
+				}
+				else {
+					//Открыть карту
+					$(".loadingScreen").addClass("hideLoadingScreen");
+					setTimeout(function() {
+						$(".loadingScreen").addClass("display-none");
+					}, SPLASH_SCREEN_TIMEOUT);
+					mainView.router.load({pageName: 'login'});
+				}
+			}
+			else {
+				//Открыть карту
+				$(".loadingScreen").addClass("hideLoadingScreen");
+				setTimeout(function() {
+					$(".loadingScreen").addClass("display-none");
+				}, SPLASH_SCREEN_TIMEOUT);
+				mainView.router.load({pageName: 'login'});
+			}
 		}
-		// Готовность устройства к работе
-		$(document).on('deviceready', function() {
-			onDeviceReady();
-		});
+		
 	</script>
 </body>
 

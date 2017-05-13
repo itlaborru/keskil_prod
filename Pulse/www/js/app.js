@@ -132,11 +132,6 @@ var mapManager = {
 				disableDefaultUI: true,
 			});
 			mapManager.firstCall = false;
-			//Открыть карту
-			$(".loadingScreen").addClass("hideLoadingScreen");
-			setTimeout(function() {
-				$(".loadingScreen").addClass("display-none");
-			}, SPLASH_SCREEN_TIMEOUT);
 		}
 		else {	
 			mapManager.clearMap();
