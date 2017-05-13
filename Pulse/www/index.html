@@ -197,7 +197,9 @@
 				}
 			});
 			$(".logOut").on('click', function () {
-				entrypoints.logOut();
+				app.confirm('Вы точно хотите выйти?', function () {
+					entrypoints.logOut();
+				});
 			});
 			//Проверка загруженных данных
 			if(localStorage.getItem("userInfo")){
