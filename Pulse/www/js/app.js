@@ -152,6 +152,11 @@ var mapManager = {
 		drawingManager.drawMarkerSetup();
 		mapManager.oldCateg = category;
 		mapManager.oldCity = city;
+		localStorage.setItem("city",city);
+		$(".loadingScreen").addClass("hideLoadingScreen");
+		setTimeout(function() {
+			$(".loadingScreen").addClass("display-none");
+		}, SPLASH_SCREEN_TIMEOUT);
 	},
 	//Иные параметры
 	markers: [],

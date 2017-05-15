@@ -46,11 +46,14 @@ var entrypoints = {
 			},
 			function(Data){
 				cities = JSON.parse(Data);
-				if(mapManager.firstCall) {
-					//Тут должна вызываться функция, отвечающая за рендер поля выбора города
+				if(localStorage.getItem("city")) {
+					var city = localStorage.getItem("city");
+					mapManager.setUpCity(mapManager.firstCall,city);
+				}
+				else {
+					console.log("Choose a city");
 					
-					//Костыль, эта функция должна просто получать список городов
-					mapManager.setUpCity(mapManager.firstCall,"Yakutsk");
+					mainView.router.load({pageName: 'cityPicker'});
 				}
 			}
 		);
@@ -114,7 +117,6 @@ var entrypoints = {
 					userInfo['loggedIn'] = true;
 					localStorage.setItem("userInfo",JSON.stringify(userInfo));
 					entrypoints.getCities();
-					mainView.router.load({pageName: 'index'});
 					cookies.setCookie('PHPSESSID', userInfo.sid);
 					$(".logOut").removeClass("display-none");
 					$('.loginSign').val('');
