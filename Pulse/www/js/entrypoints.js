@@ -69,7 +69,7 @@ var entrypoints = {
 				var parent = $(".categories__block");
 				var content="";
 				for(var i = 0;i<categories.length;i++){
-					content+= '<a href="#index" class="menu__links menu__links-map close-panel" data-category="stories">'+categories[i]+'</a><br/>';
+					content+= '<a href="#index" class="menu__links menu__links-map close-panel" data-category="'+categories[i]+'">'+categories[i]+'</a><br/>';
 				}
 				parent.append(content);
 				//Переход по категориям
