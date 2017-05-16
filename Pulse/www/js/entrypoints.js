@@ -58,6 +58,29 @@ var entrypoints = {
 			}
 		);
 	},
+	//Получение категорий
+	getCategories:function() {
+		ajax(server + "get.php",
+			{
+				'file':	'categories'
+			},
+			function(Data){
+				categories = JSON.parse(Data);
+				var parent = $(".categories__block");
+				var content="";
+				for(var i = 0;i<categories.length;i++){
+					content+= '<a href="#index" class="menu__links menu__links-map close-panel" data-category="stories">'+categories[i]+'</a><br/>';
+				}
+				parent.append(content);
+				//Переход по категориям
+				$(".menu__links-map").on('click', function () {
+					var category = $(this).attr("data-category");
+					mapManager.render(mapManager.firstCall,category,currentCity);
+					app.closePanel();
+				});
+			}
+		);
+	},
 	//Получение постов
 	getMarkers:function(city,category) {
 		ajax(server + "get.php",

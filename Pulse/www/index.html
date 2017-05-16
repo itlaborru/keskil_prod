@@ -46,8 +46,8 @@
         <div class="content-block">
 			<h3>Меню</h3>
 			<a href="#index" class="menu__links close-panel display-none logOut">Выйти</a>
-			<!-- КОСТЫЛЬ НЕОБХОДИМО АВТОМАТИЗИРОВАТЬ -->
-			</br><a href="#index" class="menu__links menu__links-map close-panel" data-category="stories">Истории</a>
+			<div class="categories__block">
+			</div>
         </div>
     </div>
 
@@ -187,12 +187,6 @@
 			console.log("Device is ready!");
 			
 			
-			//Переход по категориям
-			$(".menu__links-map").on('click', function () {
-				var category = $(this).attr("data-category");
-				mapManager.render(mapManager.firstCall,category,currentCity);
-				app.closePanel();
-			});
 			//Открыть/скрыть элемент (для двух элементов)
 			$(".show__element-call").click(function() {
 				$(".show__element[data-id='"+$(this).attr('data-id')+"']").toggleClass("state_active");
@@ -213,6 +207,8 @@
 				var type = $(this).attr("data-picker");
 				picker.render(type);
 			});
+			//Прорисовка категорий
+			entrypoints.getCategories();
 			
 			//Проверка загруженных данных
 			if(localStorage.getItem("userInfo")){
